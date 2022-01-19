@@ -1,1 +1,14 @@
-init
+MUST HAVES
+
+Originate from a Secure Origin. 
+    Served over TLS and green padlock displays (no active mixed content).
+
+Load while offline (even if only a custom offline page).
+    By implication, this requires use of Service Workers and Fetch Handlers.
+
+Reference a Web App Manifest with at least the following properties:
+    name
+    short_name
+    start_url
+    display (with a value of standalone or fullscreen)
+    an icon at least 144x144 large in png format
