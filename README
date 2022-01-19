@@ -14,6 +14,14 @@ Reference a Web App Manifest with at least the following properties:
     an icon at least 144x144 large in png format
 
 NICE TO HAVE:
-	
+
+Other uses:
+    Base functionality for our project will revolve around weather data. 
+    However, if possible we would like to expand this functionality to incorporate other data sources as well.
+    This could include sports data, stock data or anything else we can think of. 
+
 Message boards.
     Users can make posts and comments.
+
+Chat rooms. 
+    Users can utilise text based chat rooms.
