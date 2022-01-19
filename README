@@ -1,4 +1,4 @@
-MUST HAVES
+MUST HAVES:
 
 Originate from a Secure Origin. 
     Served over TLS and green padlock displays (no active mixed content).
@@ -12,3 +12,8 @@ Reference a Web App Manifest with at least the following properties:
     start_url
     display (with a value of standalone or fullscreen)
     an icon at least 144x144 large in png format
+
+NICE TO HAVE:
+	
+Message boards.
+	Users can make posts and comments.
