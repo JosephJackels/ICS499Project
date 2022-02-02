@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import edu.ics499.model.Widget;
 import edu.ics499.repositories.WidgetRepository;
@@ -24,10 +24,10 @@ public class WidgetController {
 		return widgetRepo.findAll();
 	}
 	
-	//get request to localhost:port/widgets?id=#
-	@GetMapping("{id}")
-	public Widget get(@PathVariable Long id) {
-		return widgetRepo.getById(id);
+	//get request to localhost:port/widgets/one?id=#
+	@GetMapping("/one")
+	public Widget get(@RequestParam Long id) {
+		return widgetRepo.findById(id).orElseThrow(() -> new RuntimeException());
 	}
 	
 	//post request to localhost:port/widgets/add with a Widget object
