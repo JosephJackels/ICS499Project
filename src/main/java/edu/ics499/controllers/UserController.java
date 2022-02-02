@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import edu.ics499.repositories.UserRepository;
 import edu.ics499.model.User;
@@ -22,13 +22,15 @@ public class UserController {
 	//get request to localhost:port/users/all
 	@GetMapping("/all")
 	public List<User> list(){
+		System.out.println("all");
 		return userRepo.findAll();
 	}
 	
-	//get request to localhost:port/users?id=#
-	@GetMapping("{id}")
-	public User get(@PathVariable Long id) {
-		return userRepo.getById(id);
+	//get request to localhost:port/users/one?id=#
+	@GetMapping("/one")
+	public User get(@RequestParam Long id) {
+		//maybe make a custom exception that extends runtime exception?
+		return userRepo.findById(id).orElseThrow(() -> new RuntimeException());
 	}
 	
 	//post request to localhost:port/users/add with a User object
