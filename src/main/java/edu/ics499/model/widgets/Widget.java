@@ -1,4 +1,4 @@
-package edu.ics499.model;
+package edu.ics499.model.widgets;
 
 import java.util.Objects;
 
@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import edu.ics499.model.Dashboard;
 
 @Entity
 @Table(name="widgets")

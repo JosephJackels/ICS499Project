@@ -33,6 +33,7 @@ public class User {
 	//default Constructor
 	public User() {
 		super();
+		this.dashboard = new Dashboard();
 	}
 	
 	public User(String username, String password) {
