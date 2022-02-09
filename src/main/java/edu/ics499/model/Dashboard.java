@@ -31,7 +31,6 @@ public class Dashboard {
 			joinColumns = @JoinColumn(name = "dashboardID"),
 			inverseJoinColumns = @JoinColumn(name = "widgetID"))
 	private List<Widget> widgetList = new ArrayList<>();
-	
 	//not sure why we are including this but in his examples he
 	//has an object in both classes whenever theres a relationship even if the object isnt used
 	@OneToOne

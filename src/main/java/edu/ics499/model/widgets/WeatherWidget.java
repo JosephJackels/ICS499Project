@@ -25,10 +25,9 @@ public class WeatherWidget extends Widget {
 	private String key;
 	private String units;
 	
-	private String lastUpdated;
-	private String updateFrequency;
 	//response from api
-	private Payload response;
+	private CurrentWeatherPayload current;
+	private ForecastWeatherPayload forecast;
 	
 	//maybe we should do a makeshift cache to reduce the amount of external
 	//api calls and track when it was last updated, then only update?

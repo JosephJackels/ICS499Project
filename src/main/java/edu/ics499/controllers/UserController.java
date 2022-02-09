@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import edu.ics499.repositories.UserRepository;
+import edu.ics499.model.Dashboard;
 import edu.ics499.model.User;
 
 @RestController
@@ -39,7 +40,7 @@ public class UserController {
 	//then have the backend create it it instead of sending a json object?
 	@PostMapping("/add")
 	public User create(@RequestBody final User user) {
-
+		//user.setDashboard(new Dashboard());
 		return userRepo.saveAndFlush(user);
 		
 	}
