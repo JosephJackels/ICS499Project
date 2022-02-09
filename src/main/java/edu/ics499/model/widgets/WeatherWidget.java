@@ -1,5 +1,8 @@
 package edu.ics499.model.widgets;
 
+import edu.ics499.model.payloads.CurrentWeatherPayload;
+import edu.ics499.model.payloads.ForecastWeatherPayload;
+
 public class WeatherWidget extends Widget {
 	//already has widgetId and dashboard fields
 	
@@ -26,8 +29,8 @@ public class WeatherWidget extends Widget {
 	private String units;
 	
 	//response from api
-	private CurrentWeatherPayload current;
-	private ForecastWeatherPayload forecast;
+	private CurrentWeatherPayload currentPayload;
+	private ForecastWeatherPayload forecastPayload;
 	
 	//maybe we should do a makeshift cache to reduce the amount of external
 	//api calls and track when it was last updated, then only update?
@@ -77,10 +80,27 @@ public class WeatherWidget extends Widget {
 		this.units = units;
 	}
 	
-	//makes a request to the api based on current settings
-	//and returns json result as a string?
+	public String getBaseUrl() {
+		return baseUrl;
+	}
 	
-	public String callApi() {
-		
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+	
+	public CurrentWeatherPayload getCurrentPayload() {
+		return currentPayload;
+	}
+	
+	public void setCurrentPayload(CurrentWeatherPayload currentPayload) {
+		this.currentPayload = currentPayload;
+	}
+	
+	public ForecastWeatherPayload getForecastPayload() {
+		return forecastPayload;
+	}
+	
+	public void setForecastPayload(ForecastWeatherPayload forecastPayload) {
+		this.forecastPayload = forecastPayload;
 	}
 }

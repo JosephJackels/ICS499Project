@@ -39,6 +39,4 @@ public class WidgetController {
 		return widgetRepo.saveAndFlush(widget);
 		
 	}
-	
-	get getWidgetListByUSer
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import edu.ics499.repositories.UserRepository;
-import edu.ics499.model.Dashboard;
 import edu.ics499.model.User;
 
 @RestController
