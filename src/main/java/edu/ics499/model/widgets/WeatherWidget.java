@@ -1,4 +1,4 @@
-package edu.ics499.model;
+package edu.ics499.model.widgets;
 
 public class WeatherWidget extends Widget {
 	//already has widgetId and dashboard fields
@@ -25,6 +25,8 @@ public class WeatherWidget extends Widget {
 	private String key;
 	private String units;
 	
+	private String lastUpdated;
+	private String updateFrequency;
 	//response from api
 	private Payload response;
 	

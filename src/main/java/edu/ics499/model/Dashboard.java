@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import edu.ics499.model.widgets.Widget;
+
 @Entity
 @Table(name="dashboards")
 public class Dashboard {
