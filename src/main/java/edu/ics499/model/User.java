@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+//extend user principle/detail?
 @Entity
 @Table(name="users")
 public class User {
