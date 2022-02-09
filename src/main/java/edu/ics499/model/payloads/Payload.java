@@ -15,4 +15,28 @@ public class Payload {
 	
 	private String lastUpdatedTime;
 	private String updateFrequency;
+	
+	public String getPayloadID() {
+		return PayloadID;
+	}
+
+	public void setPayloadID(String payloadID) {
+		PayloadID = payloadID;
+	}
+
+	public String getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+
+	public void setLastUpdatedTime(String lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
+
+	public String getUpdateFrequency() {
+		return updateFrequency;
+	}
+
+	public void setUpdateFrequency(String updateFrequency) {
+		this.updateFrequency = updateFrequency;
+	}
 }
