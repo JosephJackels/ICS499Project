@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import edu.ics499.model.Widget;
+
+import edu.ics499.model.widgets.Widget;
 import edu.ics499.repositories.WidgetRepository;
 
 @RestController

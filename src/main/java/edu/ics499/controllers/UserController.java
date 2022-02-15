@@ -39,7 +39,7 @@ public class UserController {
 	//then have the backend create it it instead of sending a json object?
 	@PostMapping("/add")
 	public User create(@RequestBody final User user) {
-
+		//user.setDashboard(new Dashboard());
 		return userRepo.saveAndFlush(user);
 		
 	}
