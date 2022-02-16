@@ -3,6 +3,16 @@ package edu.ics499.model.payloads;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import edu.ics499.model.widgets.WeatherWidget;
+
+@Entity
+@Table(name="forecastPayloads")
 public class ForecastWeatherPayload extends Payload {
 	
 	
@@ -10,6 +20,11 @@ public class ForecastWeatherPayload extends Payload {
 	private String message;
 	private String cnt;
 	
+	@OneToMany
+	@JoinTable(
+			name="forecastPayloads_forecastItems",
+			joinColumns = @JoinColumn(name="payloadID"),
+			inverseJoinColumns = @JoinColumn(name="forecastPayloadItemID"))
 	private List<ForecastWeatherPayloadItem> list = new ArrayList<ForecastWeatherPayloadItem>();
 	
 	private String city_id;
@@ -18,6 +33,13 @@ public class ForecastWeatherPayload extends Payload {
 	private String city_coord_lon;
 	private String city_country;
 	private String city_timezone;
+	
+	@OneToMany
+	@JoinTable(
+			name="widgets_forecastWeatherPayloads",
+			joinColumns = @JoinColumn(name="PayloadID"),
+			inverseJoinColumns = @JoinColumn(name="widgetID"))
+	private List<WeatherWidget> listeners = new ArrayList<>();
 	
 	public String getCod() {
 		return cod;
