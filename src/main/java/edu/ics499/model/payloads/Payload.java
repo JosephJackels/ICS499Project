@@ -3,25 +3,28 @@ package edu.ics499.model.payloads;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 //abstract?
 @Entity
 @Table(name="payloads")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Payload {
 	@Id
 	@GeneratedValue
-	private String PayloadID;
+	private Long payloadID;
 	
 	private String lastUpdatedTime;
 	private String updateFrequency;
 	
-	public String getPayloadID() {
-		return PayloadID;
+	public Long getPayloadID() {
+		return payloadID;
 	}
 
-	public void setPayloadID(String payloadID) {
-		PayloadID = payloadID;
+	public void setPayloadID(Long payloadID) {
+		this.payloadID = payloadID;
 	}
 
 	public String getLastUpdatedTime() {
