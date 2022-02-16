@@ -22,7 +22,6 @@ public class UserController {
 	//get request to localhost:port/users/all
 	@GetMapping("/all")
 	public List<User> list(){
-		System.out.println("all");
 		return userRepo.findAll();
 	}
 	
@@ -35,9 +34,12 @@ public class UserController {
 	
 	//post request to localhost:port/users/add with a User object
 	//in the request body? not sure how this works yet/how to use it
+	//
+	//should we also maybe change this to sending the building blocks for a user
+	//then have the backend create it it instead of sending a json object?
 	@PostMapping("/add")
 	public User create(@RequestBody final User user) {
-
+		//user.setDashboard(new Dashboard());
 		return userRepo.saveAndFlush(user);
 		
 	}
