@@ -1,8 +1,14 @@
 package edu.ics499.model.widgets;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import edu.ics499.model.payloads.CurrentWeatherPayload;
 import edu.ics499.model.payloads.ForecastWeatherPayload;
 
+@Entity
+@Table(name="weatherWidgets")
 public class WeatherWidget extends Widget {
 	//already has widgetId and dashboard fields
 	
@@ -24,12 +30,15 @@ public class WeatherWidget extends Widget {
 	
 	//keeping these separate so it's easy to update a single widget's settings
 	private String requestType;
-	private String query;
-	private String key;
+	private String weatherQuery;
+	private String weatherKey;
 	private String units;
 	
 	//response from api
+	@ManyToOne
 	private CurrentWeatherPayload currentPayload;
+	
+	@ManyToOne
 	private ForecastWeatherPayload forecastPayload;
 	
 	//maybe we should do a makeshift cache to reduce the amount of external
@@ -43,8 +52,8 @@ public class WeatherWidget extends Widget {
 	public WeatherWidget(String requestType, String query, String key, String units) {
 		super();
 		this.requestType = requestType;
-		this.query = query;
-		this.key = key;
+		this.weatherQuery = query;
+		this.weatherKey = key;
 		this.units = units;
 	}
 
@@ -57,19 +66,19 @@ public class WeatherWidget extends Widget {
 	}
 
 	public String getQuery() {
-		return query;
+		return weatherQuery;
 	}
 
 	public void setQuery(String query) {
-		this.query = query;
+		this.weatherQuery = query;
 	}
 
 	public String getKey() {
-		return key;
+		return weatherKey;
 	}
 
 	public void setKey(String key) {
-		this.key = key;
+		this.weatherKey = key;
 	}
 
 	public String getUnits() {

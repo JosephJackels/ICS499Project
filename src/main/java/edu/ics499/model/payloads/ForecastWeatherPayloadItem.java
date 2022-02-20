@@ -1,6 +1,23 @@
 package edu.ics499.model.payloads;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="forecastPayloadItems")
 public class ForecastWeatherPayloadItem {
+	
+	@Id
+	@GeneratedValue
+	private Long forecastPayloadItemID;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private ForecastWeatherPayload parent;
+	
 	private String dt;
 	
 	private String main_temp;

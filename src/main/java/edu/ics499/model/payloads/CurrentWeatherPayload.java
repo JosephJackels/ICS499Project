@@ -1,5 +1,18 @@
 package edu.ics499.model.payloads;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
+import edu.ics499.model.widgets.WeatherWidget;
+
+@Entity
+@Table(name="currentWeatherPayloads")
 public class CurrentWeatherPayload extends Payload {
 	
 	private String coord_lon;
@@ -20,7 +33,14 @@ public class CurrentWeatherPayload extends Payload {
 	private String main_humidity;
 	
 	private String visibility;
-
+	
+	@OneToMany
+	@JoinTable(
+			name="widgets_currentWeatherPayloads",
+			joinColumns = @JoinColumn(name="payloadID"),
+			inverseJoinColumns = @JoinColumn(name="widgetID"))
+	private List<WeatherWidget> listeners = new ArrayList<>();
+	
 	public String getCoord_lon() {
 		return coord_lon;
 	}
