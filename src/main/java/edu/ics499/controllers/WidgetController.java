@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.ics499.model.widgets.WeatherWidget;
 import edu.ics499.model.widgets.Widget;
 import edu.ics499.repositories.WidgetRepository;
 
@@ -38,5 +39,10 @@ public class WidgetController {
 
 		return widgetRepo.saveAndFlush(widget);
 		
+	}
+	
+	@PostMapping("/add/weather")
+	public WeatherWidget createWeather(@RequestBody final WeatherWidget widget) {
+		return widgetRepo.saveAndFlush(widget);
 	}
 }
