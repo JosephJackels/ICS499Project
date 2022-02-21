@@ -1,46 +1,63 @@
 package edu.ics499.model.payloads;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
-import edu.ics499.model.widgets.WeatherWidget;
+import edu.ics499.model.widgets.*;
 
 @Entity
 @Table(name="currentWeatherPayloads")
 public class CurrentWeatherPayload extends Payload {
-	
+
 	private String coord_lon;
 	private String coord_lat;
-	
+
 	private String weather_id;
 	private String weather_main;
 	private String weather_description;
 	private String weather_icon;
-	
+
 	private String base;
-	
+
 	private String main_temp;
 	private String main_feelslike;
 	private String main_tempmin;
 	private String main_tempmax;
 	private String main_pressure;
 	private String main_humidity;
-	
+
 	private String visibility;
-	
+	private String wind_speed;
+    private String wind_deg;
+    private String wind_gust;
+
+    private String clouds_all;
+
+    private String dt;
+
+    private String sys_type;
+    private String sys_id;
+    private String sys_message;
+    private String sys_country;
+    private String sys_sunrise;
+    private String sys_sunset;
+
+    private String timezone;
+
+    private String id;
+
+    private String name;
+
+    private String cod;
+
 	@OneToMany
 	@JoinTable(
 			name="widgets_currentWeatherPayloads",
 			joinColumns = @JoinColumn(name="payloadID"),
 			inverseJoinColumns = @JoinColumn(name="widgetID"))
 	private List<WeatherWidget> listeners = new ArrayList<>();
-	
+
 	public String getCoord_lon() {
 		return coord_lon;
 	}
@@ -265,25 +282,44 @@ public class CurrentWeatherPayload extends Payload {
 		this.cod = cod;
 	}
 
-	private String wind_speed;
-	private String wind_deg;
-	
-	private String clouds_all;
-	
-	private String dt;
-	
-	private String sys_type;
-	private String sys_id;
-	private String sys_message;
-	private String sys_country;
-	private String sys_sunrise;
-	private String sys_sunset;
-	
-	private String timezone;
-	
-	private String id;
-	
-	private String name;
-	
-	private String cod;
+	public void showPayload() {
+	    System.out.println("base - " + base);
+	    System.out.println("visibility - " + visibility);
+	    System.out.println("dt - " + dt);
+	    System.out.println("timezone - " + timezone);
+	    System.out.println("id - " + id);
+	    System.out.println("name - " + name);
+	    System.out.println("cod - " + cod);
+	    System.out.println("weather main - " + weather_main);
+	    System.out.println("weather id - " + weather_id);
+	    System.out.println("weather descritption - " + weather_description);
+	    System.out.println("weather icon - " + weather_icon);
+	    System.out.println("lat - " + coord_lat);
+	    System.out.println("lon - " + coord_lon);
+	    System.out.println("temp - " + main_temp);
+	    System.out.println("min - " + main_tempmin);
+	    System.out.println("max - " + main_tempmax);
+	    System.out.println("feels like - " + main_feelslike);
+	    System.out.println("pressure - " + main_pressure);
+	    System.out.println("humidity - " + main_humidity);
+	    System.out.println("speed - " + wind_speed);
+	    System.out.println("deg - " + wind_deg);
+	    System.out.println("gust - " + wind_gust);
+	    System.out.println("clouds - " + clouds_all);
+	    System.out.println("sunrise - " + sys_sunrise);
+	    System.out.println("sunset - " + sys_sunset);
+	    System.out.println("country - " + sys_country);
+	    System.out.println("sys id - " + sys_id);
+	    System.out.println("type - " + sys_type);
+	    System.out.println("coord lat - " + coord_lat);
+	    System.out.println("coord lon - " + coord_lon);
+	}
+
+    public String getWind_gust() {
+        return wind_gust;
+    }
+
+    public void setWind_gust(String wind_gust) {
+        this.wind_gust = wind_gust;
+    }
 }
