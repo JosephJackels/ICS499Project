@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.springframework.boot.json.*;
+
 import edu.ics499.model.widgets.*;
 
 @Entity
@@ -156,4 +158,57 @@ public class ForecastWeatherPayload extends Payload {
 	    System.out.println("Visibility - " + item.getVisibility());
 	    System.out.println("pod - " + item.getSys_pod());
 	}
+    public void populate(String response) {
+        JsonParser springParser = JsonParserFactory.getJsonParser();
+        Map<String, Object> map = springParser.parseMap(response);
+        this.setCod((String)map.get("cod"));
+        this.setMessage(String.valueOf(map.get("message")));
+        this.setCnt(String.valueOf(map.get("cnt")));
+        LinkedHashMap city = (LinkedHashMap) map.get("city");
+        this.setCity_id(String.valueOf(city.get("id")));
+        this.setCity_name((String)city.get("name"));
+        this.setCity_country((String)city.get("country"));
+        this.setCity_timezone(String.valueOf(city.get("timezone")));
+        this.setCity_sunrise(String.valueOf(city.get("sunrise")));
+        this.setCity_sunset(String.valueOf(city.get("sunset")));
+        LinkedHashMap coord = (LinkedHashMap) city.get("coord");
+        this.setCity_coord_lat(String.valueOf(coord.get("lat")));
+        this.setCity_coord_lon(String.valueOf(coord.get("lon")));
+
+        List items = (List) map.get("list");
+        //loop over each item day and make a new payload item
+        for(int i = 0; i < items.size(); i++) {
+            LinkedHashMap day = (LinkedHashMap) items.get(i);
+            ForecastWeatherPayloadItem item = new ForecastWeatherPayloadItem();
+            item.setDt(String.valueOf(day.get("dt")));
+            item.setDt_txt((String) day.get("dt_txt"));
+            item.setVisibility(String.valueOf(day.get("visibility")));
+            item.setPop(String.valueOf(day.get("pop")));
+            LinkedHashMap main = (LinkedHashMap) day.get("main");
+            item.setMain_temp(String.valueOf(main.get("temp")));
+            item.setMain_feelsLike(String.valueOf(main.get("feels_like")));
+            item.setMain_tempMin(String.valueOf(main.get("temp_min")));
+            item.setMain_tempMax(String.valueOf(main.get("temp_max")));
+            item.setMain_pressure(String.valueOf(main.get("pressure")));
+            item.setMain_seaLevel(String.valueOf(main.get("sea_level")));
+            item.setMain_grndLevel(String.valueOf(main.get("grnd_level")));
+            item.setMain_humidity(String.valueOf(main.get("humidity")));
+            item.setMain_tempKf(String.valueOf(main.get("temp_kf")));
+            List weather_list = (List) day.get("weather");
+            LinkedHashMap weather = (LinkedHashMap) weather_list.get(0);
+            item.setWeather_id(String.valueOf(weather.get("id")));
+            item.setWeather_main((String) weather.get("main"));
+            item.setWeather_description((String)weather.get("description"));
+            item.setWeather_icon((String) weather.get("icon"));
+            LinkedHashMap clouds = (LinkedHashMap) day.get("clouds");
+            item.setClouds_all(String.valueOf(clouds.get("all")));
+            LinkedHashMap wind = (LinkedHashMap) day.get("wind");
+            item.setWind_speed(String.valueOf(wind.get("speed")));
+            item.setWind_deg(String.valueOf(wind.get("deg")));
+            item.setWind_gust(String.valueOf(wind.get("gust")));
+            LinkedHashMap sys = (LinkedHashMap) day.get("sys");
+            item.setSys_pod((String) sys.get("pod"));
+            this.addPayloadItem(item);
+        }
+    }
 }
