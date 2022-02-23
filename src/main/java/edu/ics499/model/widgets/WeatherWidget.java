@@ -3,7 +3,6 @@ package edu.ics499.model.widgets;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import edu.ics499.model.payloads.CurrentWeatherPayload;
 import edu.ics499.model.payloads.ForecastWeatherPayload;
@@ -29,12 +28,13 @@ public class WeatherWidget extends Widget {
 	*/
 	//Transient annotation = not saved in the db, these are hardcoded for all
 	//weatherwidgets so it does not need to be saved
+	/*
 	@Transient
 	private String baseUrl = "https:api.openweathermap.org/data/2.5{requestType}?{query}&appid={key}&units={units}";
 	
 	@Transient
 	private String apiKey = "b4808d3be62ce204189dcf0c196809f0";
-	
+	*/
 	//keeping these separate so it's easy to update a single widget's settings
 	
 	//no longer needed?
@@ -57,10 +57,9 @@ public class WeatherWidget extends Widget {
 		super();
 	}
 
-	public WeatherWidget(String query, String apiKey, String units) {
+	public WeatherWidget(String query, String units) {
 		super();
 		this.query = query;
-		this.apiKey = apiKey;
 		this.units = units;
 	}
 
@@ -81,28 +80,12 @@ public class WeatherWidget extends Widget {
 		this.query = query;
 	}
 
-	public String getKey() {
-		return apiKey;
-	}
-
-	public void setKey(String key) {
-		this.apiKey = key;
-	}
-
 	public String getUnits() {
 		return units;
 	}
 
 	public void setUnits(String units) {
 		this.units = units;
-	}
-	
-	public String getBaseUrl() {
-		return baseUrl;
-	}
-	
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
 	}
 	
 	public CurrentWeatherPayload getCurrentPayload() {
