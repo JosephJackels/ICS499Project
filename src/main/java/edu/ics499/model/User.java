@@ -2,6 +2,7 @@ package edu.ics499.model;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ public class User {
 	@GeneratedValue
 	private Long userID;
 	
+	@Column(unique=true)
 	private String username;
 	
 	//should this be different in order to be secure?
