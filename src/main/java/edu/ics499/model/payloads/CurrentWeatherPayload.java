@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.springframework.boot.json.*;
+
 import edu.ics499.model.widgets.*;
 
 @Entity
@@ -321,5 +323,45 @@ public class CurrentWeatherPayload extends Payload {
 
     public void setWind_gust(String wind_gust) {
         this.wind_gust = wind_gust;
+    }
+
+    public void populate(String response) {
+        JsonParser springParser = JsonParserFactory.getJsonParser();
+        Map<String, Object> map = springParser.parseMap(response);
+        this.setBase((String)map.get("base"));
+        this.setVisibility(String.valueOf(map.get("visibility")));
+        this.setDt(String.valueOf(map.get("dt")));
+        this.setTimezone(String.valueOf(map.get("timezone")));
+        this.setId(String.valueOf(map.get("id")));
+        this.setName((String)map.get("name"));
+        this.setCod(String.valueOf(map.get("cod")));
+        List weather_list = (List) map.get("weather");
+        LinkedHashMap weather = (LinkedHashMap) weather_list.get(0);
+        this.setWeather_description((String) weather.get("description"));
+        this.setWeather_id(String.valueOf(weather.get("id")));
+        this.setWeather_main((String) weather.get("main"));
+        this.setWeather_icon((String) weather.get("icon"));
+        LinkedHashMap coord = (LinkedHashMap) map.get("coord");
+        this.setCoord_lat(String.valueOf(coord.get("lat")));
+        this.setCoord_lon(String.valueOf(coord.get("lon")));
+        LinkedHashMap main = (LinkedHashMap) map.get("main");
+        this.setMain_feelslike(String.valueOf(main.get("feels_like")));
+        this.setMain_temp(String.valueOf(main.get("temp")));
+        this.setMain_tempmin(String.valueOf(main.get("temp_min")));
+        this.setMain_tempmax(String.valueOf(main.get("temp_max")));
+        this.setMain_pressure(String.valueOf(main.get("pressure")));
+        this.setMain_humidity(String.valueOf(main.get("humidity")));
+        LinkedHashMap wind = (LinkedHashMap) map.get("wind");
+        this.setWind_deg(String.valueOf(wind.get("deg")));
+        this.setWind_gust(String.valueOf(wind.get("gust")));
+        this.setWind_speed(String.valueOf(wind.get("speed")));
+        LinkedHashMap clouds = (LinkedHashMap) map.get("clouds");
+        this.setClouds_all(String.valueOf(clouds.get("all")));
+        LinkedHashMap sys= (LinkedHashMap) map.get("sys");
+        this.setSys_country((String) sys.get("country"));
+        this.setSys_type(String.valueOf(sys.get("type")));
+        this.setSys_id(String.valueOf(sys.get("id")));
+        this.setSys_sunrise(String.valueOf(sys.get("sunrise")));
+        this.setSys_sunset(String.valueOf(sys.get("sunset")));
     }
 }
