@@ -1,10 +1,13 @@
-package edu.ics499.service;
+package edu.ics499.serviceImp;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import org.springframework.stereotype.Service;
+
 import edu.ics499.model.payloads.*;
 
+@Service
 public class WeatherWidgetService {
     private final static String forecastString = "http://api.openweathermap.org/data/2.5/forecast?q=";
     private final static String currentWeatherString = "http://api.openweathermap.org/data/2.5/weather?q=";
