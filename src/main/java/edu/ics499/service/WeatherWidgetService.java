@@ -15,7 +15,7 @@ public interface WeatherWidgetService {
 	Payload getCurrentPayload(Long widgetId) throws IOException;
 	Payload getForecastPayload(Long widgetId) throws IOException;
 	
-	void setWeatherQuery(String query, Long widgetId);
+	WeatherWidget setWeatherQuery(String query, Long widgetId);
 	
 	List<WeatherWidget> getAll();
 	WeatherWidget getWeatherWidgetById(Long widgetId);

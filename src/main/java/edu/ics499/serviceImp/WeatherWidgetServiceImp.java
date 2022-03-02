@@ -64,11 +64,11 @@ public class WeatherWidgetServiceImp implements WeatherWidgetService {
 	}
 
 	@Override
-	public void setWeatherQuery(String query, Long widgetId) {
+	public WeatherWidget setWeatherQuery(String query, Long widgetId) {
 		// TODO Auto-generated method stub
 		WeatherWidget widget = getWeatherWidgetById(widgetId);
 		widget.setQuery(query);
-		widgetRepo.saveAndFlush(widget);
+		return widgetRepo.saveAndFlush(widget);
 	}
 
 	@Override
