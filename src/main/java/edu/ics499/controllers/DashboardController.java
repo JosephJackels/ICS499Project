@@ -31,7 +31,7 @@ public class DashboardController {
 	}
 
 	@PostMapping("/remove")
-	public Widget removeWidget(@RequestParam Long dashboardId, Long widgetId) {
+	public Widget removeWidget(@RequestParam Long dashboardId, @RequestParam Long widgetId) {
 	    return dashboardService.removeWidgetFromDashboard(dashboardId, widgetId);
 	}
 
