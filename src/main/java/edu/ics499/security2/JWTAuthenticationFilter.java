@@ -54,10 +54,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.withSubject(((UserPrincipal) auth.getPrincipal()).getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstraints.EXPIRATION_TIME))
 				.sign(Algorithm.HMAC512(SecurityConstraints.SECRET.getBytes()));
-		
-		String body = ((UserPrincipal) auth.getPrincipal()).getUsername() + " " + token;
-		
+		String refreshToken = JWT.create()
+				.withSubject(((UserPrincipal) auth.getPrincipal()).getUsername())
+				.withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstraints.REFRESH_EXPIRATION_TIME))
+				.sign(Algorithm.HMAC512(SecurityConstraints.SECRET.getBytes()));
+		//String body = ((UserPrincipal) auth.getPrincipal()).getUsername() + " " + token;
+		//String body = "{ \"token\": " + "\"" + token + "\"}";
+		//auth.g
+		String body = new JWTResponse(token, refreshToken, ((UserPrincipal) auth.getPrincipal()).getUsername()).toJson();
 		res.getWriter().write(body);
 		res.getWriter().flush();
+	}
+	
+	@Override
+	protected void unsuccessfulAuthentication(HttpServletRequest req, HttpServletResponse res, AuthenticationException authException) throws IOException {
+		System.out.println("unsuccess");
 	}
 }

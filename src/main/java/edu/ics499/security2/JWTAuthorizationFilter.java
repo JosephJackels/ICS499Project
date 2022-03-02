@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
@@ -38,17 +39,41 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = request.getHeader(SecurityConstraints.HEADER_STRING);
-		if(token != null) {
-			String user = JWT.require(Algorithm.HMAC512(SecurityConstraints.SECRET.getBytes()))
-					.build()
-					.verify(token.replace(SecurityConstraints.TOKEN_PREFIX, ""))
-					.getSubject();
-			if(user != null) {
-				
-				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+		//try {
+			if(token != null) {
+				String user = JWT.require(Algorithm.HMAC512(SecurityConstraints.SECRET.getBytes()))
+						.build()
+						.verify(token.replace(SecurityConstraints.TOKEN_PREFIX, ""))
+						.getSubject();
+				if(user != null) {
+					
+					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+				}
+				return null;
 			}
+		//} catch (TokenExpiredException ex) {
+			//throw new TokenRefreshException(token, "must be refreshed.");
+		//}
+			//System.out.println("Token is expired!");
+			/*
+			 * String refreshToken = request.getHeader(SecurityConstraints.REFRESH_HEADER_STRING);
+			try {
+				if(token != null) {
+					String user = JWT.require(Algorithm.HMAC512(SecurityConstraints.SECRET.getBytes()))
+							.build()
+							.verify(refreshToken)
+							.getSubject();
+					if(user != null) {
+						return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+					}
+				}
+				return null;
+				
+			} catch (Exception e) {
+				
+			}*/
 			return null;
-		}
-		return null;
+		//}
+		//return null;
 	}
 }
