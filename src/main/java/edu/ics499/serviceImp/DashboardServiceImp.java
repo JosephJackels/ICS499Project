@@ -23,19 +23,19 @@ public class DashboardServiceImp implements DashboardService {
 
 	@Override
 	public Widget removeWidgetFromDashboard(Long dashboardId, Long widgetId) {
-	    Dashboard db = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
-	    List<Widget> widgets = db.getWidgetList();
-	    int index = 0;
-	    Widget removed = null;
-	    for(Widget widget : widgets) {
-	        if(widget.getWidgetID().equals(widgetId)) {
-	            removed = widgets.remove(index);
-	            break;
-	        }
-	        index++;
-	    }
-	    dashboardRepo.saveAndFlush(db);
-		return removed;
+		Dashboard dash = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
+		List<Widget> widgets = dash.getWidgetList();
+		int index = 0;
+		Widget removedWidget = new Widget();
+		for(Widget widget : widgets) {
+			if(widget.getWidgetID() == widgetId) {
+				removedWidget = widgets.remove(index);
+				break;
+			}
+			index++;
+		}
+		dashboardRepo.saveAndFlush(dash);
+		return removedWidget;
 	}
 
 	@Override

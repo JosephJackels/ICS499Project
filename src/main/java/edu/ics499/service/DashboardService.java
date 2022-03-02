@@ -12,3 +12,4 @@ public interface DashboardService {
 	Widget removeWidgetFromDashboard(Long dashboardId, Long widgetId);
 	Dashboard addWidgetToDashboard(Long dashboardId, Widget widget);
 }
+
