@@ -2,11 +2,14 @@ package edu.ics499.model;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.lang.NonNull;
 
 
 //extend user principle/detail?
@@ -18,11 +21,14 @@ public class User {
 	@GeneratedValue
 	private Long userID;
 	
+	@Column(unique=true)
+	@NonNull
 	private String username;
 	
 	//should this be different in order to be secure?
 	//like a hashed/salted password is stored not the real password?
 	//we can just use a String for now and figure that out when we get to that point
+	@NonNull
 	private String password;
 	
 	//not sure what the cascade thing is but he has it in his?

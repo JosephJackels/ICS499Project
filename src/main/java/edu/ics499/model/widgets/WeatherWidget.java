@@ -26,12 +26,20 @@ public class WeatherWidget extends Widget {
 			metric - to use Celsius
 		 * 
 	*/
+	//Transient annotation = not saved in the db, these are hardcoded for all
+	//weatherwidgets so it does not need to be saved
+	/*
+	@Transient
 	private String baseUrl = "https:api.openweathermap.org/data/2.5{requestType}?{query}&appid={key}&units={units}";
 	
+	@Transient
+	private String apiKey = "b4808d3be62ce204189dcf0c196809f0";
+	*/
 	//keeping these separate so it's easy to update a single widget's settings
-	private String requestType;
-	private String weatherQuery;
-	private String weatherKey;
+	
+	//no longer needed?
+	//private String requestType;
+	private String query;
 	private String units;
 	
 	//response from api
@@ -49,14 +57,13 @@ public class WeatherWidget extends Widget {
 		super();
 	}
 
-	public WeatherWidget(String requestType, String query, String key, String units) {
+	public WeatherWidget(String query, String units) {
 		super();
-		this.requestType = requestType;
-		this.weatherQuery = query;
-		this.weatherKey = key;
+		this.query = query;
 		this.units = units;
 	}
 
+	/*
 	public String getRequestType() {
 		return requestType;
 	}
@@ -64,21 +71,13 @@ public class WeatherWidget extends Widget {
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
 	}
-
+*/
 	public String getQuery() {
-		return weatherQuery;
+		return query;
 	}
 
 	public void setQuery(String query) {
-		this.weatherQuery = query;
-	}
-
-	public String getKey() {
-		return weatherKey;
-	}
-
-	public void setKey(String key) {
-		this.weatherKey = key;
+		this.query = query;
 	}
 
 	public String getUnits() {
@@ -87,14 +86,6 @@ public class WeatherWidget extends Widget {
 
 	public void setUnits(String units) {
 		this.units = units;
-	}
-	
-	public String getBaseUrl() {
-		return baseUrl;
-	}
-	
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
 	}
 	
 	public CurrentWeatherPayload getCurrentPayload() {
