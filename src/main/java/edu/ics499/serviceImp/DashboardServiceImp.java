@@ -1,21 +1,21 @@
 package edu.ics499.serviceImp;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import edu.ics499.model.Dashboard;
-import edu.ics499.model.widgets.Widget;
-import edu.ics499.repositories.DashboardRepository;
-import edu.ics499.service.DashboardService;
+import edu.ics499.model.*;
+import edu.ics499.model.widgets.*;
+import edu.ics499.repositories.*;
+import edu.ics499.service.*;
 
 @Service
 public class DashboardServiceImp implements DashboardService {
-	
+
 	@Autowired
 	DashboardRepository dashboardRepo;
-	
+
 	@Override
 	public Dashboard getDashboardByUserId(Long userId) {
 		return dashboardRepo.findByUserUserID(userId);
@@ -23,26 +23,36 @@ public class DashboardServiceImp implements DashboardService {
 
 	@Override
 	public Widget removeWidgetFromDashboard(Long dashboardId, Long widgetId) {
-		// TODO Auto-generated method stub
-		return null;
+		Dashboard dash = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
+		List<Widget> widgets = dash.getWidgetList();
+		int index = 0;
+		Widget removedWidget = new Widget();
+		for(Widget widget : widgets) {
+			if(widget.getWidgetID() == widgetId) {
+				removedWidget = widgets.remove(index);
+				break;
+			}
+			index++;
+		}
+		dashboardRepo.saveAndFlush(dash);
+		return removedWidget;
 	}
 
 	@Override
-	public Widget addWidgetToDashboard(Long dashboardId, Widget widget) {
-		// TODO Auto-generated method stub
-		return null;
+	public Dashboard addWidgetToDashboard(Long dashboardId, Widget widget) {
+	    Dashboard db = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
+	    db.addWidget(widget);
+	    return dashboardRepo.saveAndFlush(db);
 	}
 
 	@Override
 	public Dashboard getDashboardById(Long dashboardId) {
-		// TODO Auto-generated method stub
-		return null;
+        return dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
 	}
 
 	@Override
 	public List<Dashboard> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return dashboardRepo.findAll();
 	}
 
 }
