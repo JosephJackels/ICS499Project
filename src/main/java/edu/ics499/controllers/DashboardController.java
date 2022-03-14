@@ -24,24 +24,27 @@ public class DashboardController {
 		return dashboardService.getAll();
 	}
 
-	//get request to localhost:port/dashboards/one
-	@GetMapping("/one")
-	public Dashboard get(@RequestParam Long id) {
+	//get request to localhost:port/dashboards/one/{id}
+	@GetMapping("/one/{id}")
+	public Dashboard get(@PathVariable Long id) {
 		return dashboardService.getDashboardById(id);
 	}
-
-	@PostMapping("/remove")
-	public Widget removeWidget(@RequestParam Long dashboardId, @RequestParam Long widgetId) {
+	
+	//post request to localhost:port/dashboards/remove/{dashId}?widgetId=#
+	@PostMapping("/remove/{dashboardId}")
+	public Widget removeWidget(@PathVariable Long dashboardId, @RequestParam Long widgetId) {
 	    return dashboardService.removeWidgetFromDashboard(dashboardId, widgetId);
 	}
-
-	@PostMapping("/add")
-	public Dashboard addWidget(Long dashboardId, Widget widget) {
+	
+	//post request to localhost:port/dashboards/add/{dashId}
+	//with a Widget object in post body e.x. {"query" : "st paul", "units" : "F"} to create a weather widget?
+	@PostMapping("/add/{dashboardId}")
+	public Dashboard addWidget(@PathVariable Long dashboardId, @RequestBody final Widget widget) {
 	    return dashboardService.addWidgetToDashboard(dashboardId, widget);
 	}
 
 	//post request to localhost:port/dashboards/add with a Dashboard object
-	//in the request body? not sure how this works yet/how to use it
+	//in the request body
 	@PostMapping("/create")
 	public Dashboard create(@RequestBody final Dashboard dashboard) {
 		return dashboardRepo.saveAndFlush(dashboard);
