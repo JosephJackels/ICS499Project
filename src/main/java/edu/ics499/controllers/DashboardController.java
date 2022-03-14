@@ -24,7 +24,7 @@ public class DashboardController {
 		return dashboardService.getAll();
 	}
 
-	//get request to localhost:port/dashboards/one?id=#
+	//get request to localhost:port/dashboards/one
 	@GetMapping("/one")
 	public Dashboard get(@RequestParam Long id) {
 		return dashboardService.getDashboardById(id);

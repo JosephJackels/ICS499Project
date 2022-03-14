@@ -12,6 +12,9 @@ public class UserSecurity {
 	@Autowired
 	private UserServiceImp userService;
 	
+	@Autowired
+	private DashboardServiceImp dashService;
+	
 	public boolean hasUserId(Authentication authentication, Long userId) {
 		String currentUserName;
 		if(authentication.getPrincipal() instanceof UserDetails) {
@@ -20,5 +23,11 @@ public class UserSecurity {
 			currentUserName = authentication.getPrincipal().toString();
 		}
 		return userService.getById(userId).getUsername().equals(currentUserName);
+	}
+	
+	public boolean doesDashboardBelongToUser(Authentication auth, Long dashboardId) {
+		
+		//get user from dash service
+		//check that its the same as user in auth
 	}
 }
