@@ -10,6 +10,6 @@ public interface DashboardService {
 	List<Dashboard> getAll();
 	Dashboard getDashboardByUserId(Long userId);
 	Widget removeWidgetFromDashboard(Long dashboardId, Long widgetId);
-	Dashboard addWidgetToDashboard(Long dashboardId, Long widgetId);
+	Dashboard addWidgetToDashboard(Long dashboardId, Widget widget);
 }
 

@@ -24,9 +24,7 @@ public class Dashboard {
 	//has an object in both classes whenever theres a relationship even if the object isnt used
 	@OneToOne
 	private User user;
-	
-	private Long userId;
-	
+
 	public Dashboard() {
 		super();
 		this.widgetList = new ArrayList<>();
@@ -51,15 +49,7 @@ public class Dashboard {
 	public void addWidget(Widget widget) {
 	    widgetList.add(widget);
 	}
-	
-	public Long getUserId() {
-		return this.userId;
-	}
-	
-	public void setUserId(Long id) {
-		this.userId = id;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(dashboardID, widgetList);

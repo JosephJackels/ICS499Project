@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import edu.ics499.model.Dashboard;
 
 public interface DashboardRepository extends JpaRepository<Dashboard, Long> {
-	Dashboard findByUserId(Long userID);
+	Dashboard findByUserUserID(Long userUserID);
 }

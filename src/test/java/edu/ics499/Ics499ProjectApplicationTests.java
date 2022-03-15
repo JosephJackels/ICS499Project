@@ -1,8 +1,6 @@
 package edu.ics499;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
 
@@ -12,25 +10,24 @@ import org.springframework.boot.test.context.*;
 import edu.ics499.model.*;
 import edu.ics499.model.payloads.*;
 import edu.ics499.model.widgets.*;
-import edu.ics499.service.WeatherWidgetService;
 import edu.ics499.serviceImp.*;
 
 @SpringBootTest
 class Ics499ProjectApplicationTests {
 
-	@Test
-	void contextLoads() {
-	    testDashboard();
-	    testWidget();
-	    testUser();
-	    try {
+    @Test
+    void contextLoads() {
+        testDashboard();
+        testWidget();
+        testUser();
+        try {
             testPayload();
         } catch (IOException x) {
             x.printStackTrace();
         }
-	}
+    }
 
-	public void testPayload() throws IOException {
+    public void testPayload() throws IOException {
         CurrentWeatherPayload payload = WeatherWidgetServiceImp.requestCurrentWeather("london");
         assertEquals(payload.getName(), "London");
         assertEquals(payload.getSys_country(), "GB");
@@ -38,7 +35,7 @@ class Ics499ProjectApplicationTests {
         assertEquals(payload.getId(), "2643743");
         assertEquals(payload.getTimezone(), "0");
         assertTrue(payload.getClouds_all() != null);
-	}
+    }
 
     public void testDashboard() {
         Dashboard dashboard = new Dashboard();
