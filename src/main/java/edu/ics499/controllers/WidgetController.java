@@ -63,9 +63,15 @@ public class WidgetController {
 		return weatherWidgetService.getForecastPayload(id);
 	}
 	
+	//update as in change query, does not update payloads
 	//localhost:port/widgets/weather/one/{id}/update?query=newCity
 	@PostMapping("/weather/one/{id}/update")
 	public WeatherWidget updateWidget(@RequestParam String query, @PathVariable Long id) {
 		return weatherWidgetService.setWeatherQuery(query, id);
+	}
+	
+	@PostMapping("/weather/add")
+	public WeatherWidget createWidget(@RequestParam String query) {
+		return weatherWidgetService.addWidget(query);
 	}
 }
