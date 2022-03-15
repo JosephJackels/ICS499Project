@@ -36,11 +36,11 @@ public class DashboardController {
 	    return dashboardService.removeWidgetFromDashboard(dashboardId, widgetId);
 	}
 	
-	//post request to localhost:port/dashboards/add/{dashId}
-	//with a Widget object in post body e.x. {"query" : "st paul", "units" : "F"} to create a weather widget?
+	//first create widget with create widget end point then
+	//post request to localhost:port/dashboards/add/{dashId}?widgetId=#
 	@PostMapping("/add/{dashboardId}")
-	public Dashboard addWidget(@PathVariable Long dashboardId, @RequestBody final Widget widget) {
-	    return dashboardService.addWidgetToDashboard(dashboardId, widget);
+	public Dashboard addWidget(@PathVariable Long dashboardId, @RequestParam Long widgetId) {
+	    return dashboardService.addWidgetToDashboard(dashboardId, widgetId);
 	}
 
 	//post request to localhost:port/dashboards/add with a Dashboard object

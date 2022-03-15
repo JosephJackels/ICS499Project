@@ -15,10 +15,13 @@ public class DashboardServiceImp implements DashboardService {
 
 	@Autowired
 	DashboardRepository dashboardRepo;
-
+	
+	@Autowired
+	WidgetServiceImp widgetService;
+	
 	@Override
 	public Dashboard getDashboardByUserId(Long userId) {
-		return dashboardRepo.findByUserUserID(userId);
+		return dashboardRepo.findByUserId(userId);
 	}
 
 	@Override
@@ -39,8 +42,10 @@ public class DashboardServiceImp implements DashboardService {
 	}
 
 	@Override
-	public Dashboard addWidgetToDashboard(Long dashboardId, Widget widget) {
+	public Dashboard addWidgetToDashboard(Long dashboardId, Long widgetId) {
 	    Dashboard db = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
+	    Widget widget = widgetService.getWidgetById(widgetId);
+	    widget.setDashboardId(db.getDashboardID());
 	    db.addWidget(widget);
 	    return dashboardRepo.saveAndFlush(db);
 	}
