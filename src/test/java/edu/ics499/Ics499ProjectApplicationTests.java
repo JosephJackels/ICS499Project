@@ -1,6 +1,5 @@
 package edu.ics499;
 
-import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,7 +11,6 @@ import org.springframework.boot.test.context.*;
 import edu.ics499.model.*;
 import edu.ics499.model.payloads.*;
 import edu.ics499.model.widgets.*;
-import edu.ics499.service.WeatherWidgetService;
 import edu.ics499.serviceImp.*;
 
 @SpringBootTest
@@ -31,7 +29,10 @@ class Ics499ProjectApplicationTests {
 	}
 
 	public void testPayload() throws IOException {
-        CurrentWeatherPayload payload = WeatherWidgetServiceImp.requestCurrentWeather("london");
+        CurrentWeatherPayload payload = new CurrentWeatherPayload();
+        payload.setUpdateFrequency("0");
+        payload.setLastUpdatedTime("0");
+        WeatherWidgetServiceImp.requestCurrentWeather("london", payload);
         assertEquals(payload.getName(), "London");
         assertEquals(payload.getSys_country(), "GB");
         assertEquals(payload.getCod(), "200");
