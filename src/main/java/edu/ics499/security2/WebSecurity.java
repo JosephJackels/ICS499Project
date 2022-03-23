@@ -30,14 +30,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.cors().and().authorizeRequests()
-			.antMatchers(HttpMethod.POST, SecurityConstraints.SIGN_UP_URL).permitAll() //everyone can access create user page
-			.antMatchers("/users/one/{id}", "/users/one/{id}/dashboard") //must be logged in for pages specific to user and be that user
+			.antMatchers(HttpMethod.POST, SecurityConstraints.SIGN_UP_URL).permitAll()
+			.antMatchers("/users/one/{id}")
 				.access("@userSecurity.hasUserId(authentication, #id)")
-			.antMatchers("/dashboards/remove/{dashId}", "dashboards/one/{dashId}", "/dashboards/add/{dashId}") // dashboard must belong to logged in user
-				.access("@userSecurity.doesDashboardBelongToUser(authentication, #dashId)")
-			.antMatchers("widgets/one/{id}", "widgets/weather/one/{id}", "widgets/weather/one/{id}/**")// widget must belong to user
-				.access("@userSecurity.doesWidgetBelongToUser(authentication, #id)")
-			.anyRequest().authenticated() //catch all for rest - just must be logged in and authenticated. anyone can do get request to all users, all widgets etc.
+			//.antMatchers(HttpMethod.POST, "/login").permitAll()
+			.anyRequest().authenticated()
 			.and()
 			.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 			.addFilter(new JWTAuthorizationFilter(authenticationManager()))

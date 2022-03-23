@@ -27,7 +27,6 @@ public class Widget {
 	private Dashboard dashboard;
 	//not sure what other info to put here?
 	//maybe like a base URL string?
-	private Long dashboardId;
 	
 	public Widget() {
 		super();
@@ -41,19 +40,12 @@ public class Widget {
 		this.widgetID = widgetID;
 	}
 	
-	public Long getDashboardId() {
-		return this.dashboardId;
-	}
-	
-	public void setDashboardId(Long dashboardId) {
-		this.dashboardId = dashboardId;
-	}
-	
 	//NEEDS TO BE UPDATED IF WE ADD OTHER PROPERTIES
 	@Override
 	public int hashCode() {
 		return Objects.hash(widgetID);
 	}
+	
 	//NEEDS TO BE UPDATED IF WE ADD OTHER PROPERTIES
 	@Override
 	public boolean equals(Object obj) {

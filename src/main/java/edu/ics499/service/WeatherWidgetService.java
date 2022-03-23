@@ -20,5 +20,4 @@ public interface WeatherWidgetService {
 	List<WeatherWidget> getAll();
 	WeatherWidget getWeatherWidgetById(Long widgetId);
 	
-	WeatherWidget addWidget(String query);
 }
