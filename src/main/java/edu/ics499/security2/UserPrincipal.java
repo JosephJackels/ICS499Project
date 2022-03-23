@@ -11,6 +11,10 @@ import edu.ics499.model.User;
 
 public class UserPrincipal implements UserDetails {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final User user;
 	
 	public UserPrincipal(User user) {

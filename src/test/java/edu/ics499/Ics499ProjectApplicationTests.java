@@ -1,6 +1,7 @@
 package edu.ics499;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.*;
 
@@ -27,8 +28,12 @@ class Ics499ProjectApplicationTests {
         }
     }
 
-    public void testPayload() throws IOException {
-        CurrentWeatherPayload payload = WeatherWidgetServiceImp.requestCurrentWeather("london");
+	public void testPayload() throws IOException {
+        CurrentWeatherPayload payload = new CurrentWeatherPayload();
+        payload.setUpdateFrequency("0");
+        payload.setLastUpdatedTime("0");
+        WeatherWidgetServiceImp.requestCurrentWeather("london", payload);
+
         assertEquals(payload.getName(), "London");
         assertEquals(payload.getSys_country(), "GB");
         assertEquals(payload.getCod(), "200");
