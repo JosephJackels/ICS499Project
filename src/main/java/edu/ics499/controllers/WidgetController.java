@@ -69,9 +69,4 @@ public class WidgetController {
 	public WeatherWidget updateWidget(@RequestParam String query, @PathVariable Long id) {
 		return weatherWidgetService.setWeatherQuery(query, id);
 	}
-	
-	@PostMapping("/weather/add")
-	public WeatherWidget createWidget(@RequestParam String query) {
-		return weatherWidgetService.addWidget(query);
-	}
 }

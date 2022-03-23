@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import edu.ics499.model.payloads.*;
 import edu.ics499.model.widgets.WeatherWidget;
 import edu.ics499.model.widgets.Widget;
-import edu.ics499.repositories.ForecastWeatherPayloadItemRepository;
-import edu.ics499.repositories.PayloadRepository;
 import edu.ics499.repositories.WidgetRepository;
 import edu.ics499.service.WeatherWidgetService;
 
@@ -24,11 +22,6 @@ public class WeatherWidgetServiceImp implements WeatherWidgetService {
     
     @Autowired
     private WidgetRepository widgetRepo;
-    
-    @Autowired 
-    private PayloadRepository payloadRepo;
-    @Autowired
-    private ForecastWeatherPayloadItemRepository fwpiRepo;
     
     public static String getConnection(String requestCity, URL url, String weatherType) throws IOException {
         //contruct api request url with city name and api key
@@ -51,17 +44,18 @@ public class WeatherWidgetServiceImp implements WeatherWidgetService {
         return lines;
     }
 
-    public static void requestWeatherForecast(String requestCity, ForecastWeatherPayload payload) throws IOException  {
-        //ForecastWeatherPayload payload = new ForecastWeatherPayload();
+    public static ForecastWeatherPayload requestWeatherForecast(String requestCity) throws IOException  {
+        ForecastWeatherPayload payload = new ForecastWeatherPayload();
         String response = getConnection(requestCity, forecastURL, forecastString);
         payload.populate(response);
-        //return payload;
+        return payload;
     }
 
-    public static void requestCurrentWeather(String requestCity, CurrentWeatherPayload payload) throws IOException {
-        //CurrentWeatherPayload payload= new CurrentWeatherPayload();
+    public static CurrentWeatherPayload requestCurrentWeather(String requestCity) throws IOException {
+        CurrentWeatherPayload payload= new CurrentWeatherPayload();
         String response = getConnection(requestCity, currentWeatherURL, currentWeatherString);
         payload.populate(response);
+        return payload;
     }
 
 	@Override
@@ -100,15 +94,7 @@ public class WeatherWidgetServiceImp implements WeatherWidgetService {
 	@Override
 	public void updateCurrentPayload(Long widgetId) throws IOException{
 		WeatherWidget widget = getWeatherWidgetById(widgetId);
-		CurrentWeatherPayload current = widget.getCurrentPayload();
-		//Long payloadId = current.getPayloadID();
-		//payloadRepo.deleteById(current.getPayloadID());
-		requestCurrentWeather(widget.getQuery(), current);
-		//updated.setPayloadID(payloadId);
-		//updated.setLastUpdatedTime("0");
-		//updated.setUpdateFrequency("0");
-		payloadRepo.saveAndFlush(current);
-		//widget.setCurrentPayload();
+		widget.setCurrentPayload(requestCurrentWeather(widget.getQuery()));
 		widgetRepo.saveAndFlush(widget);
 	}
 	
@@ -116,10 +102,7 @@ public class WeatherWidgetServiceImp implements WeatherWidgetService {
 	@Override
 	public void updateForecastPayload(Long widgetId) throws IOException{
 		WeatherWidget widget = getWeatherWidgetById(widgetId);
-		ForecastWeatherPayload forecast = widget.getForecastPayload();
-		requestWeatherForecast(widget.getQuery(), forecast);
-		fwpiRepo.saveAllAndFlush(forecast.getList());
-		payloadRepo.saveAndFlush(forecast);
+		widget.setForecastPayload(requestWeatherForecast(widget.getQuery()));
 		widgetRepo.saveAndFlush(widget);
 	}
 
@@ -147,28 +130,5 @@ public class WeatherWidgetServiceImp implements WeatherWidgetService {
 			payload = widget.getForecastPayload();
 		}
 		return payload;
-	}
-	
-	@Override
-	public WeatherWidget addWidget(String query) {
-		WeatherWidget widget = new WeatherWidget();
-		widget.setQuery(query);
-		widget.setUnits("F");
-		
-		CurrentWeatherPayload current = new CurrentWeatherPayload();
-		ForecastWeatherPayload forecast = new ForecastWeatherPayload();
-		
-		current.setLastUpdatedTime("0");
-		current.setUpdateFrequency("0");
-		forecast.setLastUpdatedTime("0");
-		forecast.setUpdateFrequency("0");
-		
-		payloadRepo.save(current);
-		payloadRepo.save(forecast);
-		
-		widget.setCurrentPayload(current);
-		widget.setForecastPayload(forecast);
-		
-		return widgetRepo.saveAndFlush(widget);
 	}
 }

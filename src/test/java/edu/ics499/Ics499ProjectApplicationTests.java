@@ -16,30 +16,31 @@ import edu.ics499.serviceImp.*;
 @SpringBootTest
 class Ics499ProjectApplicationTests {
 
-	@Test
-	void contextLoads() {
-	    testDashboard();
-	    testWidget();
-	    testUser();
-	    try {
+    @Test
+    void contextLoads() {
+        testDashboard();
+        testWidget();
+        testUser();
+        try {
             testPayload();
         } catch (IOException x) {
             x.printStackTrace();
         }
-	}
+    }
 
 	public void testPayload() throws IOException {
         CurrentWeatherPayload payload = new CurrentWeatherPayload();
         payload.setUpdateFrequency("0");
         payload.setLastUpdatedTime("0");
         WeatherWidgetServiceImp.requestCurrentWeather("london", payload);
+
         assertEquals(payload.getName(), "London");
         assertEquals(payload.getSys_country(), "GB");
         assertEquals(payload.getCod(), "200");
         assertEquals(payload.getId(), "2643743");
         assertEquals(payload.getTimezone(), "0");
         assertTrue(payload.getClouds_all() != null);
-	}
+    }
 
     public void testDashboard() {
         Dashboard dashboard = new Dashboard();
