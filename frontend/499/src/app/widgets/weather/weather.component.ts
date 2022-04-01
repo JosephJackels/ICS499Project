@@ -25,7 +25,6 @@ export class WeatherComponent implements OnInit {
   }
 
   removeSelf(){
-    console.log('This is happening')
     this.delete.emit(this.WeatherData);
   }
 }
