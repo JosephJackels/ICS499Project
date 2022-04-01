@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-title>{{WeatherData.name}}</mat-card-title>
+    <mat-card-subtitle>{{WeatherData.sys.country}}</mat-card-subtitle>
+    <div class="weatherWidgetRow" style="font-size:32px;margin:top 5px;">
+        {{((WeatherData.main.temp - 273) * (9/5) + 32).toFixed(2)}} °f
+    </div>
+    <div class="weatherWidgetRow" style="font-size:15x;margin:top 10px;">Feels like: {{((WeatherData.main.feels_like- 273) * (9/5) + 32).toFixed(2)}} °</div>
+    <div class="weatherWidgetRow" style="font-size:12px;">Low: {{((WeatherData.main.temp_min - 273) * (9/5) + 32).toFixed(2)}}° High: {{((WeatherData.main.temp_max- 273) * (9/5) + 32).toFixed(2)}}°</div>
+    <mat-card-actions>
+      <button mat-button>Settings</button>
+      <button mat-button (click)="removeSelf()">Remove</button>
+    </mat-card-actions>
+</mat-card>
+<br>

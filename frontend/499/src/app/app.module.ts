@@ -23,7 +23,9 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CalendarComponent } from './widgets/calendar/calendar.component';
+import { WeatherComponent } from './widgets/weather/weather.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -33,9 +35,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabsComponent,
     AboutusComponent,
     NewUserComponent,
-    LoginComponent
-    
-    
+    LoginComponent,
+    CalendarComponent,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatToolbarModule,
     ReactiveFormsModule,
-  
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
