@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
   calendar_widgets = [0];
   weather_widgets = [0];
-  i = 0; 
+
 
   ngOnInit(): void {
   }
