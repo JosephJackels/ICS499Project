@@ -59,7 +59,7 @@ import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
-    HttpXhrBackend,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
