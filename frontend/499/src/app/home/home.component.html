@@ -1,5 +1,5 @@
-<button fxLayoutAlign="center" (click)="addWidget()">Add Calendar Widget</button>
-<button fxLayoutAlign="center" (click)="addWeather()">Add Weather Widget</button>
+<button mat-button  (click)="addWidget()">+ Calendar</button>
+<button mat-button  (click)="addWeather()">+ Weather</button>
 <div fxLayout="row" fxLayoutAlign="center" class="content">
     <app-calendar fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>
     <app-weather fxFlex="15%" *ngFor="let i of weather_widgets" (delete)="removeWeather($event)"></app-weather>
