@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './widgets/calendar/calendar.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatToolbarModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
