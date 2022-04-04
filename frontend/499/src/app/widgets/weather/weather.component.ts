@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-weather',
@@ -7,12 +9,25 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
   WeatherData:any;
+  form!: FormGroup;
+
   constructor() { }
 
   @Output() delete: EventEmitter<string> = new EventEmitter();
 
   ngOnInit(): void {
     this.getWeatherData();
+    this.form = new FormGroup({
+      widget: new FormArray([
+        new FormGroup({
+          city: new FormControl('')
+        })
+      ])
+    });
+  }
+ 
+  get widget(): FormArray{
+    return this.form.get('widget') as FormArray;
   }
 
   getWeatherData() {
@@ -26,5 +41,15 @@ export class WeatherComponent implements OnInit {
 
   removeSelf(){
     this.delete.emit(this.WeatherData);
+  }
+
+  onSubmit(){
+    this.widget.push(
+      new FormGroup({
+        city: new FormControl('')
+      })
+    );
+    this.WeatherData.name = this.form.value['widget'][0]['city']
+    console.log(this.form.value['widget'][0]['city']);
   }
 }
