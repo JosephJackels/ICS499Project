@@ -26,7 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './widgets/calendar/calendar.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 
 
 @NgModule({
@@ -59,6 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    HttpXhrBackend,
   ],
   providers: [],
   bootstrap: [AppComponent]

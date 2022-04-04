@@ -40,7 +40,8 @@ export class WeatherComponent implements OnInit {
   }
 
   removeSelf(){
-    this.delete.emit(this.WeatherData);
+    this.delete.emit(this.WeatherData.name);
+    console.log("weather class " + this.WeatherData.name);
   }
 
   onSubmit(){
@@ -49,7 +50,6 @@ export class WeatherComponent implements OnInit {
         city: new FormControl('')
       })
     );
-    this.WeatherData.name = this.form.value['widget'][0]['city']
-    console.log(this.form.value['widget'][0]['city']);
+    this.WeatherData.name = this.form.value['widget'][0]['city'];
   }
 }
