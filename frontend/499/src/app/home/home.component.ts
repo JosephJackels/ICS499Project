@@ -30,5 +30,6 @@ export class HomeComponent implements OnInit {
 
   removeWeather(WeatherData:any){
     this.weather_widgets.pop();
+    console.log("home class " + WeatherData);
   }
 }
