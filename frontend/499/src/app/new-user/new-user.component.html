@@ -12,21 +12,24 @@
                 <div fxLayoutGap="10px" fxLayout="row">
                     <div fxLayout="column">
                         <mat-form-field>
-                            <mat-label>Username</mat-label>
-                                <input type="text" formControlName="username" matInput required>
+                            <mat-label>First Name</mat-label>
+                                <input type="text" formControlName="firstName" matInput required>
                         </mat-form-field>
                     </div>
                 
-  
+                    <div fxLayout="column">
+                        <mat-form-field>
+                            <mat-label>Last Name</mat-label>
+                                <input type="text" formControlName="lastName" matInput required>
+                        </mat-form-field>
+                    </div>   
                 </div>
-                <!--
                 <div fxLayout="column" fxFlexFill>
                     <mat-form-field>
                         <mat-label>Email</mat-label>
                             <input type="email" formControlName="email" matInput email required>
                     </mat-form-field>
-                </div> 
-             -->   
+                </div>    
                 <div fxLayout="column" fxFlexFill>
                     <mat-form-field>
                         <mat-label>Password</mat-label>
