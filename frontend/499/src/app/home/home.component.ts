@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
   calendar_widgets = [0];
   weather_widgets = [0];
+  stock_widgets = [0];
 
 
   ngOnInit(): void {
@@ -31,5 +32,13 @@ export class HomeComponent implements OnInit {
   removeWeather(WeatherData:any){
     this.weather_widgets.pop();
     console.log("home class " + WeatherData);
+  }
+
+  addStocks(){
+    this.stock_widgets.push(0);
+  }
+
+  removeStocks(StockData:any){
+    this.stock_widgets.pop();
   }
 }
