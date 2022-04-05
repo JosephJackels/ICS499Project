@@ -27,6 +27,7 @@ import { CalendarComponent } from './widgets/calendar/calendar.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
+import { StocksComponent } from './widgets/stocks/stocks.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
     NewUserComponent,
     LoginComponent,
     CalendarComponent,
-    WeatherComponent
+    WeatherComponent,
+    StocksComponent
   ],
   imports: [
     BrowserModule,
