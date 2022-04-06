@@ -5,10 +5,12 @@
     </mat-card-content>
     <mat-card-actions>
         <div class="aboutus-button">
-        <h1>{{user.username}}</h1>
+        <h1>{{login.username}}</h1>
+        <h1>{{login.token}}</h1>
         <button mat-raised-button>Log In</button>
         <button mat-raised-button color="primary">Sign Up</button>
-        <button mat-raised-button (click)="getUser()">Call method</button>
+        <button mat-raised-button (click)="getUser()">Call getUser()</button>
+        <button mat-raised-button (click)="loginUser()">Call loginUser()</button>
         </div>
       </mat-card-actions>
 </mat-card>
