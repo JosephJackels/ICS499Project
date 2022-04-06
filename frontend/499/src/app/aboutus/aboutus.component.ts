@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from '../service/data-service.service';
-
+import { User } from '../service/user';
 @Component({
   selector: 'app-aboutus',
   templateUrl: './aboutus.component.html',
@@ -11,16 +11,12 @@ export class AboutusComponent implements OnInit {
 
   constructor(private data:DataServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   public getUser(){
-    this.user = this.data.getUser();
+    //change the 48 below to whatever id of user you want to get/have access to
+    return this.data.getUser(48).subscribe({next: (value: User) => this.user = value});
   }
-}
-
-export interface User{
-  userID: number;
-  username: string;
-  password: string;
 }
 
