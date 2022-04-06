@@ -5,8 +5,10 @@
     </mat-card-content>
     <mat-card-actions>
         <div class="aboutus-button">
+        <h1>{{user.username}}</h1>
         <button mat-raised-button>Log In</button>
         <button mat-raised-button color="primary">Sign Up</button>
+        <button mat-raised-button (click)="getUser()">Call method</button>
         </div>
       </mat-card-actions>
-    </mat-card>
+</mat-card>

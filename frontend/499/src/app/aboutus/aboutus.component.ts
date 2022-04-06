@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataServiceService } from '../service/data-service.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aboutus.component.css']
 })
 export class AboutusComponent implements OnInit {
+  user!: User;
 
-  constructor() { }
+  constructor(private data:DataServiceService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  public getUser(){
+    this.user = this.data.getUser();
   }
-
 }
+
+export interface User{
+  userID: number;
+  username: string;
+  password: string;
+}
+
