@@ -28,6 +28,7 @@ import { WeatherComponent } from './widgets/weather/weather.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { StocksComponent } from './widgets/stocks/stocks.component';
+import { DataServiceService } from './service/data-service.service';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { StocksComponent } from './widgets/stocks/stocks.component';
     HttpClientModule,
 
   ],
-  providers: [],
+  providers: [DataServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
