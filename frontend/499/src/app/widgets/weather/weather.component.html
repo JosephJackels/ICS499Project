@@ -14,8 +14,12 @@
                 </div>
             </div>
         </form>
-        <button mat-button (click)="onSubmit()">Change city</button>
-        <button mat-button (click)="removeSelf()">Remove</button>
+        <button mat-mini-fab (click)="onSubmit()" class="update_button">
+            <mat-icon>arrow_circle_right</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="removeSelf()" class="delete_button">
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>
 <br>

@@ -3,6 +3,10 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from './user'
 import { Login } from './login'
+import { Widget } from './widget'
+import { Payload } from './payload'
+import { Dashboard } from './dashboard'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +18,7 @@ export class DataServiceService {
   constructor(private http: HttpClient) { 
   }
 
+  //user services
   getAllUsers(): Observable<User>{
     return this.http.get<User>(this.ROOT_URL + '/users/all')
   }
@@ -32,23 +37,78 @@ export class DataServiceService {
       options)
   }
 
-  createUser(username: any, password: any): Observable<User>{
+  createUser(user: any, pass: any): Observable<User>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json'})};
-    let body = '{username: "' + username + '", password: "' + password + '"}'
+    let body = JSON.stringify({username: user, password: pass});
     return this.http.post<User>(
       this.ROOT_URL + '/users/add',
       body,
       options
     )
   }
-}
+  getDashboardForUser(token: string, userId: any): Observable<Dashboard>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
+    return this.http.get<Dashboard>(
+      this.ROOT_URL + '/users/one/' + userId + '/dashboard',
+      options
+    )
+  }
 
-interface Widget {
-  id: number;
-  type: string;
-  payload: string;
-}
+  //widget services
+  createWeatherWidget(token: string, query: string): Observable<Widget>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('query', query)};
+    return this.http.post<Widget>(
+      this.ROOT_URL + '/widgets/weather/add',
+      options
+    )
+  }
 
-interface WidgetListResponse {
-  widgets: Widget[];
+  updateWidgetQuery(token: string, newQuery: string, widgetId: any): Observable<Widget>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('query', newQuery)};
+    return this.http.post<Widget>(
+      this.ROOT_URL + '/widgets/weather/one/' + widgetId + '/update',
+      options
+    )
+  }
+
+  getCurrentWeather(token: string, widgetId: any): Observable<Payload>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
+    return this.http.get<Payload>(
+      this.ROOT_URL + '/widgets/weather/one/' + widgetId + '/current',
+      options
+    )
+  }
+
+  getForecastWeather(token: string, widgetId: any): Observable<Payload>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
+    return this.http.get<Payload>(
+      this.ROOT_URL + '/widgets/weather/one/' + widgetId + '/forecast',
+      options
+    )
+  }
+
+  //dashboard services
+  getDashboardById(token: string, dashboardId: any): Observable<Dashboard>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
+    return this.http.get<Dashboard>(
+      this.ROOT_URL + '/dashboards/one/' + dashboardId,
+      options
+    )
+  }
+
+  addWidgetToDashboard(token: string, dashboardId: any, widgetId: any): Observable<Dashboard>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('widgetId', widgetId)};
+    return this.http.post<Dashboard>(
+      this.ROOT_URL + '/dashboards/add/' + dashboardId,
+      options
+    )
+  }
+
+  removeWidgetFromDashboard(token: string, dashboardId: any, widgetId: any): Observable<Widget>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('widgetId', widgetId)};
+    return this.http.post<Widget>(
+      this.ROOT_URL + '/dashboards/remove/' + dashboardId,
+      options
+    )
+  }
 }
