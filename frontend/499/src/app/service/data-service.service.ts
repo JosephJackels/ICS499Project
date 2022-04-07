@@ -13,7 +13,6 @@ import { Dashboard } from './dashboard'
 export class DataServiceService {
 
   readonly ROOT_URL = 'http://localhost:8080'
-  //user! : Observable<any>;
   
   constructor(private http: HttpClient) { 
   }
