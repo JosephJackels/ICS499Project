@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validator, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -7,23 +7,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  registerForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', 
-        [Validators.required, Validators.minLength(10)]
-      ],
-  });
+  loginForm !: FormGroup;
   
   title:string = 'Login';
   
 
-  constructor(private fb: FormBuilder,
-    /**  
-    private authService: AuthService, 
-    */
-     private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      login: new FormArray([
+        new FormGroup({
+          username: new FormControl('', Validators.required),
+          password: new FormControl('', Validators.minLength(10)),
+        })
+      ])
+    });
+  }
+
+  get form(): FormArray{
+    return this.loginForm.get('login') as FormArray;
+  }
+
+  onSubmit(){
+    this.form.push(
+      new FormGroup({
+        username: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.minLength(10)),
+    }));
   }
 }
