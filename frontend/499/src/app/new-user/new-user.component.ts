@@ -17,20 +17,12 @@ import { PasswordMatch } from './passwordMatch.validator';
 export class NewUserComponent implements OnInit {
 
   registerForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    userName: [''],
+    username: ['', Validators.required],
     password: ['', 
         [Validators.required, Validators.minLength(10)]
       ],
     password2: ['',
         [Validators.required, Validators.minLength(10)]
-      ],
-    phone: ['',
-        [Validators.required]
-      ],
-    email: ['', 
-        [Validators.required, Validators.pattern('^(.+)(@)([^\.]*)\.([a-z]{2,})$')]
       ]
   }, {
     validator: PasswordMatch('password', 'password2')
