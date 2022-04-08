@@ -1,0 +1,12 @@
+.delete_button {
+    transform: scale(.75);
+    background-color: red;
+}
+ .update_button {
+     transform: scale(.75);
+     background-color: green;
+ }
+
+ mat-card-title {
+     color: #f44336;
+ }

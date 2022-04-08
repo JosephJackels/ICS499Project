@@ -7,10 +7,15 @@
       <div fxLayoutAlign="space-evenly center">
       <mat-card-actions>
           <div class="aboutus-button">
+          <h1>{{login.username}}</h1>
+          <h1>{{login.token}}</h1>
           <a mat-raised-button [routerLink]="['/login']">Log In</a>
           <a mat-raised-button color="primary" [routerLink]="['/new-user']">Sign Up</a>
+          <button mat-raised-button (click)="getUser()">Call getUser()</button>
+        <button mat-raised-button (click)="loginUser()">Call loginUser()</button>
           </div>
         </mat-card-actions>
         </div>
       </mat-card>
       </div>
+
