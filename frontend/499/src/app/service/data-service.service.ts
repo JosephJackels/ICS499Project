@@ -40,14 +40,18 @@ export class DataServiceService {
   }
 
   createUser(user: any, pass: any): Observable<User>{
+    console.log("service " + user);
+    console.log("service " + pass);
     let options = {headers : new HttpHeaders({'Content-Type':'application/json'})};
-    let body = JSON.stringify({username: user, password: pass});
+    let body = JSON.stringify({username:user, password:pass});
+    console.log("body " + body);
     return this.http.post<User>(
       this.ROOT_URL + '/users/add',
       body,
       options
     );
   }
+
   getDashboardForUser(token: string, userId: any): Observable<Dashboard>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
     return this.http.get<Dashboard>(

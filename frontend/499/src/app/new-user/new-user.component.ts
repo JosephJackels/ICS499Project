@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validator, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-
-
-
 import { PasswordMatch } from './passwordMatch.validator';
+import { DataServiceService } from '../service/data-service.service';
+import { User } from '../service/user';
+import { Login } from '../service/login';
+
 /** import { User } from './user/user'; */
 
 
@@ -15,60 +16,67 @@ import { PasswordMatch } from './passwordMatch.validator';
   styleUrls: ['./new-user.component.css']
 })
 export class NewUserComponent implements OnInit {
+  registerForm !: FormGroup;
 
-  registerForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', 
-        [Validators.required, Validators.minLength(10)]
-      ],
-    password2: ['',
-        [Validators.required, Validators.minLength(10)]
-      ]
-  }, {
-    validator: PasswordMatch('password', 'password2')
-  });
-  
   title:string = 'Register';
-  
+  user!: User;
+  login!: Login;
+  message:string = 'Passwords must match'
 
-  constructor(private fb: FormBuilder,
-    /**  
-    private authService: AuthService, 
-    */
-     private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService) { }
 
   ngOnInit(): void {
-  }
-
-/** 
-onSubmit(user: User) {
-  var isMatch = this.isPasswordMatch();
-  if (isMatch) {
-    this.authService.register(user).subscribe(
-      (response: User) => {
-        this.router.navigate(['/login'])
-      },
-      (errorResponse: HttpErrorResponse) => {
-        console.log(errorResponse);
-      }
-    )
+    this.registerForm = new FormGroup({
+      register: new FormArray([
+        new FormGroup({
+          username: new FormControl('', Validators.required),
+          password: new FormControl('', Validators.minLength(10)),
+          password2: new FormControl('', Validators.minLength(10)),
+        })
+      ])
+    });
     
   }
-}
+
+  get form(): FormArray{
+    return this.registerForm.get('register') as FormArray;
+  }
+
+  onSubmit() {
+    this.form.push(
+      new FormGroup({
+        username: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.minLength(10)),
+        password2: new FormControl('', Validators.minLength(10)),
+    }));
+    
+    var isMatch = this.isPasswordMatch();
+    console.log("new user form " + this.registerForm.value.register[0].username)
+    console.log("new user form " + this.registerForm.value.register[0].password)
 
 
-isPasswordMatch() {
- 
-  var pass1 = this.registerForm.get('password').value;
-  var pass2 = this.registerForm.get('password2').value;
+    if (isMatch) {
+      this.data.createUser(this.registerForm.value.register[0].username, this.registerForm.value.register[0].password).subscribe(data =>
+        this.user = {
+          username: (data as any).username,
+          userID: (data as any).userID,
+          password: (data as any).password
+      });
+    } else{
+      this.message = 'Passwords do not match';
+    }
+  }
 
-  if (pass1 !== pass2) {
-    return false;
-  } 
-
-  return true;
   
-}
-*/
+  isPasswordMatch() {
+    var pass1 = this.registerForm.value.register[0].password;
+    var pass2 = this.registerForm.value.register[0].password;
+    if (pass1 !== pass2) {
+      return false;
+    } 
+    return true;
+  }
+  
 
 }
+

@@ -1,8 +1,8 @@
 <mat-card >
     <mat-card-title>{{StockData["Meta Data"]["2. Symbol"]}}</mat-card-title>
     <div class="stockWidgetRow" style="font-size:32px;margin:top 5px;">{{(StockData["Time Series (Daily)"][ "2022-03-18"]["4. close"])}}$</div>
-    <div class="stockWidgetRow" style="font-size:15x;margin:top 10px;">Low: {{StockData["Time Series (Daily)"][ "2022-03-18"]["3. low"]}}$</div>
-    <div class="stockWidgetRow" style="font-size:15x;margin:top 10px;">High: {{StockData["Time Series (Daily)"][ "2022-03-18"]["2. high"]}}$</div>
+    <div class="stockWidgetRow" style="font-size:15x;margin:top 10px;color: red;">Low: {{StockData["Time Series (Daily)"][ "2022-03-18"]["3. low"]}}$</div>
+    <div class="stockWidgetRow" style="font-size:15x;margin:top 10px;color: green;">High: {{StockData["Time Series (Daily)"][ "2022-03-18"]["2. high"]}}$</div>
     <div class="weatherWidgetRow" style="font-size:12px;">Volume: {{StockData["Time Series (Daily)"][ "2022-03-18"]["5. volume"]}}</div>
     <mat-card-actions>
         <form [formGroup]="form">
