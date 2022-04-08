@@ -7,9 +7,20 @@
       <div fxLayoutAlign="space-evenly center">
       <mat-card-actions>
           <div class="aboutus-button">
-          <h1>{{login.username}}</h1>
-          <h1>{{login.token}}</h1>
-          <a mat-raised-button [routerLink]="['/login']">Log In</a>
+          <div style="border: 5px solid black;">
+            <h1>Testing Container - delete this eventually</h1>
+            <p>Must call login before get user</p>
+            <p>Make sure to change vals in aboutus.component.ts to match user info in your db</p>
+            <ng-container *ngIf="user">
+              <h1>User: {{user.username}}</h1>
+              <h1>Password: {{user.password}}</h1>
+            </ng-container>
+            <ng-container *ngIf="login">
+              <h1>Logged in: {{login.username}}</h1>
+              <h1>Token: {{login.token}}</h1>
+            </ng-container>
+          </div>
+            <a mat-raised-button [routerLink]="['/login']">Log In</a>
           <a mat-raised-button color="primary" [routerLink]="['/new-user']">Sign Up</a>
           <button mat-raised-button (click)="getUser()">Call getUser()</button>
         <button mat-raised-button (click)="loginUser()">Call loginUser()</button>
