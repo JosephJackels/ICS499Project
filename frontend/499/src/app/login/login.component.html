@@ -1,25 +1,20 @@
 <div class="content" fxLayoutAlign="space-evenly center" fxLayout="row" fxLayout="column">
     <mat-card>
-        <mat-card-header> 
-            <mat-card-title><h4>Login</h4></mat-card-title> 
-            </mat-card-header>
-            <mat-card-content>
-                <form [formGroup]="loginForm" >
-                    <div formArrayName="register" >    
-                        <div [formGroupName]="0" fxLayout="column" fxFlexFill>
-                            <p>Username:</p>
-                            <input placeholder="username" type="text" formControlName="username" matInput required>
-                            <p>Password (min 10 characters):</p>
-                            <input placeholder="password" type="password" formControlName="password" minlength="10" matInput required>
-                        </div>
+        <mat-card-title><h4>Login</h4></mat-card-title> 
+        <mat-card-content>
+            <form [formGroup]="loginForm" >
+                <div formArrayName="login" >    
+                    <div [formGroupName]="0" fxLayout="column" fxFlexFill>
+                        <p>Username:</p>
+                        <input placeholder="username" type="text" formControlName="username" matInput required>
+                        <p>Password:</p>
+                        <input placeholder="password" type="password" formControlName="password" minlength="10" matInput required>
+                    </div>
                         <div fxLayout="column" fxFlexFill>
                             <button mat-button type="submit" (click)="onSubmit()">Submit</button> 
                         </div>
-                        <p>
-                            Form Status: {{loginForm.status}}
-                        </p>
                     </div>
                 </form>
             </mat-card-content>
     </mat-card>
-    </div>
+</div>
