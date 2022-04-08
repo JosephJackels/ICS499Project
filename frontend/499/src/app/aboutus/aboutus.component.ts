@@ -18,7 +18,9 @@ export class AboutusComponent implements OnInit {
 
   public getUser(){
     //change the 48 below to whatever id of user you want to get/have access to
-    return this.data.getUser(48).subscribe({next: (value: User) => this.user = value});
+    //in actual use set the token from local storage - this will only work with auth
+    //for this endpoint set to .permitAll()
+    return this.data.getUser("Bearer 123", 48).subscribe({next: (value: User) => this.user = value});
   }
 
   public loginUser(){
