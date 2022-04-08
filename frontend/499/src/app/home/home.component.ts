@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,11 +17,15 @@ export class HomeComponent implements OnInit {
   }
 
   addWidget() {
-    this.calendar_widgets.push(0);
+    if (this.calendar_widgets.length == 0){
+      this.calendar_widgets.push(0);
+    }
   }
 
   removeWidget(CalendarData: any){
-    this.calendar_widgets.pop();
+    if (this.calendar_widgets.length == 1){
+      this.calendar_widgets.pop();
+    }  
   }
 
   addWeather() {
