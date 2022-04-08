@@ -1,4 +1,4 @@
-<div class="content" fxLayoutAlign="space-evenly center" fxLayout="row" fxLayout.xs="column">
+<div class="content" fxLayoutAlign="space-evenly center" fxLayout="row" fxLayout="column">
 <mat-card>
     <mat-card-header> 
         <mat-card-title><h4>Register</h4></mat-card-title> 
@@ -12,24 +12,23 @@
                 <div fxLayoutGap="10px" fxLayout="row">
                     <div fxLayout="column">
                         <mat-form-field>
-                            <mat-label>First Name</mat-label>
-                                <input type="text" formControlName="firstName" matInput required>
+                            <mat-label>Username</mat-label>
+                                <input type="text" formControlName="username" matInput required>
                         </mat-form-field>
                     </div>
-                
-                    <div fxLayout="column">
-                        <mat-form-field>
-                            <mat-label>Last Name</mat-label>
-                                <input type="text" formControlName="lastName" matInput required>
-                        </mat-form-field>
-                    </div>   
+
+
                 </div>
+                <!--
                 <div fxLayout="column" fxFlexFill>
                     <mat-form-field>
                         <mat-label>Email</mat-label>
                             <input type="email" formControlName="email" matInput email required>
                     </mat-form-field>
-                </div>    
+                </div> 
+                
+             -->   
+                
                 <div fxLayout="column" fxFlexFill>
                     <mat-form-field>
                         <mat-label>Password</mat-label>
@@ -44,6 +43,7 @@
                             <input type="password" formControlName="password2" matInput required>
                     </mat-form-field>
                 </div>
+            
                 <!--
                 <div fxLayout="column" fxFlexFill>
                     <mat-form-field>
@@ -52,7 +52,7 @@
                             <mat-error *ngIf="registerForm.get('phone').invalid">Invalid Phone Number</mat-error> 
                         </mat-form-field>
                 </div>
-                -->
+            -->
                 <div fxLayout="column" fxFlexFill>
                     
                     <!-- <button mat-button type="submit">Submit</button> -->

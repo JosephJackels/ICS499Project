@@ -1,12 +1,16 @@
-<mat-card class="aboutus-card">
-    <mat-card-title>About Us</mat-card-title>
-    <mat-card-content>
-      <p>Our mission is to provice a web application with widgets displaying several data sources and features.</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <div class="aboutus-button">
-        <button mat-raised-button>Log In</button>
-        <button mat-raised-button color="primary">Sign Up</button>
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+  <mat-card class="aboutus-card">
+      <mat-card-title>About Us</mat-card-title>
+      <mat-card-content>
+        <p>Our mission is to provide a web application with widgets displaying several data sources and features.</p>
+      </mat-card-content>
+      <div fxLayoutAlign="space-evenly center">
+      <mat-card-actions>
+          <div class="aboutus-button">
+          <a mat-raised-button [routerLink]="['/login']">Log In</a>
+          <a mat-raised-button color="primary" [routerLink]="['/new-user']">Sign Up</a>
+          </div>
+        </mat-card-actions>
         </div>
-      </mat-card-actions>
-    </mat-card>
+      </mat-card>
+      </div>
