@@ -1,0 +1,29 @@
+.delete_button {
+    transform: scale(.75);
+    background-color: red;
+}
+ .update_button {
+     transform: scale(.75);
+     background-color: green;
+ }
+
+ .settings_button {
+    transform: scale(.75);
+    background-color: #f2af29;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+mat-card-title {
+    color: #f44336;
+}
+
+mat-card {
+    background-color: #f2af29;
+}
+
+mat-card-actions {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}

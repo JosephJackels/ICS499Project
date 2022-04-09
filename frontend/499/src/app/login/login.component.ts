@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value.login[0].username)
     console.log(this.loginForm.value.login[0].password)
 
-    this.data.loginUser(this.loginForm.value.login[0].username, this.loginForm.value.login[0].password).subscribe(data =>
+    this.data.loginUser(this.loginForm.value.login[0].username, this.loginForm.value.login[0].password).subscribe(data => {
       this.login = {
         username: (data as any).username,
         token: (data as any).type + ' ' + (data as any).token
-    });
+    }; console.log(this.login);});
 
     console.log(this.login.username);
   }
