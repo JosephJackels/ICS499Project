@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import edu.ics499.model.Dashboard;
+import edu.ics499.model.payloads.Payload;
 
 @Entity
 @Table(name="widgets")
@@ -21,16 +22,42 @@ public class Widget {
 	@GeneratedValue
 	private Long widgetID;
 	
-	//not sure if or why we need this but he always has a corresponding class
-	//when there is a relationship between models
 	@ManyToOne
 	private Dashboard dashboard;
-	//not sure what other info to put here?
-	//maybe like a base URL string?
 	private Long dashboardId;
+	
+	@ManyToOne
+	private Payload payload;
+	
+	private String queryParameters;
+	private String type;
 	
 	public Widget() {
 		super();
+	}
+
+	public Payload getPayload() {
+		return payload;
+	}
+
+	public void setPayload(Payload payload) {
+		this.payload = payload;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getQueryParameters() {
+		return queryParameters;
+	}
+
+	public void setQueryParameters(String queryParameters) {
+		this.queryParameters = queryParameters;
 	}
 
 	public Long getWidgetID() {
