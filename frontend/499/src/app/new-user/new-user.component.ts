@@ -6,6 +6,8 @@ import { PasswordMatch } from './passwordMatch.validator';
 import { DataServiceService } from '../service/data-service.service';
 import { User } from '../service/user';
 import { Login } from '../service/login';
+import {MatDialog} from '@angular/material/dialog'
+import { NewUserFailedDialog } from './new-user-failed-dialog';
 
 /** import { User } from './user/user'; */
 
@@ -23,7 +25,7 @@ export class NewUserComponent implements OnInit {
   login!: Login;
   message:string = 'Passwords must match'
 
-  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService) { }
+  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -35,7 +37,13 @@ export class NewUserComponent implements OnInit {
         })
       ])
     });
-    
+    this.registerForm.statusChanges.subscribe(newStatus =>{
+      if(newStatus == "VALID"){
+        this.registerForm.markAsPristine();
+      } else {
+        this.registerForm.markAsDirty();
+      }
+    })
   }
 
   get form(): FormArray{
@@ -63,14 +71,21 @@ export class NewUserComponent implements OnInit {
           password: (data as any).password
       });
     } else{
-      this.message = 'Passwords do not match';
+      this.openNewUserFailedDialog();
     }
   }
 
+  openNewUserFailedDialog() {
+    const dialogRef =this.dialog.open(NewUserFailedDialog, {width: '500px'});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.ngOnInit();
+    })
+  }
   
   isPasswordMatch() {
     var pass1 = this.registerForm.value.register[0].password;
-    var pass2 = this.registerForm.value.register[0].password;
+    var pass2 = this.registerForm.value.register[0].password2;
     if (pass1 !== pass2) {
       return false;
     } 
