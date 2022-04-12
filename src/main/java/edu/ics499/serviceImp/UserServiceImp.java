@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import edu.ics499.model.Dashboard;
 import edu.ics499.model.User;
 import edu.ics499.repositories.UserRepository;
-import edu.ics499.security2.UserPrincipal;
+import edu.ics499.security.UserPrincipal;
 import edu.ics499.service.*;
 
 @Service

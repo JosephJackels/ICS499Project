@@ -1,4 +1,4 @@
-package edu.ics499.security2;
+package edu.ics499.security;
 
 public class JWTResponse {
 	private String token;

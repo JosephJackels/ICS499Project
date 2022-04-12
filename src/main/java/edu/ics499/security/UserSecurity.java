@@ -1,4 +1,4 @@
-package edu.ics499.security2;
+package edu.ics499.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
