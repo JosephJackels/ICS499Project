@@ -15,7 +15,7 @@ public class WidgetTypes {
 	public static final Map<String, String> mapWidgetTypeToUrl = new HashMap<String, String>(Map.of(
 			"currentWeather", "http://api.openweathermap.org/data/2.5/weather?q=",
 			"forecastWeather", "http://api.openweathermap.org/data/2.5/forecast?q=",
-			"calendar", "null",
+			"calendar", "",
 			"stock", "INSERT STOCK URL HERE"));
 	public static final Map<String, String> mapWidgetTypeToMidUrl = new HashMap<String, String>(Map.of(
 			"currentWeather", "&appid=",
