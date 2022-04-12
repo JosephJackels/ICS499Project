@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.ics499.model.payloads.CurrentWeatherPayload;
-import edu.ics499.model.payloads.ForecastWeatherPayload;
-import edu.ics499.model.widgets.WeatherWidget;
+import edu.ics499.model.payloads.Payload;
 import edu.ics499.model.widgets.Widget;
-import edu.ics499.serviceImp.WeatherWidgetServiceImp;
 import edu.ics499.serviceImp.WidgetServiceImp;
 
 @RestController
@@ -24,54 +21,34 @@ public class WidgetController {
 	@Autowired
 	WidgetServiceImp widgetService;
 	
-	@Autowired
-	WeatherWidgetServiceImp weatherWidgetService;
-	
 	//localhost:port/widgets/all
-	@GetMapping("/all")
+	@GetMapping("/get/all")
 	public List<Widget> list(){
 		return widgetService.getAll();
 	}
 	
 	//localhost:port/widgets/one/{id}
-	@GetMapping("/one/{id}")
+	@GetMapping("/get/{id}")
 	public Widget get(@PathVariable Long id) {
 		return widgetService.getWidgetById(id);
 	}
 	
-	//localhost:port/widgets/weather/all
-	@GetMapping("/weather/all")
-	public List<WeatherWidget> weatherList(){
-		return weatherWidgetService.getAll();
+	@GetMapping("get/{id}/payload")
+	public Payload getPayload(@PathVariable long id) throws IOException{
+		return widgetService.getPayload(id);
+	}
+	@PostMapping("/add/currentWeather")
+	public Widget createCurrentWeatherWidget(@RequestParam String query) {
+		return widgetService.createWidget("currentWeather", query);
 	}
 	
-	//localhost:port/widgets/weather/one/{id}
-	@GetMapping("/weather/one/{id}")
-	public WeatherWidget getWeatherWidget(@PathVariable Long id) {
-		return weatherWidgetService.getWeatherWidgetById(id);
+	@PostMapping("add/forecastWeather")
+	public Widget createForecastWeatherWidget(@RequestParam String query) {
+		return widgetService.createWidget("forecastWeather", query);
 	}
 	
-	//localhost:port/widgets/weather/one/{id}/current
-	@GetMapping("/weather/one/{id}/current")
-	public CurrentWeatherPayload getCurrentWeather(@PathVariable Long id) throws IOException {
-		return weatherWidgetService.getCurrentPayload(id);
-	}
-	
-	//localhost:port/widgets/weather/one/{id}/forecast
-	@GetMapping("/weather/one/{id}/forecast")
-	public ForecastWeatherPayload getForecastWeather(@PathVariable Long id) throws IOException {
-		return weatherWidgetService.getForecastPayload(id);
-	}
-	
-	//update as in change query, does not update payloads
-	//localhost:port/widgets/weather/one/{id}/update?query=newCity
-	@PostMapping("/weather/one/{id}/update")
-	public WeatherWidget updateWidget(@RequestParam String query, @PathVariable Long id) {
-		return weatherWidgetService.setWeatherQuery(query, id);
-	}
-	
-	@PostMapping("/weather/add")
-	public WeatherWidget createWidget(@RequestParam String query) {
-		return weatherWidgetService.addWidget(query);
+	@PostMapping("update/{id}")
+	public Widget updateWidget(@PathVariable long id, @RequestParam String query) {
+		return widgetService.updateQuery(query, id);
 	}
 }
