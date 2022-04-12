@@ -5,7 +5,3 @@
 .content > mat-card {
     width: 200px;
 }
-
-app-tabs{
-    background-color: green;
-}
