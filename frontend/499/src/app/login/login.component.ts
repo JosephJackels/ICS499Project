@@ -47,7 +47,8 @@ export class LoginComponent implements OnInit {
         username: (data as any).username,
         token: (data as any).type + ' ' + (data as any).token
       }; 
-      console.log(this.login);
+      console.log(this.login.token);
+      localStorage.setItem('token', this.login.token);
     });
   }
 }
