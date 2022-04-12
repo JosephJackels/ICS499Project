@@ -1,4 +1,4 @@
-package edu.ics499.security2;
+package edu.ics499.security;
 
 public class SecurityConstraints {
 	public static final String SECRET = "SECRET_KEY";//change this after testing to a env variable, will have to drop tables and restart, also should be 32 chars long
