@@ -37,14 +37,9 @@ public class WidgetController {
 	public Payload getPayload(@PathVariable long id) throws IOException{
 		return widgetService.getPayload(id);
 	}
-	@PostMapping("/add/currentWeather")
-	public Widget createCurrentWeatherWidget(@RequestParam String query) {
-		return widgetService.createWidget("currentWeather", query);
-	}
-	
-	@PostMapping("add/forecastWeather")
-	public Widget createForecastWeatherWidget(@RequestParam String query) {
-		return widgetService.createWidget("forecastWeather", query);
+	@PostMapping("/add/{widgetType}")
+	public Widget createWidget(@PathVariable String widgetType, @RequestParam String query) {
+		return widgetService.createWidget(widgetType, query);
 	}
 	
 	@PostMapping("update/{id}")
