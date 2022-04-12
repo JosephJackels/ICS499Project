@@ -61,10 +61,10 @@ export class DataServiceService {
   }
 
   //widget services
-  createWeatherWidget(token: string, query: string): Observable<Widget>{
+  createWidget(token: string, query: string, type:string): Observable<Widget>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('query', query)};
     return this.http.post<Widget>(
-      this.ROOT_URL + '/widgets/weather/add',
+      this.ROOT_URL + '/widgets/add' + type,
       options
     );
   }
@@ -72,25 +72,16 @@ export class DataServiceService {
   updateWidgetQuery(token: string, newQuery: string, widgetId: any): Observable<Widget>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('query', newQuery)};
     return this.http.post<Widget>(
-      this.ROOT_URL + '/widgets/weather/one/' + widgetId + '/update',
+      this.ROOT_URL + '/widgets/update/' + widgetId,
       options
     );
   }
 
   //updates and gets current weather for given weather widget id
-  getCurrentWeather(token: string, widgetId: any): Observable<Payload>{
+  getWidgetPayload(token: string, widgetId: any): Observable<Payload>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
     return this.http.get<Payload>(
-      this.ROOT_URL + '/widgets/weather/one/' + widgetId + '/current',
-      options
-    );
-  }
-
-  //updates and gets forecast weather for given weather widget id
-  getForecastWeather(token: string, widgetId: any): Observable<Payload>{
-    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
-    return this.http.get<Payload>(
-      this.ROOT_URL + '/widgets/weather/one/' + widgetId + '/forecast',
+      this.ROOT_URL + '/widgets/get/' + widgetId + '/payload',
       options
     );
   }
