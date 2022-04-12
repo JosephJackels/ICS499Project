@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.ics499.model.payloads.Payload;
 import edu.ics499.model.widgets.Widget;
+import edu.ics499.model.widgets.WidgetTypes;
 import edu.ics499.serviceImp.WidgetServiceImp;
 
 @RestController
@@ -39,7 +40,12 @@ public class WidgetController {
 	}
 	@PostMapping("/add/{widgetType}")
 	public Widget createWidget(@PathVariable String widgetType, @RequestParam String query) {
-		return widgetService.createWidget(widgetType, query);
+		if(WidgetTypes.types.contains(widgetType)) {	
+			return widgetService.createWidget(widgetType, query);
+		} else {
+			//throw an error?
+			return null;
+		}
 	}
 	
 	@PostMapping("update/{id}")
