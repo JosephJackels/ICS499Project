@@ -4,10 +4,11 @@
     <div class="weatherWidgetRow" style="font-size:32px;margin:top 5px;">
         {{((WeatherData.main.temp - 273) * (9/5) + 32).toFixed(2)}} °f
     </div>
-    <div class="weatherWidgetRow" style="font-size:15x;margin:top 10px;color: rgb(63, 63, 134);">Feels like: {{((WeatherData.main.feels_like- 273) * (9/5) + 32).toFixed(2)}} °</div>
-    <div class="weatherWidgetRow" style="font-size:12px;color: rgb(201, 111, 111);">Low: {{((WeatherData.main.temp_min - 273) * (9/5) + 32).toFixed(2)}}° High: {{((WeatherData.main.temp_max- 273) * (9/5) + 32).toFixed(2)}}°</div>
+    <div class="weatherWidgetRow" style="font-size:15x;margin:top 10px;color: rgb(8, 8, 8);">Feels like: {{((WeatherData.main.feels_like- 273) * (9/5) + 32).toFixed(2)}} °</div>
+    <div class="weatherWidgetRow" style="font-size:12px;color: rgb(35, 90, 209);">Low: {{((WeatherData.main.temp_min - 273) * (9/5) + 32).toFixed(2)}}°</div>
+    <div class="weatherWidgetRow" style="font-size:12px;color: rgb(218, 55, 55);">High {{((WeatherData.main.temp_max - 273) * (9/5) + 32).toFixed(2)}}°</div>
     <mat-card-actions style="display:none">
-        <p>Change the City:</p>
+        <p>Change City:</p>
         <form [formGroup]="form">
             <div formArrayName="widget" >
                 <div [formGroupName]="0">
