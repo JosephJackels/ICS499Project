@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
         token: (data as any).type + ' ' + (data as any).token
       };
       if(this.login.token.length != null){
-        this.router.navigate(['/home']);  
+        localStorage.setItem('token', this.login.token);
+        this.router.navigate(['/home']); 
       } else {
         //createFailedLoginDialog()
       }
