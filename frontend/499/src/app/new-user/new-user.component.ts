@@ -38,7 +38,7 @@ export class NewUserComponent implements OnInit {
       ])
     });
     this.registerForm.statusChanges.subscribe(newStatus =>{
-      if(newStatus == "VALID"){
+      if(newStatus == "VALID" && this.isPasswordMatch){
         this.registerForm.markAsPristine();
       } else {
         this.registerForm.markAsDirty();

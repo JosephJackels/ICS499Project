@@ -29,6 +29,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { StocksComponent } from './widgets/stocks/stocks.component';
 import { DataServiceService } from './service/data-service.service';
+import { ForecastComponent } from './widgets/forecast/forecast.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DataServiceService } from './service/data-service.service';
     LoginComponent,
     CalendarComponent,
     WeatherComponent,
-    StocksComponent
+    StocksComponent,
+    ForecastComponent
   ],
   imports: [
     BrowserModule,

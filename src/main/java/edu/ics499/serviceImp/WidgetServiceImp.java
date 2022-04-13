@@ -51,6 +51,11 @@ public class WidgetServiceImp implements WidgetService{
 	public String getResponse(Widget widget, Payload payload) throws IOException{
 		HttpURLConnection conn;
 	    URL url = buildUrl(widget.getType(), widget.getQueryParameters());
+	    //check for widgets that have no api to connect to e.x. calender
+	    if(url.getPath() == "") {
+	    	return "";
+	    
+	    }
 	    conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
 	    conn.connect();
@@ -89,6 +94,7 @@ public class WidgetServiceImp implements WidgetService{
 			updatePayload(widgetId);
 			widget = getWidgetById(widgetId);
 			payload = widget.getPayload();
+			//reset payloadLoadLastUpdateTime
 		}
 		return payload;
 	}
@@ -108,8 +114,8 @@ public class WidgetServiceImp implements WidgetService{
 		
 		Payload payload = new Payload();
 		
-		payload.setLastUpdatedTime("0");
-		payload.setUpdateFrequency("0");
+		payload.setLastUpdatedTime("0");//set to currenttime
+		payload.setUpdateFrequency("0");//set to whatever we want to update
 		
 		payloadRepo.save(payload);
 		

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,13 +9,20 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   navTitle:string = 'Weather Dashboard';
-  constructor() { }
-  calendar_widgets = [0];
-  weather_widgets = [0];
-  stock_widgets = [0];
+  constructor(private router: Router) { }
+  calendar_widgets: number[] = [];
+  weather_widgets: number[] = [];
+  stock_widgets: number[] = [];
 
 
   ngOnInit(): void {
+    console.log("nginit in home");
+
+    //check if token exists
+
+    //if it does -> call dashbaord info
+    
+    //else redirect to login
   }
 
   addWidget() {

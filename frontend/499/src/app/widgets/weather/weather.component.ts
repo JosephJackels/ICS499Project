@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-
+import { DataServiceService } from 'src/app/service/data-service.service';
 
 @Component({
   selector: 'app-weather',
@@ -11,7 +11,7 @@ export class WeatherComponent implements OnInit {
   WeatherData:any;
   form!: FormGroup;
 
-  constructor() { }
+  constructor(private data:DataServiceService) { }
 
   @Output() delete: EventEmitter<string> = new EventEmitter();
 

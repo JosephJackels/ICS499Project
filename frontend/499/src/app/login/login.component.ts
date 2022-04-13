@@ -46,8 +46,12 @@ export class LoginComponent implements OnInit {
       this.login = {
         username: (data as any).username,
         token: (data as any).type + ' ' + (data as any).token
-      }; 
-      console.log(this.login);
+      };
+      if(this.login.token.length != null){
+        this.router.navigate(['/home']);  
+      } else {
+        //createFailedLoginDialog()
+      }
     });
   }
 }
