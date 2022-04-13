@@ -30,7 +30,7 @@ import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { StocksComponent } from './widgets/stocks/stocks.component';
 import { DataServiceService } from './service/data-service.service';
 import { ForecastComponent } from './widgets/forecast/forecast.component';
-
+import { CreateWeatherWidgetDialog } from './home/create-weather-widget-dialog';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { ForecastComponent } from './widgets/forecast/forecast.component';
     CalendarComponent,
     WeatherComponent,
     StocksComponent,
-    ForecastComponent
+    ForecastComponent,
+    CreateWeatherWidgetDialog
   ],
   imports: [
     BrowserModule,

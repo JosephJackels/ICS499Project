@@ -1,8 +1,8 @@
 <div fxLayoutAlign="center">
     <button mat-button  (click)="addWidget()">+ Calendar</button>
-    <button mat-button  >+ Weather</button>
-    <button mat-button  >+ Stocks</button>
-    <button mat-button  >+ Forecast</button>
+    <button mat-button  (click)="createNewWeatherWidget()">+ Weather</button>
+    <button mat-button  (click)="createNewStockWidget()">+ Stocks</button>
+    <button mat-button  (click)="createNewForecastWidget()">+ Forecast</button>
 </div>
 <div fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center" class="content">
     <app-calendar fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>

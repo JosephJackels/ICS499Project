@@ -38,8 +38,10 @@ public class WidgetController {
 	public Payload getPayload(@PathVariable long id) throws IOException{
 		return widgetService.getPayload(id);
 	}
+	
 	@PostMapping("/add/{widgetType}")
 	public Widget createWidget(@PathVariable String widgetType, @RequestParam String query) {
+		System.out.println("WidgetController - adding new widget of " + widgetType);
 		if(WidgetTypes.types.contains(widgetType)) {	
 			return widgetService.createWidget(widgetType, query);
 		} else {

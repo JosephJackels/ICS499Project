@@ -32,7 +32,6 @@ export class DataServiceService {
   loginUser(user: any, pass: any): Observable<Login>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json'})};
     let body = JSON.stringify({username: user, password: pass});
-    console.log(body);
     return this.http.post<Login>(
       this.ROOT_URL + '/login',
       body,
@@ -40,11 +39,8 @@ export class DataServiceService {
   }
 
   createUser(user: any, pass: any): Observable<User>{
-    console.log("service " + user);
-    console.log("service " + pass);
     let options = {headers : new HttpHeaders({'Content-Type':'application/json'})};
     let body = JSON.stringify({username:user, password:pass});
-    console.log("body " + body);
     return this.http.post<User>(
       this.ROOT_URL + '/users/add',
       body,
@@ -64,7 +60,8 @@ export class DataServiceService {
   createWidget(token: string, query: string, type:string): Observable<Widget>{
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('query', query)};
     return this.http.post<Widget>(
-      this.ROOT_URL + '/widgets/add' + type,
+      this.ROOT_URL + '/widgets/add/' + type,
+      "",
       options
     );
   }
@@ -73,6 +70,7 @@ export class DataServiceService {
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('query', newQuery)};
     return this.http.post<Widget>(
       this.ROOT_URL + '/widgets/update/' + widgetId,
+      "",
       options
     );
   }
@@ -99,6 +97,7 @@ export class DataServiceService {
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('widgetId', widgetId)};
     return this.http.post<Dashboard>(
       this.ROOT_URL + '/dashboards/add/' + dashboardId,
+      "",
       options
     );
   }
@@ -107,6 +106,7 @@ export class DataServiceService {
     let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token}), params : new HttpParams().set('widgetId', widgetId)};
     return this.http.post<Widget>(
       this.ROOT_URL + '/dashboards/remove/' + dashboardId,
+      "",
       options
     );
   }
