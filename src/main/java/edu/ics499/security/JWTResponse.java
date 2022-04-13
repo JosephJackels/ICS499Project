@@ -5,11 +5,13 @@ public class JWTResponse {
 	private String type = "Bearer";
 	private String refreshToken;
 	private String username;
+	private long userId;
 	
-	public JWTResponse(String token, String refreshToken, String username) {
+	public JWTResponse(String token, String refreshToken, String username, long userId) {
 		this.token = token;
 		this.refreshToken = refreshToken;
 		this.username = username;
+		this.userId = userId;
 	}
 	
 	public String getToken() {
@@ -43,6 +45,14 @@ public class JWTResponse {
 				+ username + "]";
 	}
 	public String toJson() {
-		return "{\"token\": \"" + token + "\", \"type\": \"" + type + "\", \"refreshToken\": \"" + refreshToken + "\", \"username\": \"" + username + "\"}";
+		return "{\"token\": \"" + token + "\", \"type\": \"" + type + "\", \"refreshToken\": \"" + refreshToken + "\", \"username\": \"" + username + "\", \"userId\": \"" + userId + "\"}";
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 }

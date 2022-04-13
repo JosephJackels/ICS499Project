@@ -45,11 +45,13 @@ export class LoginComponent implements OnInit {
     this.data.loginUser(this.loginForm.value.login[0].username, this.loginForm.value.login[0].password).subscribe(data => {
       this.login = {
         username: (data as any).username,
-        token: (data as any).type + ' ' + (data as any).token
+        token: (data as any).type + ' ' + (data as any).token,
+        userId: (data as any).userId
       };
       if(this.login.token.length != null){
         localStorage.setItem('token', this.login.token);
-        this.router.navigate(['/home']); 
+        localStorage.setItem('userId', this.login.userId);
+        this.router.navigate(['/home']);
       } else {
         //createFailedLoginDialog()
       }

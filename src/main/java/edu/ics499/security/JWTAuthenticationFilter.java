@@ -8,6 +8,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,10 +21,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.ics499.model.User;
 //import edu.ics499.security2.SecurityConstraints;
+import edu.ics499.serviceImp.UserServiceImp;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private UserServiceImp userService;
 	
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
@@ -61,7 +66,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		//String body = ((UserPrincipal) auth.getPrincipal()).getUsername() + " " + token;
 		//String body = "{ \"token\": " + "\"" + token + "\"}";
 		//auth.g
-		String body = new JWTResponse(token, refreshToken, ((UserPrincipal) auth.getPrincipal()).getUsername()).toJson();
+		String username = ((UserPrincipal) auth.getPrincipal()).getUsername();
+		long userId = ((UserPrincipal) auth.getPrincipal()).getId();
+		System.out.println(userId);
+		String body = new JWTResponse(token, refreshToken, username, userId).toJson();
 		res.getWriter().write(body);
 		res.getWriter().flush();
 	}

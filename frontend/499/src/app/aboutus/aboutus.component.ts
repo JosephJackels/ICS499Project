@@ -31,7 +31,8 @@ export class AboutusComponent implements OnInit {
     //change vals to whoever to login
     return this.data.loginUser('joe', 'password').subscribe(data => this.login = {
       username: (data as any).username,
-      token: (data as any).type + ' ' + (data as any).token
+      token: (data as any).type + ' ' + (data as any).token,
+      userId: (data as any).userId
     });
   }
 }

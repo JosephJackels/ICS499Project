@@ -38,4 +38,10 @@ public class WidgetTypes {
 			"forecastWeather", "weather_key",
 			"calendar", "",
 			"stock", ""));
+	
+	public static final Map<String, String> mapWidgetTypeToUpdateFrequency = new HashMap<String, String>(Map.of(
+			"currentWeather", "0",
+			"forecastWeather", "0",
+			"calendar", "0",
+			"stock", "0"));
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Dashboard } from '../service/dashboard';
+import { DataServiceService } from '../service/data-service.service';
+import { Widget } from '../service/widget';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,25 +11,64 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   navTitle:string = 'Weather Dashboard';
-  constructor(private router: Router) { }
-  calendar_widgets: number[] = [];
-  weather_widgets: number[] = [];
-  stock_widgets: number[] = [];
+  dashboard!: Dashboard;
+  calendar_widgets: Widget[] = [];
+  weather_widgets: Widget[] = [];
+  stock_widgets: Widget[] = [];
 
+  constructor(private router: Router, private data:DataServiceService) { }
 
   ngOnInit(): void {
     console.log("nginit in home");
 
     //check if token exists
-
+    if(localStorage.getItem("token") != null){
+      this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")!).subscribe(data => {
+        this.dashboard = {
+          dashboardId: (data as any).dashboardID,
+          widgetList: ((data as any).widgetList)
+        };
+        console.log(this.dashboard.widgetList);
+        this.populateWidgets();
+      });
+    }
     //if it does -> call dashbaord info
     
     //else redirect to login
   }
 
-  addWidget() {
+  populateWidgets(){
+    this.dashboard.widgetList.forEach(widget => {
+      console.log("starting to populate lists");
+      console.log(widget.type);
+      switch(widget.type) { 
+        case "calendar": { 
+           this.addWidget(widget);
+           break; 
+        } 
+        case "currentWeather": {
+          this.addWeather(widget);
+          break;
+        }
+        case "forecastWeather": {
+          this.addWeather(widget);
+          break;
+        }
+        case "stock": {
+          this.addStocks(widget);
+          break;
+        }
+        default: { 
+           console.error("Widget type: " + widget.type + " does not exist!");
+           break; 
+        }
+      } 
+    });
+  }
+
+  addWidget(widget: Widget) {
     if (this.calendar_widgets.length == 0){
-      this.calendar_widgets.push(0);
+      this.calendar_widgets.push(widget);
     }
   }
 
@@ -37,16 +78,16 @@ export class HomeComponent implements OnInit {
     }  
   }
 
-  addWeather() {
-    this.weather_widgets.push(0);
+  addWeather(widget: Widget) {
+    this.weather_widgets.push(widget);
   }
 
   removeWeather(WeatherData:any){
     this.weather_widgets.pop();
   }
 
-  addStocks(){
-    this.stock_widgets.push(0);
+  addStocks(widget: Widget){
+    this.stock_widgets.push(widget);
   }
 
   removeStocks(StockData:any){
