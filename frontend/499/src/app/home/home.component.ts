@@ -3,17 +3,18 @@ import { Router } from '@angular/router';
 import { Dashboard } from '../service/dashboard';
 import { DataServiceService } from '../service/data-service.service';
 import { Widget } from '../service/widget';
+import { WeatherComponent } from '../widgets/weather/weather.component';
+import { WeatherDisplay } from './WeatherDisplay';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   navTitle:string = 'Weather Dashboard';
   dashboard!: Dashboard;
-  calendar_widgets: Widget[] = [];
-  weather_widgets: Widget[] = [];
+  calendar_widgets: any[] = [0];
+  weather_widgets: WeatherDisplay[] = [];
   stock_widgets: Widget[] = [];
 
   constructor(private router: Router, private data:DataServiceService) { }
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
           dashboardId: (data as any).dashboardID,
           widgetList: ((data as any).widgetList)
         };
-        console.log(this.dashboard.widgetList);
+        console.log(this.dashboard);
         this.populateWidgets();
       });
     }
@@ -40,18 +41,13 @@ export class HomeComponent implements OnInit {
   populateWidgets(){
     this.dashboard.widgetList.forEach(widget => {
       console.log("starting to populate lists");
-      console.log(widget.type);
       switch(widget.type) { 
-        case "calendar": { 
-           this.addWidget(widget);
-           break; 
-        } 
         case "currentWeather": {
-          this.addWeather(widget);
+          this.addWeather(widget.payload.jsonResponse);
           break;
         }
         case "forecastWeather": {
-          this.addWeather(widget);
+          this.addWeather("");
           break;
         }
         case "stock": {
@@ -66,9 +62,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addWidget(widget: Widget) {
+  addWidget(): void {
     if (this.calendar_widgets.length == 0){
-      this.calendar_widgets.push(widget);
+      this.calendar_widgets.push(0);
     }
   }
 
@@ -78,8 +74,9 @@ export class HomeComponent implements OnInit {
     }  
   }
 
-  addWeather(widget: Widget) {
-    this.weather_widgets.push(widget);
+  addWeather(widget: string) {
+    let obj = new WeatherDisplay(widget);
+    this.weather_widgets.push(obj);
   }
 
   removeWeather(WeatherData:any){

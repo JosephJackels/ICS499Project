@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
       };
       if(this.login.token.length != null){
         localStorage.setItem('token', this.login.token);
+        console.log(this.login);
         localStorage.setItem('userId', this.login.userId);
         this.router.navigate(['/home']);
       } else {
