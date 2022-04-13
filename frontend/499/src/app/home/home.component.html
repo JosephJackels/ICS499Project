@@ -1,11 +1,18 @@
 <div fxLayoutAlign="center">
-    <button mat-button  >+ Calendar</button>
+    <button mat-button  (click)="addWidget()">+ Calendar</button>
     <button mat-button  >+ Weather</button>
     <button mat-button  >+ Stocks</button>
     <button mat-button  >+ Forecast</button>
 </div>
 <div fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center" class="content">
     <app-calendar fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>
-    <app-weather fxFlex="18%" *ngFor="let i of weather_widgets" (delete)="removeWeather($event)"></app-weather>
+    <!-- <app-weather fxFlex="18%" *ngFor="let i of weather_widgets" (delete)="removeWeather($event)"></app-weather> -->
     <app-stocks fxFlex="20%" *ngFor="let i of stock_widgets" (delete)="removeStocks($event)"></app-stocks>
+    <div fxFlex="15%" *ngFor="let widget of weather_widgets"> 
+        <mat-card>
+            <mat-card-title>{{widget.name}}</mat-card-title>
+            <mat-card-subtitle>{{widget.country}}</mat-card-subtitle>
+            <div class="weatherWidgetRow" style="font-size:20px;margin:top 5px;">{{widget.temp}} °f</div>
+        </mat-card>
+    </div>
 </div>
