@@ -100,8 +100,12 @@ export class HomeComponent implements OnInit {
     this.weather_widgets.push(obj);
   }
 
-  removeWeather(WeatherData:any){
-    this.weather_widgets.pop();
+  removeWeather(weather:any){
+    for (let i = 0; i < this.weather_widgets.length; i++){
+      if(this.weather_widgets[i].name==weather){
+        this.weather_widgets.splice(i,1);
+      }
+    }
   }
 
   addStocks(widget: string){
@@ -163,5 +167,27 @@ export class HomeComponent implements OnInit {
         this.populateWidgets();
       });
     });
+  }
+
+  toggleButtonActionsVisible(val: any){
+    
+    //traverse upwards from button to get to parent mat-card element
+    let element = val.target.parentElement;
+    while(element.nodeName != "MAT-CARD"){
+      element=element.parentElement;
+    }
+    
+    //get the mat-card-actiona element that is within the parent card
+    element = (element.querySelector("mat-card-actions") as HTMLElement);
+    
+    //if there, toggle display
+    if(element != null){
+      let currentVis = element.style.display;
+      if(currentVis != "none"){
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    }
   }
 }

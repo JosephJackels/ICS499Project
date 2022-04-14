@@ -16,6 +16,9 @@
             <div class="weatherWidgetRow" style="font-size:15x;margin:top 10px;color: rgb(8, 8, 8);">Feels like: {{((widget.feels_like- 273) * (9/5) + 32).toFixed(2)}}°</div>
             <div class="weatherWidgetRow" style="font-size:12px;color: rgb(35, 90, 209);">Low: {{((widget.temp_min - 273) * (9/5) + 32).toFixed(2)}}°</div>
             <div class="weatherWidgetRow" style="font-size:12px;color: rgb(218, 55, 55);">High {{((widget.temp_max - 273) * (9/5) + 32).toFixed(2)}}°</div>
+            <button mat-mini-fab (click)="removeWeather(widget.name)" class="delete_button">
+                <mat-icon>delete</mat-icon>
+            </button>
         </mat-card>
     </div>
     <div fxFlex="15%" *ngFor="let widget of stock_widgets"> 
