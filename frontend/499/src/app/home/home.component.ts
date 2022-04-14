@@ -6,6 +6,7 @@ import { DataServiceService } from '../service/data-service.service';
 import { Widget } from '../service/widget';
 import { WeatherComponent } from '../widgets/weather/weather.component';
 import { CreateWeatherWidgetDialog } from './create-weather-widget-dialog';
+import { StockDisplay } from './StockDisplay';
 import { WeatherDisplay } from './WeatherDisplay';
 
 @Component({
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   dashboard!: Dashboard;
   calendar_widgets: any[] = [0];
   weather_widgets: WeatherDisplay[] = [];
-  stock_widgets: Widget[] = [];
+  stock_widgets: StockDisplay[] = [];
 
   constructor(private router: Router, private data:DataServiceService, public dialog: MatDialog) { }
 
@@ -64,7 +65,7 @@ export class HomeComponent implements OnInit {
             break;
           }
           case "stock": {
-            this.addStocks(widget);
+            this.addStocks(widget.payload.jsonResponse);
             break;
           }
           default: { 
@@ -103,8 +104,9 @@ export class HomeComponent implements OnInit {
     this.weather_widgets.pop();
   }
 
-  addStocks(widget: Widget){
-    this.stock_widgets.push(widget);
+  addStocks(widget: string){
+    let obj = new StockDisplay(widget);
+    this.stock_widgets.push(obj);
   }
 
   removeStocks(StockData:any){
