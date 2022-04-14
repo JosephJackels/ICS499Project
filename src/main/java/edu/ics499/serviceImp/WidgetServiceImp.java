@@ -1,29 +1,25 @@
 package edu.ics499.serviceImp;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.net.*;
+import java.net.http.*;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import edu.ics499.model.payloads.Payload;
-import edu.ics499.model.widgets.Widget;
-import edu.ics499.repositories.PayloadRepository;
-import edu.ics499.repositories.WidgetRepository;
-import edu.ics499.service.WidgetService;
-import edu.ics499.model.widgets.WidgetTypes;
+import edu.ics499.model.payloads.*;
+import edu.ics499.model.widgets.*;
+import edu.ics499.repositories.*;
+import edu.ics499.service.*;
 
 @Service
 public class WidgetServiceImp implements WidgetService{
-	
+
 	@Autowired
 	private WidgetRepository widgetRepo;
 	@Autowired PayloadRepository payloadRepo;
-	
+
 	@Override
 	public List<Widget> getAll() {
 		return widgetRepo.findAll();
@@ -47,15 +43,15 @@ public class WidgetServiceImp implements WidgetService{
 		payloadRepo.saveAndFlush(payload);
 		widgetRepo.saveAndFlush(widget);
 	}
-	
+
 	public String getResponse(Widget widget, Payload payload) throws IOException{
 		HttpURLConnection conn;
 	    URL url = buildUrl(widget.getType(), widget.getQueryParameters());
 	    //check for widgets that have no api to connect to e.x. calender
 	    if(url.getPath() == "") {
 	    	return "";
-	    
 	    }
+
 	    conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
 	    conn.connect();
@@ -73,16 +69,36 @@ public class WidgetServiceImp implements WidgetService{
         System.out.println(lines.length());
         return lines;
 	}
-	
+
+	//this works
+	public String connectToStockApi(Widget widget, String params) throws IOException, InterruptedException {
+	    String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(widget.getType());
+        String midUrl = WidgetTypes.mapWidgetTypeToMidUrl.get(widget.getType());
+        String finalUrl = baseUrl + params + midUrl;
+        System.out.println(finalUrl);
+	    HttpRequest request = HttpRequest.newBuilder()
+	        .uri(URI.create(finalUrl))
+	        .header("x-api-key", System.getenv(WidgetTypes.mapWidgetTypeToApiKeyName.get("stock")))
+	        .method("GET", HttpRequest.BodyPublishers.noBody())
+	        .build();
+	        HttpResponse<String> response = HttpClient.newHttpClient()
+	        .send(request, HttpResponse.BodyHandlers.ofString());
+	    System.out.println(WidgetTypes.mapWidgetTypeToApiKeyName.get("stock"));
+	    System.out.println(response.body());
+	    String lines = response.body();
+        return lines;
+	}
+
 	public URL buildUrl(String type, String queryParameters) throws MalformedURLException{
-		String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(type);
-		String midUrl = WidgetTypes.mapWidgetTypeToMidUrl.get(type);
-		String apiKeyName = WidgetTypes.mapWidgetTypeToApiKeyName.get(type);
-		String finalUrl = baseUrl + queryParameters + midUrl;
-		if(apiKeyName != "") {
-			finalUrl += System.getenv(apiKeyName);
-		}
-		return new URL(finalUrl);
+    	String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(type);
+    	String midUrl = WidgetTypes.mapWidgetTypeToMidUrl.get(type);
+   		String apiKeyName = WidgetTypes.mapWidgetTypeToApiKeyName.get(type);
+   		String finalUrl = baseUrl + queryParameters + midUrl;
+   		if(apiKeyName != "") {
+    		finalUrl += System.getenv(apiKeyName);
+    	}
+    	System.out.println(finalUrl);
+    	return new URL(finalUrl);
 	}
 
 	@Override
@@ -111,16 +127,16 @@ public class WidgetServiceImp implements WidgetService{
 		Widget widget = new Widget();
 		widget.setQueryParameters(query);
 		widget.setType(type);
-		
+
 		Payload payload = new Payload();
-		
+
 		payload.setLastUpdatedTime("0");//set to currenttime
 		payload.setUpdateFrequency("0");//set to whatever we want to update
-		
+
 		payloadRepo.save(payload);
-		
+
 		widget.setPayload(payload);
-		
+
 		return widgetRepo.saveAndFlush(widget);
 	}
 
