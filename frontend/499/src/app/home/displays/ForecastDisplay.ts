@@ -1,18 +1,19 @@
 export class ForecastDisplay {
     public name: string;
-    public temp: number;
     public country: string;
-    public temp_min: number;
-    public temp_max: number;
-    public feels_like: number;
+    public temps: number[];
+    public descrips: string[];
 
-    public constructor(weather: any) {
-        let data = JSON.parse(weather);
+    public constructor(forecast: any) {
+        let data = JSON.parse(forecast);
         this.name = data.name;
-        this.temp = data.main.temp;
-        this.country = data.sys.country
-        this.temp_max = data.main.temp_max;
-        this.temp_min = data.main.temp_min;
-        this.feels_like = data.main.feels_like;
+        this.country = data.sys.country;
+        this.temps = [0,0,0]
+        this.descrips = ['','','']
+        var i: number;
+        for (i = 0; i < 3; i++) {
+            this.temps[i] = data.list[i].main.temp;
+            this.descrips[i] = data.list[i].main.description; 
+        }
     }
 }
