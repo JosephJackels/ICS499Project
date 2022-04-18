@@ -63,7 +63,8 @@ export class HomeComponent implements OnInit {
             break;
           }
           case "forecastWeather": {
-            this.addWeather(widget.payload.jsonResponse);
+            console.log(widget.payload.jsonResponse);
+            this.addForecast(widget.payload.jsonResponse);
             break;
           }
           case "stock": {
