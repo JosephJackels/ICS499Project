@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { Dashboard } from '../service/dashboard';
 import { DataServiceService } from '../service/data-service.service';
 import { Widget } from '../service/widget';
-import { WeatherComponent } from '../widgets/weather/weather.component';
-import { CreateWeatherWidgetDialog } from './create-weather-widget-dialog';
-import { StockDisplay } from './StockDisplay';
-import { WeatherDisplay } from './WeatherDisplay';
+import { CreateWeatherWidgetDialog } from './dialogs/create-weather-widget-dialog';
+import { CreateForecastWidgetDialog } from './dialogs/create-forecast-widget-dialog';
+import { StockDisplay } from './displays/StockDisplay';
+import { WeatherDisplay } from './displays/WeatherDisplay';
+import { ForecastDisplay} from './displays/ForecastDisplay';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   dashboard!: Dashboard;
   calendar_widgets: any[] = [0];
   weather_widgets: WeatherDisplay[] = [];
+  forecast_widgets: ForecastDisplay[] = [];
   stock_widgets: StockDisplay[] = [];
 
   constructor(private router: Router, private data:DataServiceService, public dialog: MatDialog) { }
@@ -61,7 +63,7 @@ export class HomeComponent implements OnInit {
             break;
           }
           case "forecastWeather": {
-            this.addWeather("");
+            this.addWeather(widget.payload.jsonResponse);
             break;
           }
           case "stock": {
@@ -108,6 +110,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  addForecast(widget: string) {
+    let obj = new ForecastDisplay(widget);
+    this.forecast_widgets.push(obj);
+  }
+
+  removeForecast(forecast:any){
+    for (let i = 0; i < this.forecast_widgets.length; i++){
+      if(this.forecast_widgets[i].name==forecast){
+        this.forecast_widgets.splice(i,1);
+      }
+    }
+  }
+
   addStocks(widget: string){
     let obj = new StockDisplay(widget);
     this.stock_widgets.push(obj);
@@ -129,8 +144,14 @@ export class HomeComponent implements OnInit {
   }
 
   createNewForecastWidget(){
-    //todo
-    //either create a new dialog or try to make the other one generic?
+    const dialogRef = this.dialog.open(CreateForecastWidgetDialog, {
+      width: '250px',
+      data: {query: ""},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      let inputQuery = result;
+      this.createWidget(inputQuery, 'forecastWeather');
+    });
   }
 
   createNewStockWidget(){
