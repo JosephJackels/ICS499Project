@@ -40,13 +40,22 @@ public class WidgetServiceImp implements WidgetService {
     public void updatePayload(Long widgetId) throws IOException {
         Widget widget = getWidgetById(widgetId);
         Payload payload = widget.getPayload();
-        payload.setJsonResponse(getResponse(widget, payload));
+        try {
+            payload.setJsonResponse(getResponse(widget, payload));
+        } catch (IOException x) {
+            x.printStackTrace();
+        } catch (InterruptedException x) {
+            x.printStackTrace();
+        }
         payloadRepo.saveAndFlush(payload);
         widgetRepo.saveAndFlush(widget);
     }
 
-    public String getResponse(Widget widget, Payload payload) throws IOException {
+    public String getResponse(Widget widget, Payload payload) throws IOException, InterruptedException {
         HttpURLConnection conn;
+        if (widget.getType().equals("stock")){
+            return this.connectToStockApi(widget, widget.getQueryParameters());
+        }
         URL url = buildUrl(widget.getType(), widget.getQueryParameters());
         // check for widgets that have no api to connect to e.x. calender
         if (url.getPath() == "") {
