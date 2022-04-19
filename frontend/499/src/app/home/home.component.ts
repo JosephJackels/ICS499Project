@@ -99,6 +99,7 @@ export class HomeComponent implements OnInit {
   }
 
   addWeather(widget: string) {
+    console.log(widget);
     let obj = new WeatherDisplay(widget);
     this.weather_widgets.push(obj);
   }
@@ -139,8 +140,10 @@ export class HomeComponent implements OnInit {
       data: {query: "Enter a city"},
     });
     dialogRef.afterClosed().subscribe(result => {
-      let inputQuery = result;
-      this.createWidget(inputQuery, 'currentWeather');
+      if(result != null){
+        let inputQuery = result;
+        this.createWidget(inputQuery, 'currentWeather');
+      }
     });
   }
 
@@ -150,8 +153,10 @@ export class HomeComponent implements OnInit {
       data: {query: ""},
     });
     dialogRef.afterClosed().subscribe(result => {
-      let inputQuery = result;
-      this.createWidget(inputQuery, 'forecastWeather');
+      if(result != null){
+        let inputQuery = result;
+        this.createWidget(inputQuery, 'forecastWeather');
+      }
     });
   }
 

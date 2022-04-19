@@ -45,6 +45,10 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value.login[0].password)
 
     this.data.loginUser(this.loginForm.value.login[0].username, this.loginForm.value.login[0].password).subscribe(data => {
+      if(data == null){
+        this.loginFailedDialog();
+        return;
+      }
       this.login = {
         username: (data as any).username,
         token: (data as any).type + ' ' + (data as any).token,
@@ -55,9 +59,6 @@ export class LoginComponent implements OnInit {
         console.log(this.login);
         localStorage.setItem('userId', this.login.userId);
         this.router.navigate(['/home']);
-      } else {
-        //createFailedLoginDialog()
-        this.loginFailedDialog();
       }
     });
   }
