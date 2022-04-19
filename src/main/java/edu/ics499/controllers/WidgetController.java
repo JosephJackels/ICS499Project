@@ -54,4 +54,9 @@ public class WidgetController {
 	public Widget updateWidget(@PathVariable long id, @RequestParam String query) {
 		return widgetService.updateQuery(query, id);
 	}
+	
+	@PostMapping("delete/{id}")
+	public Widget deleteWidget(@PathVariable long id) {
+		return widgetService.deleteWidget(id);
+	}
 }

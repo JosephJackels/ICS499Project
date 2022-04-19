@@ -110,4 +110,13 @@ export class DataServiceService {
       options
     );
   }
+
+  deleteWidgetFromBackend(token: string, widgetId: any): Observable<Widget>{
+    let options = {headers : new HttpHeaders({'Content-Type':'application/json', 'Authorization':token})};
+    return this.http.post<Widget>(
+      this.ROOT_URL + '/widgets/delete/' + widgetId,
+      "",
+      options
+    )
+  }
 }
