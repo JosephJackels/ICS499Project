@@ -145,5 +145,13 @@ public class WidgetServiceImp implements WidgetService {
 
         return widgetRepo.saveAndFlush(widget);
     }
+    
+    @Override
+    public Widget deleteWidget(Long widgetId) {
+    	Widget widget = widgetRepo.getById(widgetId);
+    	widgetRepo.deleteById(widgetId);
+    	widgetRepo.saveAndFlush(widget);
+    	return widget;
+    }
 
 }

@@ -36,7 +36,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				//.permitAll()
 			.antMatchers("/dashboards/remove/{dashId}", "dashboards/one/{dashId}", "/dashboards/add/{dashId}") // dashboard must belong to logged in user
 				.access("@userSecurity.doesDashboardBelongToUser(authentication, #dashId)")
-			.antMatchers("widgets/get/{id}", "widgets/get/{id}/payload", "widgets/update/{id}")// widget must belong to user
+			.antMatchers("widgets/get/{id}", "widgets/get/{id}/payload", "widgets/update/{id}", "widgets/delete/{id}")// widget must belong to user
 				.access("@userSecurity.doesWidgetBelongToUser(authentication, #id)")
 			.anyRequest().authenticated() //catch all for rest - just must be logged in and authenticated. anyone can do get request to all users, all widgets etc.
 			.and()

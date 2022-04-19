@@ -15,4 +15,5 @@ public interface WidgetService {
 	Payload getPayload(Long widgetId) throws IOException;
 	Widget updateQuery(String query, Long widgetId);
 	Widget createWidget(String type, String query);
+	Widget deleteWidget(Long widgetId);
 }
