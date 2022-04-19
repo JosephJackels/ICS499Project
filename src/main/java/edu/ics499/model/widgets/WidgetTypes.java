@@ -13,33 +13,33 @@ import java.util.*;
 public class WidgetTypes {
 
 	public static final List<String> types = new ArrayList<>(List.of(
-			"currentWeather",
-			"forecastWeather",
-			"calendar",
-			"stock"));
+        "calendar",
+		"currentWeather",
+		"forecastWeather",
+		"stock"));
 
 	public static final Map<String, String> mapWidgetTypeToUrl = new HashMap<>(Map.of(
-			"currentWeather", "http://api.openweathermap.org/data/2.5/weather?q=",
-			"forecastWeather", "http://api.openweathermap.org/data/2.5/forecast?q=",
-			"calendar", "",
-			"stock", "https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols="));
+	    "calendar", "",	
+	    "currentWeather", "http://api.openweathermap.org/data/2.5/weather?q=",
+		"forecastWeather", "http://api.openweathermap.org/data/2.5/forecast?q=",
+		"stock", "https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols="));
 
 	public static final Map<String, String> mapWidgetTypeToMidUrl = new HashMap<>(Map.of(
-			"currentWeather", "&appid=",
-			"forecastWeather", "&appid=",
-			"calendar", "",
-			//the stock thing is technically the end
-			"stock", "%2CUSD%3DX"));
+	    "calendar", "",
+	    "currentWeather", "&appid=",
+		"forecastWeather", "&units=imperial&appid=",
+		//the stock thing is technically the end
+		"stock", "%2CUSD%3DX"));
 
 	public static final Map<String, String> mapWidgetTypeToApiKeyName = new HashMap<>(Map.of(
-			"currentWeather", "weather_key",
-			"forecastWeather", "weather_key",
-			"calendar", "",
-			"stock", "stock_key"));
+	    "calendar", "",
+	    "currentWeather", "weather_key",
+		"forecastWeather", "weather_key",
+		"stock", "stock_key"));
 
 	public static final Map<String, String> mapWidgetTypeToUpdateFrequency = new HashMap<>(Map.of(
-			"currentWeather", "0",
-			"forecastWeather", "0",
-			"calendar", "0",
-			"stock", "0"));
+	    "calendar", "0",
+	    "currentWeather", "0",
+		"forecastWeather", "0",
+		"stock", "0"));
 }

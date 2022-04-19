@@ -1,1 +1,29 @@
-<p>forecast works!</p>
+<mat-card>
+    <mat-card-title>{{ForecastData.name}}</mat-card-title>
+    <mat-card-subtitle>{{ForecastData.sys.country}}</mat-card-subtitle>
+    <div class="forecastWidgetRow" style="font-size:24x;margin:top 10px;color: rgb(8, 8, 8);">Tomorrow: {{ForecastData.list[0].main.temp}} °</div>
+    <div class="forecastWidgetRow" style="font-size:18x;color: rgb(8, 8, 8);">{{ForecastData.list[0].weather[0].description}}</div>
+    <div class="forecastWidgetRow" style="font-size:15px;color: rgb(35, 90, 209);">Day Two: {{ForecastData.list[1].main.temp}} °</div>
+    <div class="forecastWidgetRow" style="font-size:12px;color: rgb(35, 90, 209);">{{ForecastData.list[1].weather[0].description}}</div>
+    <div class="forecastWidgetRow" style="font-size:15px;color: rgb(218, 55, 55);">Day Three: {{ForecastData.list[1].main.temp}} °</div>
+    <div class="forecastWidgetRow" style="font-size:12px;color: rgb(218, 55, 55);">{{ForecastData.list[2].weather[0].description}}</div>
+    <mat-card-actions style="display:none">
+        <p>Change City:</p>
+        <form [formGroup]="form">
+            <div formArrayName="widget" >
+                <div [formGroupName]="0">
+                    <input type="text" placeholder="city" formControlName="city" style="font-size: 8px">
+                </div>
+            </div>
+        </form>
+        <button mat-mini-fab (click)="onSubmit()" class="update_button">
+            <mat-icon>arrow_circle_right</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="removeSelf()" class="delete_button">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+    <button mat-mini-fab (click)="toggleButtonActionsVisible($event)" class="settings_button">
+        <mat-icon>settings</mat-icon>
+    </button>
+</mat-card>

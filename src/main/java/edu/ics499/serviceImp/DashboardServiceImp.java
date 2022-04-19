@@ -13,51 +13,51 @@ import edu.ics499.service.*;
 @Service
 public class DashboardServiceImp implements DashboardService {
 
-	@Autowired
-	DashboardRepository dashboardRepo;
-	
-	@Autowired
-	WidgetServiceImp widgetService;
-	
-	@Override
-	public Dashboard getDashboardByUserId(Long userId) {
-		return dashboardRepo.findByUserId(userId);
-	}
+    @Autowired
+    private DashboardRepository dashboardRepo;
 
-	@Override
-	public Widget removeWidgetFromDashboard(Long dashboardId, Long widgetId) {
-		Dashboard dash = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
-		List<Widget> widgets = dash.getWidgetList();
-		int index = 0;
-		Widget removedWidget = new Widget();
-		for(Widget widget : widgets) {
-			if(widget.getWidgetID() == widgetId) {
-				removedWidget = widgets.remove(index);
-				break;
-			}
-			index++;
-		}
-		dashboardRepo.saveAndFlush(dash);
-		return removedWidget;
-	}
+    @Autowired
+    private WidgetServiceImp widgetService;
 
-	@Override
-	public Dashboard addWidgetToDashboard(Long dashboardId, Long widgetId) {
-	    Dashboard db = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
-	    Widget widget = widgetService.getWidgetById(widgetId);
-	    widget.setDashboardId(db.getDashboardID());
-	    db.addWidget(widget);
-	    return dashboardRepo.saveAndFlush(db);
-	}
+    @Override
+    public Dashboard getDashboardByUserId(Long userId) {
+        return dashboardRepo.findByUserId(userId);
+    }
 
-	@Override
-	public Dashboard getDashboardById(Long dashboardId) {
+    @Override
+    public Widget removeWidgetFromDashboard(Long dashboardId, Long widgetId) {
+        Dashboard dash = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
+        List<Widget> widgets = dash.getWidgetList();
+        int index = 0;
+        Widget removedWidget = new Widget();
+        for (Widget widget : widgets) {
+            if (widget.getWidgetID() == widgetId) {
+                removedWidget = widgets.remove(index);
+                break;
+            }
+            index++ ;
+        }
+        dashboardRepo.saveAndFlush(dash);
+        return removedWidget;
+    }
+
+    @Override
+    public Dashboard addWidgetToDashboard(Long dashboardId, Long widgetId) {
+        Dashboard db = dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
+        Widget widget = widgetService.getWidgetById(widgetId);
+        widget.setDashboardId(db.getDashboardID());
+        db.addWidget(widget);
+        return dashboardRepo.saveAndFlush(db);
+    }
+
+    @Override
+    public Dashboard getDashboardById(Long dashboardId) {
         return dashboardRepo.findById(dashboardId).orElseThrow(() -> new RuntimeException());
-	}
+    }
 
-	@Override
-	public List<Dashboard> getAll() {
-		return dashboardRepo.findAll();
-	}
+    @Override
+    public List<Dashboard> getAll() {
+        return dashboardRepo.findAll();
+    }
 
 }

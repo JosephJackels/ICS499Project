@@ -31,7 +31,8 @@ import { StocksComponent } from './widgets/stocks/stocks.component';
 import { DataServiceService } from './service/data-service.service';
 import { ForecastComponent } from './widgets/forecast/forecast.component';
 import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-failed-dialog.component';
-
+import { CreateWeatherWidgetDialog } from './home/dialogs/create-weather-widget-dialog';
+import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widget-dialog';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,9 @@ import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-fa
     WeatherComponent,
     StocksComponent,
     ForecastComponent,
-    LoginFailedDialogComponent
-
+    LoginFailedDialogComponent,
+    CreateWeatherWidgetDialog,
+    CreateForecastWidgetDialog
   ],
   imports: [
     BrowserModule,

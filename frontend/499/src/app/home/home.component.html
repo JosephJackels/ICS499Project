@@ -1,12 +1,13 @@
 <div fxLayoutAlign="center">
     <button mat-button  (click)="addWidget()">+ Calendar</button>
     <button mat-button  (click)="createNewWeatherWidget()">+ Weather</button>
-    <button mat-button  (click)="createNewStockWidget()">+ Stocks</button>
     <button mat-button  (click)="createNewForecastWidget()">+ Forecast</button>
+    <button mat-button  (click)="createNewStockWidget()">+ Stocks</button>
 </div>
 <div fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center" class="content">
     <app-calendar fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>
     <!-- <app-weather fxFlex="18%" *ngFor="let i of weather_widgets" (delete)="removeWeather($event)"></app-weather> -->
+    <!-- <app-weather fxFlex="18%" *ngFor="let i of forecast_widgets" (delete)="removeForecast($event)"></app-forecast> -->
     <!-- <app-stocks fxFlex="20%" *ngFor="let i of stock_widgets" (delete)="removeStocks($event)"></app-stocks> -->
     <div fxFlex="15%" *ngFor="let widget of weather_widgets"> 
         <mat-card>
@@ -29,6 +30,9 @@
             <div class="stockWidgetRow" style="font-size:15x;margin:top 10px;color: red;">Low: {{widget.daily_low}}$</div>
             <div class="stockWidgetRow" style="font-size:15x;margin:top 10px;color: green;">High: {{widget.daily_high}}$</div>
             <div class="weatherWidgetRow" style="font-size:12px;">{{widget.volume}} shares</div>
+            <button mat-mini-fab (click)="removeWeather(widget.name)" class="delete_button">
+                <mat-icon>delete</mat-icon>
+            </button>
         </mat-card>
     </div>
 </div>
