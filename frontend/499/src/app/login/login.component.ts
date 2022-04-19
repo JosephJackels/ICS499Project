@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { DataServiceService } from '../service/data-service.service';
 import { Login } from '../service/login';
 import { User } from '../service/user';
+import { LoginFailedDialogComponent } from './login-failed-dialog/login-failed-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
   login!: Login;
   
 
-  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService) { }
+  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService, public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -55,7 +57,15 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       } else {
         //createFailedLoginDialog()
+        this.loginFailedDialog();
       }
     });
+  }
+  loginFailedDialog() {
+    const dialogRef =this.dialog.open(LoginFailedDialogComponent, {width: '500px'});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.ngOnInit();
+    })
   }
 }
