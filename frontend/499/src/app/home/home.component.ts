@@ -59,16 +59,16 @@ export class HomeComponent implements OnInit {
         };
         switch(widget.type) { 
           case "currentWeather": {
-            this.addWeather(widget.payload.jsonResponse);
+            this.addWeather(widget.payload.jsonResponse, widget.widgetID);
             break;
           }
           case "forecastWeather": {
             console.log(widget.payload.jsonResponse);
-            this.addForecast(widget.payload.jsonResponse);
+            this.addForecast(widget.payload.jsonResponse, widget.widgetID);
             break;
           }
           case "stock": {
-            this.addStocks(widget.payload.jsonResponse);
+            this.addStocks(widget.payload.jsonResponse, widget.widgetID);
             break;
           }
           default: { 
@@ -98,22 +98,23 @@ export class HomeComponent implements OnInit {
     }  
   }
 
-  addWeather(widget: string) {
+  addWeather(widget: string, widgetId: number) {
     console.log(widget);
-    let obj = new WeatherDisplay(widget);
+    let obj = new WeatherDisplay(widget, widgetId);
     this.weather_widgets.push(obj);
   }
 
   removeWeather(weather:any){
     for (let i = 0; i < this.weather_widgets.length; i++){
       if(this.weather_widgets[i].name==weather){
+        this.removeWidgetAndDelete(this.weather_widgets[i].widgetId, this.dashboard.dashboardId);
         this.weather_widgets.splice(i,1);
       }
     }
   }
 
-  addForecast(widget: string) {
-    let obj = new ForecastDisplay(widget);
+  addForecast(widget: string, widgetId: any) {
+    let obj = new ForecastDisplay(widget, widgetId);
     this.forecast_widgets.push(obj);
   }
 
@@ -125,8 +126,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  addStocks(widget: string){
-    let obj = new StockDisplay(widget);
+  addStocks(widget: string, widgetId: any){
+    let obj = new StockDisplay(widget, widgetId);
     this.stock_widgets.push(obj);
   }
 
@@ -142,11 +143,23 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
         let inputQuery = result;
-        this.createWidget(inputQuery, 'currentWeather');
+        if(!this.widgetExistsCheck(inputQuery, this.weather_widgets)){
+          this.createWidget(inputQuery, 'currentWeather');
+        } else {
+          console.log("Widget: " + inputQuery + " already exists");
+        }
       }
     });
   }
-
+  widgetExistsCheck(query:any, list:any[]): boolean{
+    let found = false;
+    list.forEach(widget => {
+      if(widget.name == query){
+        found = true;
+      }
+    });
+    return found;
+  }
   createNewForecastWidget(){
     const dialogRef = this.dialog.open(CreateForecastWidgetDialog, {
       width: '250px',
@@ -216,5 +229,14 @@ export class HomeComponent implements OnInit {
         element.style.display = "block";
       }
     }
+  }
+
+  removeWidgetAndDelete(widgetId: any, dashboardId: any){
+    this.data.removeWidgetFromDashboard(localStorage.getItem("token")!, dashboardId, widgetId).subscribe(data => {
+      //response here
+      this.data.deleteWidgetFromBackend(localStorage.getItem("token")!, widgetId).subscribe(data => {
+
+      })
+    })
   }
 }

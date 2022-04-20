@@ -42,4 +42,12 @@ public class WidgetTypes {
 	    "currentWeather", "0",
 		"forecastWeather", "0",
 		"stock", "0"));
+	//is apiKeyHeader
+	//calendar, false
+	//....
+	//stock, true
+	
+	//apiKeyHeaderName
+	//calendar, ""
+	//stock, api-x-
 }

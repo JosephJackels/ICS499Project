@@ -5,11 +5,11 @@
     <button mat-button  (click)="createNewStockWidget()">+ Stocks</button>
 </div>
 <div fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center" class="content">
-    <app-calendar fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>
+    <app-calendar class="widgetContainer" fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>
     <!-- <app-weather fxFlex="18%" *ngFor="let i of weather_widgets" (delete)="removeWeather($event)"></app-weather> -->
     <!-- <app-weather fxFlex="18%" *ngFor="let i of forecast_widgets" (delete)="removeForecast($event)"></app-forecast> -->
     <!-- <app-stocks fxFlex="20%" *ngFor="let i of stock_widgets" (delete)="removeStocks($event)"></app-stocks> -->
-    <div fxFlex="15%" *ngFor="let widget of weather_widgets"> 
+    <div fxFlex="15%" *ngFor="let widget of weather_widgets" class="widgetContainer"> 
         <mat-card>
             <mat-card-title>{{widget.name}}</mat-card-title>
             <mat-card-subtitle>{{widget.country}}</mat-card-subtitle>
@@ -22,7 +22,7 @@
             </button>
         </mat-card>
     </div>
-    <div fxFlex="15%" *ngFor="let widget of stock_widgets"> 
+    <div fxFlex="15%" *ngFor="let widget of stock_widgets" class="widgetContainer"> 
         <mat-card>
             <mat-card-title>{{widget.ticker}}</mat-card-title>
             <mat-card-subtitle>{{widget.name}}</mat-card-subtitle>

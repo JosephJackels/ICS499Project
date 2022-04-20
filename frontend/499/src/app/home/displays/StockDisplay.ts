@@ -5,8 +5,9 @@ export class StockDisplay{
     public daily_low: number;
     public volume: number;
     public name: string; 
+    public widgetId: number;
 
-    public constructor(data: any){
+    public constructor(data: any, widgetId: number){
         //this might not work immediately and may require some tweaking in regards to accessing the data that 'stock' is
         let stock = JSON.parse(data);
         this.ticker = stock.quoteResponse.result[0].symbol;
@@ -15,5 +16,6 @@ export class StockDisplay{
         this.daily_low = stock.quoteResponse.result[0].regularMarketDayLow;
         this.volume = stock.quoteResponse.result[0].regularMarketVolume;
         this.name = stock.quoteResponse.result[0].shortName;
+        this.widgetId = widgetId;
     }
 }

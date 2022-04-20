@@ -23,3 +23,8 @@ mat-card-actions {
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
+
+.widgetContainer {
+    min-width: 200px;
+    width: 20vw;
+}
