@@ -6,6 +6,10 @@ import { Login } from '../service/login';
 import { User } from '../service/user';
 import { LoginFailedDialogComponent } from './login-failed-dialog/login-failed-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar'
+import { LoginSuccessSnackbarComponent } from './login-success-snackbar/login-success-snackbar.component';
+import {MatIconModule} from '@angular/material/icon'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +21,7 @@ export class LoginComponent implements OnInit {
   login!: Login;
   
 
-  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService, public dialog:MatDialog) { }
+  constructor(private fb: FormBuilder, private router: Router, private data:DataServiceService, public dialog:MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -32,6 +36,12 @@ export class LoginComponent implements OnInit {
 
   get form(): FormArray{
     return this.loginForm.get('login') as FormArray;
+  }
+
+  openSnackBar(){
+    this.snackBar.openFromComponent(LoginSuccessSnackbarComponent, {
+      duration: 5000,
+    });
   }
 
   onSubmit(){
@@ -59,6 +69,8 @@ export class LoginComponent implements OnInit {
         console.log(this.login);
         localStorage.setItem('userId', this.login.userId);
         this.router.navigate(['/home']);
+        this.openSnackBar();
+        this.hideLoginAndSignUpTabs();
       }
     });
   }
@@ -68,5 +80,14 @@ export class LoginComponent implements OnInit {
       console.log(result);
       this.ngOnInit();
     })
+  }
+
+  hideLoginAndSignUpTabs(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
+        tab.style.display = "none";
+      }
+    });
   }
 }

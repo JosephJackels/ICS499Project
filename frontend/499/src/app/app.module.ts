@@ -33,7 +33,7 @@ import { ForecastComponent } from './widgets/forecast/forecast.component';
 import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-failed-dialog.component';
 import { CreateWeatherWidgetDialog } from './home/dialogs/create-weather-widget-dialog';
 import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widget-dialog';
-
+import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/login-success-snackbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +48,8 @@ import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widge
     ForecastComponent,
     LoginFailedDialogComponent,
     CreateWeatherWidgetDialog,
-    CreateForecastWidgetDialog
+    CreateForecastWidgetDialog,
+    LoginSuccessSnackbarComponent,
   ],
   imports: [
     BrowserModule,

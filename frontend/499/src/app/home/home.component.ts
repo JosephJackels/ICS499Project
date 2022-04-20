@@ -27,8 +27,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("nginit in home");
-
-    //check if token exists
     if(localStorage.getItem("token") != null){
       this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")!).subscribe(data => {
         this.dashboard = {
@@ -37,11 +35,13 @@ export class HomeComponent implements OnInit {
         };
         console.log(this.dashboard);
         this.populateWidgets();
+
+        //UNCOMMENT THIS WHEN LOGOUT IS WORKING
+        //this.hideLoginAndSignUpTabs();
       });
+    } else {
+      this.router.navigate(['/login']);
     }
-    //if it does -> call dashbaord info
-    
-    //else redirect to login
   }
 
   populateWidgets(){
@@ -138,7 +138,7 @@ export class HomeComponent implements OnInit {
   createNewWeatherWidget(){
     const dialogRef = this.dialog.open(CreateWeatherWidgetDialog, {
       width: '250px',
-      data: {query: "Enter a city"},
+      data: {query: ""},
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
@@ -238,5 +238,34 @@ export class HomeComponent implements OnInit {
 
       })
     })
+  }
+
+  hideLoginAndSignUpTabs(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
+        tab.style.display = "none";
+      }
+    });
+  }
+
+  toggleButtonActionsVisibile(val: any){
+    let element = val.target.parentElement;
+    while(element.nodeName != "MAT-CARD"){
+      element=element.parentElement;
+    }
+    
+    //get the mat-card-actiona element that is within the parent card
+    element = (element.querySelector("mat-card-actions") as HTMLElement);
+    
+    //if there, toggle display
+    if(element != null){
+      let currentVis = element.style.display;
+      if(currentVis != "none"){
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    }
   }
 }
