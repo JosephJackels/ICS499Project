@@ -1,3 +1,7 @@
 mat-card {
-    background-color: #f2af29;
+    background-color: #1c2541;
+    color: #e0e0ce;
+}
+input {
+    background-color: #3a506b;
 }

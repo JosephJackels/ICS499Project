@@ -33,6 +33,7 @@ public class UserSecurity {
 	public boolean doesDashboardBelongToUser(Authentication authentication, Long dashboardId) {
 		
 		//get user from dash service
+		System.out.println(dashboardId);
 		String currentUserName;
 		if(authentication.getPrincipal() instanceof UserDetails) {
 			currentUserName = ((UserDetails) authentication.getPrincipal()).getUsername();

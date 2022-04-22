@@ -42,10 +42,7 @@ public class UserController {
 	//get request to localhost:port/users/one/{id}/dashboard -- replace {id} with userID ex users/one/1/dashboard
 	@GetMapping("/one/{id}/dashboard")
 	public Dashboard getDashboardForUser(@PathVariable Long id) {
-		System.out.println("here");
-		Dashboard d = dashboardService.getDashboardByUserId(id);
-		System.out.println(d.toString());
-		return d;
+		return dashboardService.getDashboardByUserId(id);
 	}
 	
 	//post request to localhost:port/users/add with a User object

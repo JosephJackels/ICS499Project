@@ -5,3 +5,7 @@
 .content > mat-card {
     width: 200px;
 }
+mat-toolbar {
+    color: #e0e0ce;
+    background-color: #40531b;
+}

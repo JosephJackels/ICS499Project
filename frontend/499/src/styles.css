@@ -11,12 +11,12 @@ body {
   margin: 0px;
   font-size: 15px;
   line-height: 1.42857143;
-  color: #2c3e50;
+  color: #618b4a;
   background-color: #e0e0ce;
   
 }
-mat-ink-bar {
-  background-color: #f44336 !important;
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #40531b !important;
 }
 .fill-remaining-space {
   flex: 1 1 auto;
