@@ -9,6 +9,7 @@ import { CreateForecastWidgetDialog } from './dialogs/create-forecast-widget-dia
 import { StockDisplay } from './displays/StockDisplay';
 import { WeatherDisplay } from './displays/WeatherDisplay';
 import { ForecastDisplay} from './displays/ForecastDisplay';
+import { CreateStockWidgetDialog } from './dialogs/create-stock-widget-dialog';
 
 @Component({
   selector: 'app-home',
@@ -90,38 +91,44 @@ export class HomeComponent implements OnInit {
     this.stock_widgets = [];
   }
 
+  //adds calendar widget, it will only let you add one
   addWidget(): void {
     if (this.calendar_widgets.length == 0){
       this.calendar_widgets.push(0);
     }
   }
 
+  //remove calendar widget, only if there is one
   removeWidget(CalendarData: any){
     if (this.calendar_widgets.length == 1){
       this.calendar_widgets.pop();
     }  
   }
 
+  //adds weather widget with desired data and id
   addWeather(widget: string, widgetId: number) {
     console.log(widget);
     let obj = new WeatherDisplay(widget, widgetId);
     this.weather_widgets.push(obj);
   }
 
+  //removes weather widget with the id passed into it
   removeWeather(weather:any){
     for (let i = 0; i < this.weather_widgets.length; i++){
-      if(this.weather_widgets[i].name==weather){
+      if(this.weather_widgets[i].widgetId==weather){
         this.removeWidgetAndDelete(this.weather_widgets[i].widgetId, this.dashboard.dashboardId);
         this.weather_widgets.splice(i,1);
       }
     }
   }
 
+  //adds forecast widget with the desired data and id
   addForecast(widget: string, widgetId: any) {
     let obj = new ForecastDisplay(widget, widgetId);
     this.forecast_widgets.push(obj);
   }
 
+  //removes forecast widget with the id passed into it
   removeForecast(forecast:any){
     for (let i = 0; i < this.forecast_widgets.length; i++){
       if(this.forecast_widgets[i].name==forecast){
@@ -131,11 +138,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //adds stock widget with the desired data and id
   addStocks(widget: string, widgetId: any){
     let obj = new StockDisplay(widget, widgetId);
     this.stock_widgets.push(obj);
   }
 
+  //removes stock widget with the id passed into it
   removeStocks(StockData:any){
     this.stock_widgets.pop();
   }
@@ -156,6 +165,8 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  //checks to make sure the new widget is not a duplicate
   widgetExistsCheck(query:any, list:any[]): boolean{
     let found = false;
     list.forEach(widget => {
@@ -165,6 +176,8 @@ export class HomeComponent implements OnInit {
     });
     return found;
   }
+
+  //creates a new forecast widget 
   createNewForecastWidget(){
     const dialogRef = this.dialog.open(CreateForecastWidgetDialog, {
       width: '250px',
@@ -182,11 +195,27 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  //creates a new stock widget
   createNewStockWidget(){
     //todo
     //either create a new dialog or try to make the other one generic?
+    const dialogRef = this.dialog.open(CreateStockWidgetDialog, {
+      width: '250px',
+      data: {query: ""},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != null){
+        let inputQuery = result;
+        if(!this.widgetExistsCheck(inputQuery, this.stock_widgets)){
+          this.createWidget(inputQuery, 'stock');
+        } else {
+          console.log("Widget: " + inputQuery + " already exists");
+        }
+      }
+    });
   }
 
+  //creates a generic widget
   createWidget(query: string, type: string){
     this.data.createWidget(localStorage.getItem("token")!, query, type).subscribe(data => {
       let widgetResponse: Widget = {
@@ -200,7 +229,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
+  //after the widget is created, add it to the dashboard
   addWidgetToDashboard(widgetId: any){
     this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")).subscribe(data => {
       let dashboardResponse: Dashboard = {
@@ -240,6 +269,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //remove widget
   removeWidgetAndDelete(widgetId: any, dashboardId: any){
     this.data.removeWidgetFromDashboard(localStorage.getItem("token")!, dashboardId, widgetId).subscribe(data => {
       //response here
