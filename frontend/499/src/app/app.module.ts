@@ -35,7 +35,6 @@ import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/lo
 import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-failed-dialog.component';
 import { CreateWeatherWidgetDialog } from './home/dialogs/create-weather-widget-dialog';
 import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widget-dialog';
-import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/login-success-snackbar.component';
 import { LogoutSuccessSnackbarComponent } from './tabs/logout-success-snackbar/logout-success-snackbar.component';
 
 @NgModule({
