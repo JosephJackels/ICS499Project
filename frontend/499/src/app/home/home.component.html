@@ -27,6 +27,26 @@
             </button>
         </mat-card>
     </div>
+    <div fxFlex="15%" *ngFor="let widget of forecast_widgets" class="widgetContainer"> 
+        <mat-card>
+            <mat-card-title>{{widget.name}}</mat-card-title>
+            <mat-card-subtitle>{{widget.country}}</mat-card-subtitle>
+            <div class="forecastWidgetRow" style="font-size:24x;margin:top 10px;color: rgb(8, 8, 8);">Tomorrow: {{((widget.temps[0]))}} °</div>
+            <div class="forecastWidgetRow" style="font-size:18x;color: rgb(8, 8, 8);">{{((widget.descrips[0]))}}</div>
+            <div class="forecastWidgetRow" style="font-size:15px;color: rgb(35, 90, 209);">  2nd Day: {{((widget.temps[1]))}} °</div>
+            <div class="forecastWidgetRow" style="font-size:12px;color: rgb(35, 90, 209);">{{((widget.descrips[1]))}}</div>
+            <div class="forecastWidgetRow" style="font-size:15px;color: rgb(218, 55, 55);">  3rd Day: {{((widget.temps[2]))}} °</div>
+            <div class="forecastWidgetRow" style="font-size:12px;color: rgb(218, 55, 55);">{{((widget.descrips[2]))}}</div>            
+            <mat-card-actions style="display:none">
+                <button mat-mini-fab (click)="removeForecast(widget.name)" class="delete_button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+            <button mat-mini-fab (click)="toggleButtonActionsVisible($event)" class="settings_button">
+                <mat-icon>settings</mat-icon>
+            </button>
+        </mat-card>
+    </div>
     <div fxFlex="15%" *ngFor="let widget of stock_widgets" class="widgetContainer"> 
         <mat-card>
             <mat-card-title>{{widget.ticker}}</mat-card-title>

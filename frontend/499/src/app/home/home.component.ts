@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit {
   clearWidgetLists() {
     this.calendar_widgets = [0];
     this.weather_widgets = [];
+    this.forecast_widgets = [];
     this.stock_widgets = [];
   }
 
@@ -124,6 +125,7 @@ export class HomeComponent implements OnInit {
   removeForecast(forecast:any){
     for (let i = 0; i < this.forecast_widgets.length; i++){
       if(this.forecast_widgets[i].name==forecast){
+        this.removeWidgetAndDelete(this.forecast_widgets[i].widgetId, this.dashboard.dashboardId);
         this.forecast_widgets.splice(i,1);
       }
     }
@@ -171,7 +173,11 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
         let inputQuery = result;
-        this.createWidget(inputQuery, 'forecastWeather');
+        if(!this.widgetExistsCheck(inputQuery, this.forecast_widgets)){
+          this.createWidget(inputQuery, 'forecastWeather');
+        } else {
+          console.log("Widget: " + inputQuery + " already exists");
+        }
       }
     });
   }
@@ -238,7 +244,6 @@ export class HomeComponent implements OnInit {
     this.data.removeWidgetFromDashboard(localStorage.getItem("token")!, dashboardId, widgetId).subscribe(data => {
       //response here
       this.data.deleteWidgetFromBackend(localStorage.getItem("token")!, widgetId).subscribe(data => {
-
       })
     })
   }
