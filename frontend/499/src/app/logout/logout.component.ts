@@ -13,6 +13,7 @@ export class LogoutComponent implements OnInit {
   ngOnInit(): void {
     localStorage.clear();
     this.showLoginAndSignUpTabs();
+    this.hideLogoutTab();
     this.router.navigate(['/login']);
   }
 
@@ -24,6 +25,15 @@ export class LogoutComponent implements OnInit {
       }
     });
   }
+
+  hideLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "none";
+      }
+    });
+  }  
 
 }
 

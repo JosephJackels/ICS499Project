@@ -47,13 +47,4 @@ export class TabsComponent implements OnInit {
       duration: 5000,
     });
   }
-
-  showLoginAndSignUpTabs(){
-    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
-    tabElements.forEach(tab => {
-      if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
-        tab.style.display = "";
-      }
-    });
-  }
 }
