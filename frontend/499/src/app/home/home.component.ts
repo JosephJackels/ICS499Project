@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
           };
           this.populateWidgets();
           //uncommment this once logout works
-          //this.hideLoginAndSignUpTabs();
+          this.hideLoginAndSignUpTabs();
         },
         error => {
           console.log("Error - recieved response with code: " + error.status);
