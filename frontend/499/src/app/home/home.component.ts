@@ -43,14 +43,14 @@ export class HomeComponent implements OnInit {
           //create popup saying token expire/ user needs to login again?
         }); 
     } else {
+      this.hideLogoutTab();
       this.router.navigate(['/login']);
     }
   }
 
   populateWidgets(){
-
     this.clearWidgetLists();
-    
+    this.showLogoutTab();
     console.log("starting to populate lists");
     this.dashboard.widgetList.forEach(widget => {
       this.data.getWidgetPayload(localStorage.getItem("token")!, widget.widgetID).subscribe(data => {
@@ -257,23 +257,30 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  toggleButtonActionsVisibile(val: any){
-    let element = val.target.parentElement;
-    while(element.nodeName != "MAT-CARD"){
-      element=element.parentElement;
-    }
-    
-    //get the mat-card-actiona element that is within the parent card
-    element = (element.querySelector("mat-card-actions") as HTMLElement);
-    
-    //if there, toggle display
-    if(element != null){
-      let currentVis = element.style.display;
-      if(currentVis != "none"){
-        element.style.display = "none";
-      } else {
-        element.style.display = "block";
+  hideLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "none";
       }
-    }
+    });
+  }
+
+  showLoginAndSignUpTabs(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
+        tab.style.display = "flex";
+      }
+    });
+  }
+
+  showLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "flex";
+      }
+    });
   }
 }

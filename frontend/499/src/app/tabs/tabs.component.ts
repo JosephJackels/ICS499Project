@@ -11,21 +11,26 @@ export class TabsComponent implements OnInit {
 
   tabLinks:Array<Itablink> = [
   {
-          path: 'home',
-          label: 'Home'
+    path: 'home',
+    label: 'Home'
   }, 
   {
-          path: 'aboutus',
-          label: 'About Us'
-  },
-  {
-          path: 'login',
-          label: 'Log In'
+    path: 'aboutus',
+    label: 'About Us'
   },
   {
     path: 'new-user',
     label: 'Sign Up'
+  },
+  {
+    path: 'login',
+    label: 'Log In'
+  },
+  {
+    path: 'logout',
+    label: 'Log Out'
   }
+
 ]
 
   constructor(public snackBar: MatSnackBar) {}

@@ -70,7 +70,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userId', this.login.userId);
         this.router.navigate(['/home']);
         this.openSnackBar();
-        this.hideLoginAndSignUpTabs();
+       // this.hideLoginAndSignUpTabs();
+       // this.showLogoutTab();
       }
     });
   }
@@ -87,6 +88,15 @@ export class LoginComponent implements OnInit {
     tabElements.forEach(tab => {
       if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
         tab.style.display = "none";
+      }
+    });
+  }
+
+  showLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "flex";
       }
     });
   }
