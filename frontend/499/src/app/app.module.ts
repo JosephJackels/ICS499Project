@@ -22,18 +22,21 @@ import { FormsModule } from '@angular/forms';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './widgets/calendar/calendar.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
+import { ForecastComponent } from './widgets/forecast/forecast.component';
+import { StocksComponent } from './widgets/stocks/stocks.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
-import { StocksComponent } from './widgets/stocks/stocks.component';
 import { DataServiceService } from './service/data-service.service';
-import { ForecastComponent } from './widgets/forecast/forecast.component';
+import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/login-success-snackbar.component';
 import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-failed-dialog.component';
 import { CreateWeatherWidgetDialog } from './home/dialogs/create-weather-widget-dialog';
 import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widget-dialog';
-import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/login-success-snackbar.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,14 +45,15 @@ import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/lo
     AboutusComponent,
     NewUserComponent,
     LoginComponent,
+    LogoutComponent,
     CalendarComponent,
     WeatherComponent,
-    StocksComponent,
     ForecastComponent,
+    StocksComponent,
+    LoginSuccessSnackbarComponent,
     LoginFailedDialogComponent,
     CreateWeatherWidgetDialog,
     CreateForecastWidgetDialog,
-    LoginSuccessSnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,6 @@ import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/lo
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
-
   ],
   providers: [DataServiceService],
   bootstrap: [AppComponent]
