@@ -7,6 +7,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
   CalendarData: any;
+  months: string[]  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
   constructor() { }
   @Output() delete: EventEmitter<string> = new EventEmitter();
 
