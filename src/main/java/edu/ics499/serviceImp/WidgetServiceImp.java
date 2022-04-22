@@ -76,7 +76,6 @@ public class WidgetServiceImp implements WidgetService {
             }
             scanner.close();
         }
-        System.out.println(lines.length());
         return lines;
     }
 
@@ -85,13 +84,10 @@ public class WidgetServiceImp implements WidgetService {
         String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(widget.getType());
         String midUrl = WidgetTypes.mapWidgetTypeToMidUrl.get(widget.getType());
         String finalUrl = baseUrl + params + midUrl;
-        System.out.println(finalUrl);
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(finalUrl))
             .header("x-api-key", System.getenv(WidgetTypes.mapWidgetTypeToApiKeyName.get("stock")))
             .method("GET", HttpRequest.BodyPublishers.noBody()).build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(WidgetTypes.mapWidgetTypeToApiKeyName.get("stock"));
-        System.out.println(response.body());
         String lines = response.body();
         return lines;
     }
@@ -104,7 +100,6 @@ public class WidgetServiceImp implements WidgetService {
         if (apiKeyName != "") {
             finalUrl += System.getenv(apiKeyName);
         }
-        System.out.println(finalUrl);
         return new URL(finalUrl);
     }
 

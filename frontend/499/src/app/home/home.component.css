@@ -5,18 +5,18 @@
 
 .settings_button {
     transform: scale(.75);
-    background-color: #f2af29;
+    background-color: #618b4a;
     position: absolute;
     right: 5px;
     top: 5px;
 }
 
 mat-card-title {
-    color: #f44336;
+    color: #e0e0ce;
 }
 
 mat-card {
-    background-color: #f2af29;
+    background-color: #618b4a;
 }
 
 mat-card-actions {

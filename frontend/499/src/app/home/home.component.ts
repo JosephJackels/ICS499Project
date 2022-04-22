@@ -28,16 +28,20 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     console.log("nginit in home");
     if(localStorage.getItem("token") != null){
-      this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")!).subscribe(data => {
-        this.dashboard = {
-          dashboardId: (data as any).dashboardID,
-          widgetList: ((data as any).widgetList)
-        };
-        console.log(this.dashboard);
-        this.populateWidgets();
-        //UNCOMMENT THIS WHEN LOGOUT IS WORKING
-        this.hideLoginAndSignUpTabs();
-      });
+        this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")!).subscribe(data => {
+          this.dashboard = {
+            dashboardId: (data as any).dashboardId,
+            widgetList: (data as any).widgetList
+          };
+          this.populateWidgets();
+          //uncommment this once logout works
+          //this.hideLoginAndSignUpTabs();
+        },
+        error => {
+          console.log("Error - recieved response with code: " + error.status);
+          this.router.navigate(['/login']);
+          //create popup saying token expire/ user needs to login again?
+        }); 
     } else {
       this.hideLogoutTab();
       this.router.navigate(['/login']);
