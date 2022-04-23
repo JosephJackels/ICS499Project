@@ -41,7 +41,7 @@ public class WidgetTypes {
 	    "calendar", "0",
 	    "currentWeather", "0",
 		"forecastWeather", "0",
-		"stock", "0"));
+		"stock", "3600000"));//update once an hour?
 	//is apiKeyHeader
 	//calendar, false
 	//....

@@ -14,6 +14,9 @@ export class AboutusComponent implements OnInit {
   constructor(private data:DataServiceService) {}
 
   ngOnInit(): void {
+    if(localStorage.getItem("token") == null){
+      this.hideLogoutTab();
+    }
   }
 
   public getUser(){
@@ -33,6 +36,15 @@ export class AboutusComponent implements OnInit {
       username: (data as any).username,
       token: (data as any).type + ' ' + (data as any).token,
       userId: (data as any).userId
+    });
+  }
+
+  hideLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "none";
+      }
     });
   }
 }

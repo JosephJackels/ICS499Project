@@ -38,13 +38,18 @@ export class NewUserComponent implements OnInit {
         })
       ])
     });
+    
+    if(localStorage.getItem("token") == null){
+      this.hideLogoutTab();
+    }
+
     this.registerForm.statusChanges.subscribe(newStatus =>{
       if(newStatus == "VALID" && this.isPasswordMatch){
         this.registerForm.markAsPristine();
       } else {
         this.registerForm.markAsDirty();
       }
-    })
+    });
   }
 
   get form(): FormArray{
@@ -120,6 +125,15 @@ export class NewUserComponent implements OnInit {
     let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
     tabElements.forEach(tab => {
       if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
+        tab.style.display = "none";
+      }
+    });
+  }
+
+  hideLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
         tab.style.display = "none";
       }
     });
