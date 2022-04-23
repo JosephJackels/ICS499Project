@@ -81,7 +81,8 @@ public class WidgetServiceImp implements WidgetService {
 
     // this works
     public String connectToStockApi(Widget widget, String params) throws IOException, InterruptedException {
-        String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(widget.getType());
+        System.out.println("Stock API is being called for Widget: " + widget.getWidgetID());
+    	String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(widget.getType());
         String midUrl = WidgetTypes.mapWidgetTypeToMidUrl.get(widget.getType());
         String finalUrl = baseUrl + params + midUrl;
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(finalUrl))
@@ -111,8 +112,11 @@ public class WidgetServiceImp implements WidgetService {
             updatePayload(widgetId);
             widget = getWidgetById(widgetId);
             payload = widget.getPayload();
+            payload.setLastUpdatedTime(Long.toString(System.currentTimeMillis()));
             // reset payloadLoadLastUpdateTime
         }
+        payloadRepo.saveAndFlush(payload);
+        widgetRepo.saveAndFlush(widget);
         return payload;
     }
 
@@ -131,8 +135,8 @@ public class WidgetServiceImp implements WidgetService {
 
         Payload payload = new Payload();
 
-        payload.setLastUpdatedTime("0");// set to currenttime
-        payload.setUpdateFrequency("0");// set to whatever we want to update
+        payload.setLastUpdatedTime("0");// set to 0 so that it is automatically update the first time it is fetched
+        payload.setUpdateFrequency(WidgetTypes.mapWidgetTypeToUpdateFrequency.get(type));// set to whatever we want to update
 
         payloadRepo.save(payload);
 

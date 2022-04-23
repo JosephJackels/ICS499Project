@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
         })
       ])
     });
+    if(localStorage.getItem("token") == null){
+      this.hideLogoutTab();
+    }
   }
 
   get form(): FormArray{
@@ -79,5 +82,33 @@ export class LoginComponent implements OnInit {
       console.log(result);
       this.ngOnInit();
     })
+  }
+
+
+  hideLoginAndSignUpTabs(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/login" || tab.getAttribute("href") == "/new-user"){
+        tab.style.display = "none";
+      }
+    });
+  }
+
+  showLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "flex";
+      }
+    });
+  }
+
+  hideLogoutTab(){
+    let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;
+    tabElements.forEach(tab => {
+      if(tab.getAttribute("href") == "/logout"){
+        tab.style.display = "none";
+      }
+    });
   }
 }

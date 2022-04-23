@@ -42,7 +42,13 @@ export class LogoutComponent implements OnInit {
         tab.style.display = "none";
       }
     });
-  }  
+  } 
+
+  openSnackBar(){
+    this.snackBar.openFromComponent(LogoutSuccessSnackbarComponent, {
+      duration: 5000,
+    });
+  }
 
 }
 
