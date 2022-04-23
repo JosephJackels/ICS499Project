@@ -43,13 +43,6 @@ export class LogoutComponent implements OnInit {
       }
     });
   } 
-
-  openSnackBar(){
-    this.snackBar.openFromComponent(LogoutSuccessSnackbarComponent, {
-      duration: 5000,
-    });
-  }
-
 }
 
 
