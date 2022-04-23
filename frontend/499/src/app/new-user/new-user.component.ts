@@ -4,8 +4,8 @@ import { FormControl, FormGroup, FormBuilder, Validator, Validators, FormArray }
 import { Router } from '@angular/router';
 import { PasswordMatch } from './passwordMatch.validator';
 import { DataServiceService } from '../service/data-service.service';
-import { User } from '../service/user';
-import { Login } from '../service/login';
+import { User } from '../service/interfaces/user';
+import { Login } from '../service/interfaces/login';
 import {MatDialog} from '@angular/material/dialog'
 import { NewUserFailedDialog } from './new-user-failed-dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';

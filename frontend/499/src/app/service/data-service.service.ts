@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { User } from './user'
-import { Login } from './login'
-import { Widget } from './widget'
-import { Payload } from './payload'
-import { Dashboard } from './dashboard'
+import { User } from './interfaces/user'
+import { Login } from './interfaces/login'
+import { Widget } from './interfaces/widget'
+import { Payload } from './interfaces/payload'
+import { Dashboard } from './interfaces/dashboard'
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Dashboard } from '../service/dashboard';
+import { Dashboard } from '../service/interfaces/dashboard';
 import { DataServiceService } from '../service/data-service.service';
-import { Widget } from '../service/widget';
+import { Widget } from '../service/interfaces/widget';
 import { CreateWeatherWidgetDialog } from './dialogs/create-weather-widget-dialog';
 import { CreateForecastWidgetDialog } from './dialogs/create-forecast-widget-dialog';
 import { StockDisplay } from './displays/StockDisplay';
