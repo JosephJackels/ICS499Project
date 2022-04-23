@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { LogoutSuccessSnackbarComponent } from './logout-success-snackbar/logout-success-snackbar.component';
 
 @Component({
   selector: 'app-logout',
@@ -8,13 +10,20 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     localStorage.clear();
     this.showLoginAndSignUpTabs();
     this.hideLogoutTab();
+    this.openSnackBar();
     this.router.navigate(['/login']);
+  }
+
+  openSnackBar(){
+    this.snackBar.openFromComponent(LogoutSuccessSnackbarComponent, {
+      duration: 3000,
+    });
   }
 
   showLoginAndSignUpTabs(){
