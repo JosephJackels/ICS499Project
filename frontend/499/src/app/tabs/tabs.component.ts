@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Itablink } from '../itablink';
-import { LogoutSuccessSnackbarComponent } from './logout-success-snackbar/logout-success-snackbar.component';
+import { LogoutSuccessSnackbarComponent } from '../logout/logout-success-snackbar/logout-success-snackbar.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-tabs',

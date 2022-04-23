@@ -6,7 +6,7 @@ import { Login } from '../service/interfaces/login';
 import { User } from '../service/interfaces/user';
 import { LoginFailedDialogComponent } from './login-failed-dialog/login-failed-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { LoginSuccessSnackbarComponent } from './login-success-snackbar/login-success-snackbar.component';
 import {MatIconModule} from '@angular/material/icon'
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   openSnackBar(){
     this.snackBar.openFromComponent(LoginSuccessSnackbarComponent, {
-      duration: 5000,
+      duration: 3000,
     });
   }
 
@@ -73,8 +73,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userId', this.login.userId);
         this.router.navigate(['/home']);
         this.openSnackBar();
-       // this.hideLoginAndSignUpTabs();
-       // this.showLogoutTab();
       }
     });
   }
@@ -85,6 +83,7 @@ export class LoginComponent implements OnInit {
       this.ngOnInit();
     })
   }
+
 
   hideLoginAndSignUpTabs(){
     let tabElements = document.querySelectorAll("nav.mat-tab-nav-bar div.mat-tab-links>a") as NodeListOf<HTMLElement>;

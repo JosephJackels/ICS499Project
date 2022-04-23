@@ -36,7 +36,7 @@ import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-fa
 import { CreateWeatherWidgetDialog } from './home/dialogs/create-weather-widget-dialog';
 import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widget-dialog';
 
-import { LogoutSuccessSnackbarComponent } from './tabs/logout-success-snackbar/logout-success-snackbar.component';
+import { LogoutSuccessSnackbarComponent } from './logout/logout-success-snackbar/logout-success-snackbar.component';
 import { CreateStockWidgetDialog } from './home/dialogs/create-stock-widget-dialog';
 
 @NgModule({

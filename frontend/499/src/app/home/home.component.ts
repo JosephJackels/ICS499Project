@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
             widgetList: (data as any).widgetList
           };
           this.populateWidgets();
-          //uncommment this once logout works
           this.hideLoginAndSignUpTabs();
         },
         error => {
