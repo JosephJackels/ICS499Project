@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { HomeComponent } from 'src/app/home/home.component';
 import { DataServiceService } from 'src/app/service/data-service.service';
-import { Widget } from 'src/app/service/widget';
+import { Widget } from 'src/app/service/interfaces/widget';
 
 @Component({
   selector: 'app-forecast',

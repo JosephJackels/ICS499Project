@@ -26,7 +26,7 @@ public class WidgetTypes {
 
 	public static final Map<String, String> mapWidgetTypeToMidUrl = new HashMap<>(Map.of(
 	    "calendar", "",
-	    "currentWeather", "&appid=",
+	    "currentWeather", "&units=imperial&appid=",
 		"forecastWeather", "&units=imperial&appid=",
 		//the stock thing is technically the end
 		"stock", "%2CUSD%3DX"));

@@ -14,10 +14,11 @@
             <mat-card>
                 <mat-card-title>{{widget.name}}</mat-card-title>
                 <mat-card-subtitle>{{widget.country}}</mat-card-subtitle>
-                <div class="weatherWidgetRow" style="font-size:28px;margin:top 5px;">{{((widget.temp - 273) * (9/5) + 32).toFixed(2)}} °f</div>
-                <div class="weatherWidgetRow" style="font-size:15x;margin:top 10px;color: rgb(8, 8, 8);">Feels like: {{((widget.feels_like- 273) * (9/5) + 32).toFixed(2)}}°</div>
-                <div class="weatherWidgetRow" style="font-size:12px;color: rgb(8, 8, 8);">Low: {{((widget.temp_min - 273) * (9/5) + 32).toFixed(2)}}°</div>
-                <div class="weatherWidgetRow" style="font-size:12px;color: rgb(8, 8, 8);">High {{((widget.temp_max - 273) * (9/5) + 32).toFixed(2)}}°</div>
+                <div class="weatherWidgetRow" style="font-size:24px;margin-top: 5px;color: rgb(8, 8, 8);">{{widget.temp}} °F</div>
+                <div class="weatherWidgetRow" style= "margin-top: auto;">   </div>
+                <div class="weatherWidgetRow" style="font-size:12px;margin-top: 10px;color: rgb(8, 8, 64);">Low: {{widget.temp_min}} °F</div>
+                <div class="weatherWidgetRow" style="font-size:12px;color: rgb(64, 8, 8);">High {{widget.temp_max}} °F</div>
+                <div class="weatherWidgetRow" style="font-size:15x;margin-top: 10px;color: rgb(8, 8, 8);">Feels like: {{widget.feels_like}} °F</div>
                 <mat-card-actions style="display:none">
                     <button mat-mini-fab (click)="removeWeather(widget.widgetId)" class="delete_button">
                         <mat-icon>delete</mat-icon>
@@ -32,12 +33,12 @@
             <mat-card>
                 <mat-card-title>{{widget.name}}</mat-card-title>
                 <mat-card-subtitle>{{widget.country}}</mat-card-subtitle>
-                <div class="forecastWidgetRow" style="font-size:24x;margin:top 10px;color: rgb(8, 8, 8);">Tomorrow: {{((widget.temps[0]))}} °</div>
-                <div class="forecastWidgetRow" style="font-size:18x;color: rgb(8, 8, 8);">{{((widget.descrips[0]))}}</div>
-                <div class="forecastWidgetRow" style="font-size:15px;color: rgb(35, 90, 209);">  2nd Day: {{((widget.temps[1]))}} °</div>
-                <div class="forecastWidgetRow" style="font-size:12px;color: rgb(35, 90, 209);">{{((widget.descrips[1]))}}</div>
-                <div class="forecastWidgetRow" style="font-size:15px;color: rgb(218, 55, 55);">  3rd Day: {{((widget.temps[2]))}} °</div>
-                <div class="forecastWidgetRow" style="font-size:12px;color: rgb(218, 55, 55);">{{((widget.descrips[2]))}}</div>            
+                <div class="forecastWidgetRow" style="font-size:18px;color: rgb(8, 8, 8);">Tomorrow: {{widget.temps[0]}} °F</div>
+                <div class="forecastWidgetRow" style="font-size:15px;color: rgb(8, 8, 8);">{{widget.descrips[0]}}</div>
+                <div class="forecastWidgetRow" style="font-size:16px;margin-top: 4px;color: rgb(8, 8, 64);">{{widget.days[1]}}: {{widget.temps[1]}} °F</div>
+                <div class="forecastWidgetRow" style="font-size:12px;color: rgb(8, 8, 64);">{{widget.descrips[1]}}</div>
+                <div class="forecastWidgetRow" style="font-size:16px;margin-top: 4px;color: rgb(64, 8, 8);">{{widget.days[2]}}: {{widget.temps[2]}} °F</div>
+                <div class="forecastWidgetRow" style="font-size:12px;color: rgb(64, 8, 8);">{{widget.descrips[2]}}</div>            
                 <mat-card-actions style="display:none">
                     <button mat-mini-fab (click)="removeForecast(widget.name)" class="delete_button">
                         <mat-icon>delete</mat-icon>

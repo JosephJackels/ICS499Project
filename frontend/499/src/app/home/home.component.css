@@ -28,3 +28,8 @@ mat-card-actions {
     min-width: 200px;
     width: 20vw;
 }
+
+footer {
+    display: block;
+    padding: 80px;
+  }

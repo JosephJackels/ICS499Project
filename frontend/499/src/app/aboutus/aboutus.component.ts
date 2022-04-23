@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from '../service/data-service.service';
-import { Login } from 'src/app/service/login';
-import { User } from '../service/user';
+import { Login } from 'src/app/service/interfaces/login';
+import { User } from '../service/interfaces/user';
 @Component({
   selector: 'app-aboutus',
   templateUrl: './aboutus.component.html',

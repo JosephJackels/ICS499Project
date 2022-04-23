@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validator, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../service/data-service.service';
-import { Login } from '../service/login';
-import { User } from '../service/user';
+import { Login } from '../service/interfaces/login';
+import { User } from '../service/interfaces/user';
 import { LoginFailedDialogComponent } from './login-failed-dialog/login-failed-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar'
