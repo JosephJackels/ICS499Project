@@ -1,3 +1,4 @@
+//object for the home component to display forecast data
 export class ForecastDisplay {
     public name: string;
     public country: string;

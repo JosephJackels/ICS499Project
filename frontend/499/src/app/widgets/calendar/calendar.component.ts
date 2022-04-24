@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
   CalendarData: any;
+  //list of months
   months: string[]  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   constructor() { }
@@ -16,17 +17,18 @@ export class CalendarComponent implements OnInit {
     this.getCalendarData();
   }
 
+  //get calendar data from system
   getCalendarData(){
     let dateTime = new Date();
     this.CalendarData = dateTime;
   }
   
+  //delete calendar from screen
   removeSelf(){
     this.delete.emit(this.CalendarData);
   }
 
   toggleButtonActionsVisible(val: any){
-    
     //traverse upwards from button to get to parent mat-card element
     let element = val.target.parentElement;
     while(element.nodeName != "MAT-CARD"){

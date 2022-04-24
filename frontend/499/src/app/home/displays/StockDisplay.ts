@@ -1,3 +1,4 @@
+//object for the home component to display stock data
 export class StockDisplay{
     public name:string;
     public current_price:number;
@@ -8,7 +9,6 @@ export class StockDisplay{
     public widgetId: number;
 
     public constructor(data: any, widgetId: number){
-        //this might not work immediately and may require some tweaking in regards to accessing the data that 'stock' is
         let stock = JSON.parse(data);
         this.name = stock.quoteResponse.result[0].symbol;
         this.current_price = stock.quoteResponse.result[0].regularMarketPrice;
