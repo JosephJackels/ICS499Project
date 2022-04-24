@@ -19,6 +19,7 @@ import { CreateStockWidgetDialog } from './dialogs/create-stock-widget-dialog';
 export class HomeComponent implements OnInit {
   navTitle:string = 'Weather Dashboard';
   dashboard!: Dashboard;
+  //lists to hold widget display objects 
   calendar_widgets: any[] = [0];
   weather_widgets: WeatherDisplay[] = [];
   forecast_widgets: ForecastDisplay[] = [];
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //call methods to contact backend and get data
   populateWidgets(){
     this.clearWidgetLists();
     this.showLogoutTab();

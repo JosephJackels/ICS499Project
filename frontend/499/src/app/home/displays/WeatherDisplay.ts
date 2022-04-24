@@ -1,3 +1,4 @@
+//object for the home component to display weather data
 export class WeatherDisplay {
     public name: string;
     public temp: number;
