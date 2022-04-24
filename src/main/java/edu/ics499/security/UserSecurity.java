@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import edu.ics499.serviceImp.DashboardServiceImp;
 import edu.ics499.serviceImp.UserServiceImp;
 import edu.ics499.serviceImp.WidgetServiceImp;
-
+/**
+ * Class used for configuring access to different endpoints by verifying that the token passed and data being accessed belong to the same user
+ */
 @Component("userSecurity")
 public class UserSecurity {
 	@Autowired

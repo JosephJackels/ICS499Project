@@ -16,7 +16,11 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-
+/**
+ * Auhtorization Filter handles verifying tokens
+ * @author joe
+ *
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
 	public JWTAuthorizationFilter(AuthenticationManager authManager) {

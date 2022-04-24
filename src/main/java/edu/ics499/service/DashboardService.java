@@ -4,7 +4,10 @@ import java.util.*;
 
 import edu.ics499.model.*;
 import edu.ics499.model.widgets.*;
-
+/**
+ * Service class for Dashboard manipulation
+ *
+ */
 public interface DashboardService {
 	Dashboard getDashboardById(Long dashboardId);
 	List<Dashboard> getAll();

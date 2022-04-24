@@ -1,5 +1,8 @@
 package edu.ics499.security;
-
+/**
+ * Response given when logging in to provide user with token, refresh token, username, and userId
+ *
+ */
 public class JWTResponse {
 	private String token;
 	private String type = "Bearer";

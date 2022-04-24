@@ -17,7 +17,12 @@ import javax.persistence.Table;
 
 import edu.ics499.model.widgets.Widget;
 
-//abstract?
+/**
+ * Payload Entity
+ * Sub entity of Widget Entity
+ * Holds a response from the api used for its widget, and tracks when it was last updated and how often it should be updated 
+ */
+
 @Entity
 @Table(name="payloads")
 @Inheritance(strategy = InheritanceType.JOINED)

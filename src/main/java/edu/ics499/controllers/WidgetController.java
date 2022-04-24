@@ -15,7 +15,19 @@ import edu.ics499.model.payloads.Payload;
 import edu.ics499.model.widgets.Widget;
 import edu.ics499.model.widgets.WidgetTypes;
 import edu.ics499.serviceImp.WidgetServiceImp;
-
+/**
+ * User Controller
+ * 
+ * Controller that creates endpoints for operations to be performed involving user including:
+ * 
+ * /widgets/get/all - GET, returns all widgets
+ * /widgets/get/{id} - GET, returns single widget by id
+ * /widgets/get/{id}/payload - GET, returns single widget's payload object by widgetId
+ * /widgets/add/{widgetType}?query={query} - POST, creates a new widget of widgetType and set's it's query field
+ * /widgets/update/{id}?query={query} - POST, update a widget's query to a new vaue
+ * /widgets/delete/{id} - POST, delete a widget by id
+ * 
+ */
 @RestController
 @RequestMapping("/widgets")
 public class WidgetController {

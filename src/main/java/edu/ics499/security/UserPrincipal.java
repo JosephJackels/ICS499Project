@@ -8,7 +8,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import edu.ics499.model.User;
-
+/**
+ * Class to be used to handle login information/token based authorization 
+ *
+ */
 public class UserPrincipal implements UserDetails {
 	
 	private final User user;

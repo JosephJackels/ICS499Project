@@ -10,6 +10,17 @@ import java.util.*;
  * 		YOU MUST CREATE ENVIRONMENT VARIABLE FOR ANY KEY IN FILE WidgetServicesImp.java with corresponding name and value.
  * 			To do so: right click on WidgetServiceImp.java => hover over RunAs, click Run Configurations. scroll over to ENvironment tab and create key.
  */
+
+/**
+ * 
+ * WidgetTypes contains lists of static information that is shared by all widgets of the same type
+ * 
+ * types - current types of widgets - also keys used for the other lists/maps
+ * mapWidgetTypeToUrl - maps the widgetType to the base URL of that widget's api
+ * mapWidgetTypeToMidUrl - maps widgetType to and common url text that comes after the query parameters, e.x. apiKey prefix
+ * mapWIdgetTypeToApiKeyName - maps widgetType to the name of the environment variable containing that widget's api key
+ * mapWidgetTypeTOUpdateFrequency - maps widgetType to how often it should be updated. Used when creating a widget.
+ */
 public class WidgetTypes {
 
 	public static final List<String> types = new ArrayList<>(List.of(
@@ -41,13 +52,5 @@ public class WidgetTypes {
 	    "calendar", "0",
 	    "currentWeather", "0",
 		"forecastWeather", "0",
-		"stock", "3600000"));//update once an hour?
-	//is apiKeyHeader
-	//calendar, false
-	//....
-	//stock, true
-	
-	//apiKeyHeaderName
-	//calendar, ""
-	//stock, api-x-
+		"stock", "3600000"));//update once an hour
 }

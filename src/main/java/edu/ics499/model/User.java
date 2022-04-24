@@ -11,8 +11,12 @@ import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
+/**
+ * User Entity
+ * - holds user information - username & hashed password
+ * - contains a dashboard of user's widgets
+ */
 
-//extend user principle/detail?
 @Entity
 @Table(name="users")
 public class User {
@@ -25,14 +29,8 @@ public class User {
 	@NonNull
 	private String username;
 	
-	//should this be different in order to be secure?
-	//like a hashed/salted password is stored not the real password?
-	//we can just use a String for now and figure that out when we get to that point
-	@NonNull
 	private String password;
 	
-	//not sure what the cascade thing is but he has it in his?
-	//something to lookup I guess
 	@OneToOne(cascade = CascadeType.ALL)
 	private Dashboard dashboard;
 	

@@ -5,7 +5,10 @@ import java.util.List;
 
 import edu.ics499.model.payloads.Payload;
 import edu.ics499.model.widgets.Widget;
-
+/**
+ * Service class for Widget manipulation
+ *
+ */
 public interface WidgetService {
 	List<Widget> getAll();
 	Widget getWidgetById(Long widgetId);

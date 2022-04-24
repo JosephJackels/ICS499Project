@@ -13,6 +13,15 @@ import javax.persistence.Table;
 import edu.ics499.model.Dashboard;
 import edu.ics499.model.payloads.Payload;
 
+/**
+ * 
+ * Widget Entity
+ * Has a type used to get relevent information for creation and use that is not stored in the DB - api url, environement variable name, etc. See WidgetTypes for more info
+ * Belongs to a dashboard, holds a payload object
+ * Stores the queryParameters that make this Widget unique among others of its type and are sent to the api when updating its payload
+ *
+ */
+
 @Entity
 @Table(name="widgets")
 @Inheritance(strategy = InheritanceType.JOINED)

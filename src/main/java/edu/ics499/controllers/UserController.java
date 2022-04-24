@@ -14,7 +14,17 @@ import edu.ics499.serviceImp.DashboardServiceImp;
 import edu.ics499.serviceImp.UserServiceImp;
 import edu.ics499.model.Dashboard;
 import edu.ics499.model.User;
-
+/**
+ * User Controller
+ * 
+ * Controller that creates endpoints for operations to be performed involving user including:
+ * 
+ * /users/all - GET, returns all users
+ * /users/one/{id} - GET, returns single user by id
+ * /users/one/{id}/dashboard - GET, returns single user's dashboard object by userId
+ * /users/add - POST, creates a new user via information sent in the body of the request
+ *
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {

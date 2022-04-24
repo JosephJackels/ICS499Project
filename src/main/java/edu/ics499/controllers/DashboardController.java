@@ -9,7 +9,18 @@ import edu.ics499.model.*;
 import edu.ics499.model.widgets.*;
 import edu.ics499.repositories.*;
 import edu.ics499.serviceImp.*;
-
+/**
+ * Dashboard Controller
+ * 
+ * Controller that creates endpoints for operations to be performed involving dashboard including:
+ * 
+ * /dashboards/all - GET, returns all dashboard
+ * /dashboards/one/{id} - GET, returns single dashboard by dashboardId
+ * /dashboards/remove/{id}?widgetId={widgetId} - POST, removes widget (by id) from dashboard
+ * /dashboards/add/{id}?widgetId={widgetId} - POST, adds a widget (by id) to a dasboard
+ * /dashboards/create/ - POST, creates a dashboard via informaiton sent in the body of the request
+ *
+ */
 @RestController
 @RequestMapping("/dashboards")
 public class DashboardController {
@@ -43,7 +54,7 @@ public class DashboardController {
 	    return dashboardService.addWidgetToDashboard(dashboardId, widgetId);
 	}
 
-	//post request to localhost:port/dashboards/add with a Dashboard object
+	//post request to localhost:port/dashboards/create with a Dashboard object
 	//in the request body
 	@PostMapping("/create")
 	public Dashboard create(@RequestBody final Dashboard dashboard) {

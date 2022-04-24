@@ -13,7 +13,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import edu.ics499.serviceImp.UserServiceImp;
-
+/**
+ * Handles access to various endpoints based on rules in UserSecurity.java, otherwize allowing only authenticated users
+ * @author joe
+ *
+ */
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 	

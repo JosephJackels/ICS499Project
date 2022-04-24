@@ -22,7 +22,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ics499.model.User;
 //import edu.ics499.security2.SecurityConstraints;
 import edu.ics499.serviceImp.UserServiceImp;
-
+/**
+ * Authentication Filter handles authenticating login requests and generating JWT tokens
+ *
+ */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
 	private AuthenticationManager authenticationManager;
