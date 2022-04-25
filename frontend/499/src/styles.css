@@ -52,3 +52,23 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
+.matcardstyle {
+  width: 40%;
+  height: 30%;
+  margin-top: 20vh;
+}
+input[type=text], input[type=password] {
+  width: 60%;
+  padding: 8px 20px;
+  margin: 14px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+}
+label {
+  justify-content: start;
+}
+
