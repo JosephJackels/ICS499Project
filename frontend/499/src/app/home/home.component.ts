@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     if(localStorage.getItem("token") != null){
         this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")!).subscribe(data => {
           this.dashboard = {
-            dashboardId: (data as any).dashboardId,
+            dashboardId: (data as any).dashboardID,
             widgetList: (data as any).widgetList
           };
           this.populateWidgets();
@@ -115,6 +115,7 @@ export class HomeComponent implements OnInit {
 
   //removes weather widget with the id passed into it
   removeWeather(weather:any){
+    console.log(weather)
     for (let i = 0; i < this.weather_widgets.length; i++){
       if(this.weather_widgets[i].widgetId==weather){
         this.removeWidgetAndDelete(this.weather_widgets[i].widgetId, this.dashboard.dashboardId);
@@ -133,6 +134,8 @@ export class HomeComponent implements OnInit {
   removeForecast(forecast:any){
     for (let i = 0; i < this.forecast_widgets.length; i++){
       if(this.forecast_widgets[i].name==forecast){
+        console.log(this.dashboard.dashboardId);
+        console.log(this.forecast_widgets[i].widgetId);
         this.removeWidgetAndDelete(this.forecast_widgets[i].widgetId, this.dashboard.dashboardId);
         this.forecast_widgets.splice(i,1);
       }
@@ -146,8 +149,15 @@ export class HomeComponent implements OnInit {
   }
 
   //removes stock widget with the id passed into it
-  removeStocks(StockData:any){
-    this.stock_widgets.pop();
+  removeStocks(stockName:any){
+    for (let i = 0; i < this.stock_widgets.length; i++){
+      if(this.stock_widgets[i].name==stockName){
+        console.log(this.dashboard.dashboardId);
+        console.log(this.stock_widgets[i].widgetId);
+        this.removeWidgetAndDelete(this.stock_widgets[i].widgetId, this.dashboard.dashboardId);
+        this.stock_widgets.splice(i,1);
+      }
+    }
   }
 
   createNewWeatherWidget(){
@@ -275,8 +285,8 @@ export class HomeComponent implements OnInit {
     this.data.removeWidgetFromDashboard(localStorage.getItem("token")!, dashboardId, widgetId).subscribe(data => {
       //response here
       this.data.deleteWidgetFromBackend(localStorage.getItem("token")!, widgetId).subscribe(data => {
-      })
-    })
+      });
+    });
   }
 
   hideLoginAndSignUpTabs(){
