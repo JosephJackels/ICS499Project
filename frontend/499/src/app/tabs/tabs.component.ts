@@ -15,10 +15,6 @@ export class TabsComponent implements OnInit {
     label: 'Home'
   }, 
   {
-    path: 'aboutus',
-    label: 'About Us'
-  },
-  {
     path: 'new-user',
     label: 'Sign Up'
   },

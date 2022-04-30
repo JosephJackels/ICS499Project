@@ -19,15 +19,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
-import { AboutusComponent } from './aboutus/aboutus.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './widgets/calendar/calendar.component';
-import { WeatherComponent } from './widgets/weather/weather.component';
-import { ForecastComponent } from './widgets/forecast/forecast.component';
-import { StocksComponent } from './widgets/stocks/stocks.component';
+//import { WeatherComponent } from './widgets/weather/weather.component';
+//import { ForecastComponent } from './widgets/forecast/forecast.component';
+//import { StocksComponent } from './widgets/stocks/stocks.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { DataServiceService } from './service/data-service.service';
@@ -35,7 +34,6 @@ import { LoginSuccessSnackbarComponent } from './login/login-success-snackbar/lo
 import { LoginFailedDialogComponent } from './login/login-failed-dialog/login-failed-dialog.component';
 import { CreateWeatherWidgetDialog } from './home/dialogs/create-weather-widget-dialog';
 import { CreateForecastWidgetDialog } from './home/dialogs/create-forecast-widget-dialog';
-
 import { LogoutSuccessSnackbarComponent } from './logout/logout-success-snackbar/logout-success-snackbar.component';
 import { CreateStockWidgetDialog } from './home/dialogs/create-stock-widget-dialog';
 
@@ -44,20 +42,18 @@ import { CreateStockWidgetDialog } from './home/dialogs/create-stock-widget-dial
     AppComponent,
     HomeComponent,
     TabsComponent,
-    AboutusComponent,
     NewUserComponent,
     LoginComponent,
     LogoutComponent,
     CalendarComponent,
-    WeatherComponent,
-    ForecastComponent,
-    StocksComponent,
+//    WeatherComponent,
+//    ForecastComponent,
+//    StocksComponent,
     LoginSuccessSnackbarComponent,
     LoginFailedDialogComponent,
     CreateWeatherWidgetDialog,
     CreateForecastWidgetDialog,
     CreateStockWidgetDialog,
-    LoginSuccessSnackbarComponent,
     LogoutSuccessSnackbarComponent
     
   ],

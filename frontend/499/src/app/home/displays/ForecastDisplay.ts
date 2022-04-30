@@ -21,9 +21,7 @@ export class ForecastDisplay {
         this.timezone = data.city.timezone;
         console.log(this.timezone);
         for (let i = 0; i < 3; i++) {
-            console.log(data.list[i*8].dt);
-            this.days[i] = this.calendar[(Math.floor((data.list[i*8].dt)/86400) + 5) % 7];
-            console.log(this.calendar[i]);
+            this.days[i] = this.calendar[(Math.floor((data.list[i*8].dt-21600)/86400) + 5) % 7];
             this.temps[i] = data.list[i].main.temp;
             this.descrips[i] = data.list[i].weather[0].description; 
         }

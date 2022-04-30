@@ -4,6 +4,8 @@
         <button mat-button  (click)="createNewWeatherWidget()">+ Weather</button>
         <button mat-button  (click)="createNewForecastWidget()">+ Forecast</button>
         <button mat-button  (click)="createNewStockWidget()">+ Stocks</button>
+        <button mat-button  (click)="createNewComicWidget()">+ Comic</button>
+
     </div>
     <div fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center" class="content">
         <app-calendar class="widgetContainer" fxFlex="15%" *ngFor="let i of calendar_widgets" (delete)="removeWidget($event)"></app-calendar>
@@ -67,9 +69,25 @@
                 </button>
             </mat-card>
         </div>
+        <div fxFlex="40%" *ngFor="let widget of comic_widget" class="widgetContainer"> 
+            <mat-card>
+                <mat-card-title>{{widget.title}}</mat-card-title>
+                <img mat-card-image [src] = widget.image>
+                <mat-card-subtitle>{{widget.text}}</mat-card-subtitle>     
+                <mat-card-actions style="display:none">
+                    <button mat-mini-fab (click)="removeComic(widget.title)" class="delete_button">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+                <button mat-mini-fab (click)="toggleButtonActionsVisible($event)" class="settings_button">
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </mat-card>
+        </div>
     </div>
+
     <footer>
-        <p fxLayoutAlign="center">Created by Gilbert, Joe, Alex and Leo. Data courtesy of Open Weather API and Yahoo Finance.</p>
+        <p fxLayoutAlign="center">Created by Gilbert, Joe, Alex and Leo. Data courtesy of Open Weather API, Yahoo Finance, and xkcd.com.</p>
         <a href="https://github.com/JosephJackels/ICS499Project" target="_blank" rel="noreferrer noopener" fxLayoutAlign="center">Check us out on Github</a>
     </footer>
 </html>
