@@ -12,7 +12,10 @@ We used Spring and Angular to build a web application that can display data from
 - install mysql
 - create database with name and account 
 - install angular
-- run backend and frontend projects simultaneously
+- run backend as a Spring Boot Project
+- run frontend through npm
+- run both projects simultaneously
+- '''console npm serve '''
 - api keys with environment variables matching the code are required
 
 ## API's we used:
