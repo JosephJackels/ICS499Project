@@ -1,34 +1,14 @@
-We are looking to build a progressive web application with widgets displaying several data sources and features.
+#Widget App
+We used Spring and Angular to build a web application that can display data from several sources in widget form.
 
-MUST HAVES:
+##To run:
+    -install spring boot
+    -install mysql
+    -create database with name and account 
+    -install angular
+    -run backend and frontend projects simultaneously
 
-Originate from a Secure Origin. 
-    Served over TLS and green padlock displays (no active mixed content).
-
-Load while offline (even if only a custom offline page).
-    By implication, this requires use of Service Workers and Fetch Handlers.
-
-Reference a Web App Manifest with at least the following properties:
-    name
-    short_name
-    start_url
-    display (with a value of stand-alone or full-screen)
-    an icon at least 144x144 large in png format
-
-NICE TO HAVE:
-
-Other uses:
-    Base functionality for our project will revolve around weather data. 
-    However, if possible we would like to expand this functionality to incorporate other data sources as well.
-    This could include sports data, stock data or anything else we can think of. 
-
-Message boards.
-    Users can make posts and comments.
-
-Chat rooms. 
-    Users can utilize text based chat rooms.
-
-Possible API's to use:
-
-    Weather: OpenWeatherMap - https://openweathermap.org/
-
+##API's we used:
+    -Weather: OpenWeatherMap - https://openweathermap.org/
+    -Stocks: Yahoo finance - https://www.yahoofinanceapi.com/
+    
