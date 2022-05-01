@@ -19,11 +19,17 @@ We used Spring and Angular to build a web application that can display data from
 - new widget types can be build in easily  
 - each widget has its own template
 - widgets can be removed by clicking the gear icon followed by the trash icon
+- calendar uses system data
 
 ## To run:
 - install spring boot
 - install mysql
 - create database MySQL db on port 3306 with username: testUser and password: password and account 
+```
+mysql> CREATE DATABASE dashboard_app_db;
+mysql> USE dashboard_app_db;
+mysql> -h localhost -u testuUser -ppassword
+```
 - install angular
 ```
 npm install -g @angular/cli
@@ -35,7 +41,7 @@ npm install -g @angular/cli
 ng serve --open
 ``` 
 - run both projects simultaneously
-- api keys with environment variables matching the code are **required**
+- **api keys with environment variables matching the code are required**
 
 ### Take a look:
 ![Demo!](/frontend/499/src/assets/img/demo.png "demo")
