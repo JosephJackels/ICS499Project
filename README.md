@@ -14,12 +14,11 @@ We used Spring and Angular to build a web application that can display data from
 - install angular
 - run backend as a Spring Boot Project
 - run frontend through npm
-- run both projects simultaneously
-- api keys with environment variables matching the code are required
-
 ```properties
 npm serve
-```  
+``` 
+- run both projects simultaneously
+- api keys with environment variables matching the code are required
 
 ## API's we used:
 - [Open Weather](https://openweathermap.org/)
