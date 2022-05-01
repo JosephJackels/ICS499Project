@@ -14,6 +14,6 @@ We used Spring and Angular to build a web application that can display data from
     - api keys with environment variables matching the code are required
 
 ## API's we used:
-    - Weather[link](https://openweathermap.org/): OpenWeatherMap - https://openweathermap.org/
-    - [Yahoo Finance](https://www.yahoofinanceapi.com/): Yahoo finance - https://www.yahoofinanceapi.com/
+    - [Open Weather] (https://openweathermap.org/)
+    - [Yahoo Finance] (https://www.yahoofinanceapi.com/) 
     
