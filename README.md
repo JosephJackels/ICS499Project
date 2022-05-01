@@ -6,6 +6,7 @@ We used Spring and Angular to build a web application that can display data from
 - once logged in users will be redirected to their dashboard
 - widgets will populate dashboard
 - widgets can be weather, calendar, stock or comic type
+- *duplicate widgets are not allowed*
 - widgets have a payload that stores data
 - backend fetches data from api's and stores in payload
 - backend can manage how often widgets are refreshed to prevent excess api calls
