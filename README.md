@@ -15,7 +15,7 @@ We used Spring and Angular to build a web application that can display data from
 - run backend as a Spring Boot Project
 - run frontend through npm
 - run both projects simultaneously
-- '''console npm serve '''
+'''console npm serve '''
 - api keys with environment variables matching the code are required
 
 ## API's we used:
