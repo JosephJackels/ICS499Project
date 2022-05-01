@@ -127,21 +127,30 @@ public class WidgetServiceImp implements WidgetService {
         return widgetRepo.saveAndFlush(widget);
     }
 
+    
     @Override
     public Widget createWidget(String type, String query) {
         Widget widget = new Widget();
         widget.setQueryParameters(query);
         widget.setType(type);
-
         Payload payload = new Payload();
-
         payload.setLastUpdatedTime("0");// set to 0 so that it is automatically update the first time it is fetched
         payload.setUpdateFrequency(WidgetTypes.mapWidgetTypeToUpdateFrequency.get(type));// set to whatever we want to update
 
+        // checks if equivalent payload exists.
+        List<Widget> list = getAll();
+        Iterator<Widget> it = list.iterator();
+        while(it.hasNext()) {
+            Widget next = it.next();
+            String nextType = next.getType();
+            String nextQuery = next.getQueryParameters();
+            if (nextType.equals(type) && nextQuery.equals(query)) {
+                payload = next.getPayload();
+                break;
+            }
+        }
         payloadRepo.save(payload);
-
         widget.setPayload(payload);
-
         return widgetRepo.saveAndFlush(widget);
     }
     
