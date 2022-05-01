@@ -15,5 +15,5 @@ We used Spring and Angular to build a web application that can display data from
 
 ## API's we used:
     - Weather[link](https://openweathermap.org/): OpenWeatherMap - https://openweathermap.org/
-    - Stocks[link](https://www.yahoofinanceapi.com/): Yahoo finance - https://www.yahoofinanceapi.com/
+    - [Yahoo Finance](https://www.yahoofinanceapi.com/): Yahoo finance - https://www.yahoofinanceapi.com/
     
