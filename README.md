@@ -20,6 +20,9 @@ npm serve
 - run both projects simultaneously
 - api keys with environment variables matching the code are required
 
+
+![Demo!](/assets/images/demo.png "demo")
+
 ## API's we used:
 - [Open Weather](https://openweathermap.org/)
 - [Yahoo Finance](https://www.yahoofinanceapi.com/) 
