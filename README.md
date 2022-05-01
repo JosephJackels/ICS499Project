@@ -14,8 +14,9 @@ We used Spring and Angular to build a web application that can display data from
 ## To run:
 - install spring boot
 - install mysql
-- create database with name and account 
+- create database MySQL db on port 3306 with username: testUser and password: password and account 
 - install angular
+- may require installation of additional angular modules
 - run backend as a Spring Boot Project
 - run frontend through npm
 ```
