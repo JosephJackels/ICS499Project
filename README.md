@@ -2,7 +2,8 @@
 We used Spring and Angular to build a web application that can display data from several sources in widgets.
 
 ## Features:
-- users can create accounts to manage their dashboards
+- users will be prompted to create an account
+- once logged in users will be redirected to their dashboard
 - widgets will populate dashboard
 - widgets can be weather, calendar, stock or comic type
 - widgets have a payload that stores data
@@ -12,6 +13,8 @@ We used Spring and Angular to build a web application that can display data from
 - frontend renders widgets visually
 - frontend manages tokens and passes instructions to backend
 - new widget types can be build in easily  
+- each widget has its own template
+- widgets can be removed by clicking the gear icon followed by the trash icon
 
 ## To run:
 - install spring boot
