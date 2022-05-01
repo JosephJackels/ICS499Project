@@ -21,7 +21,7 @@ npm serve
 - api keys with environment variables matching the code are required
 
 
-![Demo!](ICS499Project/frontend/499/src/assets/img/demo.png "demo")
+![Demo!](/frontend/499/src/assets/img/demo.png "demo")
 
 ## API's we used:
 - [Open Weather](https://openweathermap.org/)
