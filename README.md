@@ -1,5 +1,5 @@
 # Widget App
-We used Spring and Angular to build a web application that can display data from several sources in widgets.
+We used the Spring and Angular frameworks to build a web application that can display data from multiples sources in widgets.
 
 ## Features:
 - users will be prompted to create an account
@@ -18,7 +18,7 @@ We used Spring and Angular to build a web application that can display data from
 - frontend manages tokens and passes instructions to backend
 - new widget types can be build in easily  
 - each widget has its own template
-- widgets can be removed by clicking the gear icon followed by the trash icon
+- widgets can be removed permanently by clicking the gear icon followed by the trash icon
 - calendar uses system data
 
 ## To run:
@@ -28,7 +28,7 @@ We used Spring and Angular to build a web application that can display data from
 ```
 mysql> CREATE DATABASE dashboard_app_db;
 mysql> USE dashboard_app_db;
-mysql> -h localhost -u testuUser -ppassword
+mysql> --host=localhost --port=3306 --user=testUser --password=password; 
 ```
 - install angular
 ```
