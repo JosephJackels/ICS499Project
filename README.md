@@ -20,7 +20,7 @@ npm serve
 - run both projects simultaneously
 - api keys with environment variables matching the code are required
 
-
+### Take a look:
 ![Demo!](/frontend/499/src/assets/img/demo.png "demo")
 
 ## API's we used:
