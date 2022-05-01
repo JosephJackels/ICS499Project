@@ -10,6 +10,7 @@ import { StockDisplay } from './displays/StockDisplay';
 import { WeatherDisplay } from './displays/WeatherDisplay';
 import { ForecastDisplay} from './displays/ForecastDisplay';
 import { CreateStockWidgetDialog } from './dialogs/create-stock-widget-dialog';
+import { ComicDisplay } from './displays/ComicDisplay';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
   weather_widgets: WeatherDisplay[] = [];
   forecast_widgets: ForecastDisplay[] = [];
   stock_widgets: StockDisplay[] = [];
+  comic_widget: ComicDisplay[] = [];
 
   constructor(private router: Router, private data:DataServiceService, public dialog: MatDialog) { }
 
@@ -68,12 +70,15 @@ export class HomeComponent implements OnInit {
             break;
           }
           case "forecastWeather": {
-            console.log(widget.payload.jsonResponse);
             this.addForecast(widget.payload.jsonResponse, widget.widgetID);
             break;
           }
           case "stock": {
             this.addStocks(widget.payload.jsonResponse, widget.widgetID);
+            break;
+          }
+          case "comic": {
+            this.addComic(widget.payload.jsonResponse, widget.widgetID);
             break;
           }
           default: { 
@@ -90,6 +95,7 @@ export class HomeComponent implements OnInit {
     this.weather_widgets = [];
     this.forecast_widgets = [];
     this.stock_widgets = [];
+    this.comic_widget = [];
   }
 
   //adds calendar widget, it will only let you add one
@@ -125,13 +131,13 @@ export class HomeComponent implements OnInit {
   }
 
   //adds forecast widget with the desired data and id
-  addForecast(widget: string, widgetId: any) {
+  addForecast(widget: string, widgetId: number) {
     let obj = new ForecastDisplay(widget, widgetId);
     this.forecast_widgets.push(obj);
   }
 
   //removes forecast widget with the id passed into it
-  removeForecast(forecast:any){
+  removeForecast(forecast: any){
     for (let i = 0; i < this.forecast_widgets.length; i++){
       if(this.forecast_widgets[i].name==forecast){
         console.log(this.dashboard.dashboardId);
@@ -158,6 +164,22 @@ export class HomeComponent implements OnInit {
         this.stock_widgets.splice(i,1);
       }
     }
+  }
+
+  //adds comic widget if one does not exist
+   addComic(widget: string, widgetId: number) {
+    if (this.comic_widget.length == 0){
+      let obj = new ComicDisplay(widget, widgetId);
+      this.comic_widget.push(obj);
+    }
+  }
+
+  //removes comic widget if one exists
+  removeComic(comic: any){
+    if (this.comic_widget.length == 1){
+      this.removeWidgetAndDelete(this.comic_widget[0].widgetId, this.dashboard.dashboardId);
+      this.comic_widget = [];
+    }  
   }
 
   createNewWeatherWidget(){
@@ -226,6 +248,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  createNewComicWidget(){
+    this.createWidget('', 'comic');
+  }
+
   //creates a generic widget
   createWidget(query: string, type: string){
     this.data.createWidget(localStorage.getItem("token")!, query, type).subscribe(data => {
@@ -239,6 +265,8 @@ export class HomeComponent implements OnInit {
       this.addWidgetToDashboard(widgetResponse.widgetID);
     });
   }
+
+
 
   //after the widget is created, add it to the dashboard
   addWidgetToDashboard(widgetId: any){
