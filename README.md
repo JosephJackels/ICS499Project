@@ -1,5 +1,5 @@
 # Widget App
-We used Spring and Angular to build a web application that can display data from several sources in widget form.
+We used Spring and Angular to build a web application that can display data from several sources in widgets.
 
 ## Features:
 - users can create accounts to manage their dashboards
@@ -14,11 +14,11 @@ We used Spring and Angular to build a web application that can display data from
 - install angular
 - run backend as a Spring Boot Project
 - run frontend through npm
-```properties
+```
 npm serve
 ``` 
 - run both projects simultaneously
-- api keys with environment variables matching the code are required
+- api keys with environment variables matching the code are **required**
 
 ### Take a look:
 ![Demo!](/frontend/499/src/assets/img/demo.png "demo")
