@@ -27,8 +27,8 @@ We used the Spring and Angular frameworks to build a web application that can di
 - create database MySQL db on port 3306 with username: testUser and password: password and account 
 ```
 mysql> CREATE DATABASE dashboard_app_db;
-mysql> USE dashboard_app_db;
-mysql> --host=localhost --port=3306 --user=testUser --password=password; 
+mysql> CREATE USER 'testUser'@'%' identified by 'password'; -- Creates the user
+mysql> grant all on dashboard_app_db.* to 'testUser'@'%';
 ```
 - install angular
 ```
@@ -41,7 +41,7 @@ npm install -g @angular/cli
 ng serve --open
 ``` 
 - run both projects simultaneously
-- **api keys with environment variables matching the code are required**
+- ***api keys with environment variables matching the code are required for the backend to get data***
 
 ### Take a look:
 ![Demo!](/frontend/499/src/assets/img/demo.png "demo")
