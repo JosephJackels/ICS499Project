@@ -17,3 +17,8 @@ We used Spring and Angular to build a web application that can display data from
 - [Open Weather](https://openweathermap.org/)
 - [Yahoo Finance](https://www.yahoofinanceapi.com/) 
     
+## Authors:
+- Gilbert
+- Joe
+- Alex
+- Leo
