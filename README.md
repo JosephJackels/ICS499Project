@@ -17,7 +17,7 @@ We used Spring and Angular to build a web application that can display data from
 - run both projects simultaneously
 - api keys with environment variables matching the code are required
 
-'''console
+'''properties
 npm serve 
 '''
 
