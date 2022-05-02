@@ -249,7 +249,8 @@ export class HomeComponent implements OnInit {
   }
 
   createNewComicWidget(){
-    this.createWidget('', 'comic');
+    if (this.comic_widget.length == 0)
+      this.createWidget('', 'comic');
   }
 
   //creates a generic widget
