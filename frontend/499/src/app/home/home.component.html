@@ -31,16 +31,31 @@
                 </button>
             </mat-card>
         </div>
-        <div fxFlex="15%" *ngFor="let widget of forecast_widgets" class="widgetContainer"> 
+        <div fxFlex="20%" *ngFor="let widget of forecast_widgets" class="widgetContainer"> 
             <mat-card>
                 <mat-card-title>{{widget.name}}</mat-card-title>
                 <mat-card-subtitle>{{widget.country}}</mat-card-subtitle>
-                <div class="forecastWidgetRow" style="font-size:18px;color: rgb(8, 8, 8);">Tomorrow: {{widget.temps[0]}} °F</div>
-                <div class="forecastWidgetRow" style="font-size:15px;color: rgb(8, 8, 8);">{{widget.descrips[0]}}</div>
-                <div class="forecastWidgetRow" style="font-size:16px;margin-top: 4px;color: rgb(8, 8, 64);">{{widget.days[1]}}: {{widget.temps[1]}} °F</div>
-                <div class="forecastWidgetRow" style="font-size:12px;color: rgb(8, 8, 64);">{{widget.descrips[1]}}</div>
-                <div class="forecastWidgetRow" style="font-size:16px;margin-top: 4px;color: rgb(64, 8, 8);">{{widget.days[2]}}: {{widget.temps[2]}} °F</div>
-                <div class="forecastWidgetRow" style="font-size:12px;color: rgb(64, 8, 8);">{{widget.descrips[2]}}</div>            
+                <div class="forecastDayOne" style="display:flex; flex-flow: row nowrap; justify-content:space-between;">
+                    <div>
+                        <div style="font-size:18px;color: rgb(8, 8, 8); ">Tomorrow: {{widget.temps[0]}} °F</div>
+                        <div style="font-size:15px;color: rgb(8, 8, 8); ">{{widget.descrips[0]}}</div>
+                    </div>
+                    <img style="width: 50px; height: auto; margin: 0 20px 0 0;" mat-card-image [src] = widget.image[0]>
+                </div>
+                <div class="forecastDayTwo" style="display:flex; flex-flow: row nowrap; justify-content:space-between;">
+                    <div>
+                        <div style="font-size:16px;margin-top: 4px;color: rgb(8, 8, 64);">{{widget.days[1]}}: {{widget.temps[1]}} °F</div>
+                        <div style="font-size:12px;color: rgb(8, 8, 64);">{{widget.descrips[1]}}</div>
+                    </div>
+                    <img style="width: 50px; height: auto; margin: 0 20px 0 0;" mat-card-image [src] = widget.image[1]>
+                </div>
+                <div class="forecastDayThree" style="display:flex; flex-flow: row nowrap; justify-content:space-between;">
+                    <div>
+                        <div class="forecastWidgetRow" style="font-size:16px;margin-top: 4px;color: rgb(64, 8, 8);">{{widget.days[2]}}: {{widget.temps[2]}} °F</div>
+                        <div class="forecastWidgetRow" style="font-size:12px;color: rgb(64, 8, 8);">{{widget.descrips[2]}}</div>            
+                    </div>
+                    <img style="width: 50px; height: auto; margin: 0 20px 0 0;" mat-card-image [src] = widget.image[2]>
+                </div>
                 <mat-card-actions style="display:none">
                     <button mat-mini-fab (click)="removeForecast(widget.name)" class="delete_button">
                         <mat-icon>delete</mat-icon>
@@ -69,7 +84,7 @@
                 </button>
             </mat-card>
         </div>
-        <div fxFlex="40%" *ngFor="let widget of comic_widget" class="widgetContainer"> 
+        <div fxFlex="30%" *ngFor="let widget of comic_widget" class="widgetContainer"> 
             <mat-card>
                 <mat-card-title>{{widget.title}}</mat-card-title>
                 <img mat-card-image [src] = widget.image>

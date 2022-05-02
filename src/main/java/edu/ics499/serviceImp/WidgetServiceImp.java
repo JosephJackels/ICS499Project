@@ -53,7 +53,7 @@ public class WidgetServiceImp implements WidgetService {
 
     public String getResponse(Widget widget, Payload payload) throws IOException, InterruptedException {
         HttpURLConnection conn;
-        if (widget.getType().equals("stock")){
+        if (widget.getType().equals("stock")) {
             return this.connectToStockApi(widget, widget.getQueryParameters());
         }
         URL url = buildUrl(widget.getType(), widget.getQueryParameters());
@@ -82,7 +82,7 @@ public class WidgetServiceImp implements WidgetService {
     // this works
     public String connectToStockApi(Widget widget, String params) throws IOException, InterruptedException {
         System.out.println("Stock API is being called for Widget: " + widget.getWidgetID());
-    	String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(widget.getType());
+        String baseUrl = WidgetTypes.mapWidgetTypeToUrl.get(widget.getType());
         String midUrl = WidgetTypes.mapWidgetTypeToMidUrl.get(widget.getType());
         String finalUrl = baseUrl + params + midUrl;
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(finalUrl))
@@ -124,42 +124,51 @@ public class WidgetServiceImp implements WidgetService {
     public Widget updateQuery(String query, Long widgetId) {
         Widget widget = getWidgetById(widgetId);
         widget.setQueryParameters(query);
+        Payload payload = checkForPayload(widget.getType(), query);
+        widget.setPayload(payload);
         return widgetRepo.saveAndFlush(widget);
     }
 
-    
-    @Override
-    public Widget createWidget(String type, String query) {
-        Widget widget = new Widget();
-        widget.setQueryParameters(query);
-        widget.setType(type);
+    public Payload checkForPayload(String type, String query) {
         Payload payload = new Payload();
-        payload.setLastUpdatedTime("0");// set to 0 so that it is automatically update the first time it is fetched
-        payload.setUpdateFrequency(WidgetTypes.mapWidgetTypeToUpdateFrequency.get(type));// set to whatever we want to update
-
-        // checks if equivalent payload exists.
         List<Widget> list = getAll();
         Iterator<Widget> it = list.iterator();
-        while(it.hasNext()) {
+        boolean found = false;
+        while (it.hasNext() && !found) {
             Widget next = it.next();
             String nextType = next.getType();
             String nextQuery = next.getQueryParameters();
             if (nextType.equals(type) && nextQuery.equals(query)) {
                 payload = next.getPayload();
-                break;
+                found = true;
             }
         }
-        payloadRepo.save(payload);
+        if (payload.getPayloadID() == null) {
+            payload.setLastUpdatedTime("0");
+            // set to 0 so that it is automatically update the first time it is fetched
+            payload.setUpdateFrequency(WidgetTypes.mapWidgetTypeToUpdateFrequency.get(type));
+            // set to whatever we want to update
+            payloadRepo.save(payload);
+        }
+        return payload;
+    }
+
+    @Override
+    public Widget createWidget(String type, String query) {
+        Widget widget = new Widget();
+        widget.setQueryParameters(query);
+        widget.setType(type);
+        Payload payload = checkForPayload(type, query);
         widget.setPayload(payload);
         return widgetRepo.saveAndFlush(widget);
     }
-    
+
     @Override
     public Widget deleteWidget(Long widgetId) {
-    	Widget widget = widgetRepo.getById(widgetId);
-    	widgetRepo.deleteById(widgetId);
-    	//widgetRepo.saveAndFlush(widget);
-    	return widget;
+        Widget widget = widgetRepo.getById(widgetId);
+        widgetRepo.deleteById(widgetId);
+        // widgetRepo.saveAndFlush(widget);
+        return widget;
     }
 
 }
