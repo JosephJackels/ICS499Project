@@ -47,7 +47,7 @@ ng serve --open
 ![Demo!](/frontend/499/src/assets/img/demo.png "demo")
 
 ## API's we used:
-- [Open Weather](https://openweathermap.org/) (requires key)
+- [Open Weather](https://openweathermap.org/api) (requires key)
 - [Yahoo Finance](https://www.yahoofinanceapi.com/) (requires key)
 - [XKCD](https://xkcd.com/json.html) (no key necessary)
     
