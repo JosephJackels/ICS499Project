@@ -23,10 +23,8 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CalendarComponent } from './widgets/calendar/calendar.component';
-//import { WeatherComponent } from './widgets/weather/weather.component';
-//import { ForecastComponent } from './widgets/forecast/forecast.component';
-//import { StocksComponent } from './widgets/stocks/stocks.component';
+import { CalendarComponent } from './home/calendar/calendar.component';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { DataServiceService } from './service/data-service.service';
@@ -46,9 +44,6 @@ import { CreateStockWidgetDialog } from './home/dialogs/create-stock-widget-dial
     LoginComponent,
     LogoutComponent,
     CalendarComponent,
-//    WeatherComponent,
-//    ForecastComponent,
-//    StocksComponent,
     LoginSuccessSnackbarComponent,
     LoginFailedDialogComponent,
     CreateWeatherWidgetDialog,
