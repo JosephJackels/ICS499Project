@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private data:DataServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log("nginit in home");
     if(localStorage.getItem("token") != null){
         this.data.getDashboardForUser(localStorage.getItem("token")!, localStorage.getItem("userId")!).subscribe(data => {
           this.dashboard = {
@@ -55,7 +54,6 @@ export class HomeComponent implements OnInit {
   populateWidgets(){
     this.clearWidgetLists();
     this.showLogoutTab();
-    console.log("starting to populate lists");
     this.dashboard.widgetList.forEach(widget => {
       this.data.getWidgetPayload(localStorage.getItem("token")!, widget.widgetID).subscribe(data => {
         widget.payload = {
@@ -114,14 +112,12 @@ export class HomeComponent implements OnInit {
 
   //adds weather widget with desired data and id
   addWeather(widget: string, widgetId: number) {
-    console.log(widget);
     let obj = new WeatherDisplay(widget, widgetId);
     this.weather_widgets.push(obj);
   }
 
   //removes weather widget with the id passed into it
   removeWeather(weather:any){
-    console.log(weather)
     for (let i = 0; i < this.weather_widgets.length; i++){
       if(this.weather_widgets[i].widgetId==weather){
         this.removeWidgetAndDelete(this.weather_widgets[i].widgetId, this.dashboard.dashboardId);
@@ -140,8 +136,6 @@ export class HomeComponent implements OnInit {
   removeForecast(forecast: any){
     for (let i = 0; i < this.forecast_widgets.length; i++){
       if(this.forecast_widgets[i].name==forecast){
-        console.log(this.dashboard.dashboardId);
-        console.log(this.forecast_widgets[i].widgetId);
         this.removeWidgetAndDelete(this.forecast_widgets[i].widgetId, this.dashboard.dashboardId);
         this.forecast_widgets.splice(i,1);
       }
@@ -158,8 +152,6 @@ export class HomeComponent implements OnInit {
   removeStocks(stockName:any){
     for (let i = 0; i < this.stock_widgets.length; i++){
       if(this.stock_widgets[i].name==stockName){
-        console.log(this.dashboard.dashboardId);
-        console.log(this.stock_widgets[i].widgetId);
         this.removeWidgetAndDelete(this.stock_widgets[i].widgetId, this.dashboard.dashboardId);
         this.stock_widgets.splice(i,1);
       }
@@ -281,7 +273,6 @@ export class HomeComponent implements OnInit {
           dashboardId: (data as any).dashboardID,
           widgetList: ((data as any).widgetList)
         };
-        console.log(this.dashboard);
         this.populateWidgets();
       });
     });
