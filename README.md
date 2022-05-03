@@ -44,7 +44,7 @@ ng serve --open
 - ***api keys with environment variables matching the code are required for the backend to get data***
 
 ### Take a look:
-![Demo!](/frontend/499/src/assets/img/demo.png "demo")
+![Demo!](/frontend/499/src/assets/img/dashboard.png "demo")
 
 ## API's we used:
 - [Open Weather](https://openweathermap.org/api) (requires key)
